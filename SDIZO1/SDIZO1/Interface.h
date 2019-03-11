@@ -4,13 +4,14 @@
 #include <conio.h>
 #include <string>
 #include "pch.h"
+#include "List.h"
 
 using namespace std;
 
 class Interface
 {
 private:
-
+	List lista;
 public:
 	void mmenu()
 	{
@@ -30,7 +31,7 @@ public:
 			switch (choice)
 			{
 			case '1': table(); break;
-			case '2': cout << "TBA" << endl; break;
+			case '2': list(); break;
 			case '3': cout << "TBA" << endl; break;
 			case '4': cout << "TBA" << endl; break;
 			case '5': cout << "TBA" << endl; break;
@@ -57,6 +58,7 @@ private:
 		cout << " [5] Wyswietl" << endl;
 		cout << " [6] Stwórz losowo" << endl;
 		cout << " [7] Testowanie" << endl;
+		cout << " [8] Rozmiar " << name << endl;
 		cout << " [0] Wróæ" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -73,6 +75,29 @@ private:
 			{
 			case '1': break;
 			case '0': break;
+			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+			}
+		} while (choice != '0');
+	}
+
+	void list()
+	{
+		char choice;
+		int ii;
+		do
+		{
+			choice = printmenu("Lista");
+			switch (choice)
+			{
+			case '0': break;
+			case '3':
+			{
+				cout << "\nWprowadŸ wartoœæ: ";
+				cin >> ii;
+				lista.push_front(ii);
+			}break;
+			case '5': lista.display(); break;
+			case '8': lista.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
