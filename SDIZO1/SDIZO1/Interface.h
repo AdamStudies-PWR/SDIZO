@@ -58,6 +58,7 @@ private:
 		cout << " [6] Stwórz losowo" << endl;
 		cout << " [7] Testowanie" << endl;
 		cout << " [0] Wróæ" << endl;
+		cout << " Wybór: ";
 		choice = _getche();
 		return choice;
 	}
