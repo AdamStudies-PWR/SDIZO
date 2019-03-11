@@ -13,6 +13,7 @@ class Interface
 private:
 	List lista;
 public:
+	//G³ówne menu programu
 	void mmenu()
 	{
 		char choice;
@@ -46,6 +47,7 @@ public:
 		} while (choice != '0');
 	}
 private:
+	//Funkcja wyœwietlaj¹ca g³ówne menu oraz przyjmuj¹ca input
 	char printmenu(string name)
 	{
 		char choice;
@@ -64,7 +66,7 @@ private:
 		choice = _getche();
 		return choice;
 	}
-
+	//Funkcja obs³uguj¹ca interfejs tablicy
 	void table()
 	{
 		char choice;
@@ -79,7 +81,7 @@ private:
 			}
 		} while (choice != '0');
 	}
-
+	//FUnkcja obs³uguj¹ca interfejs Listy
 	void list()
 	{
 		char choice;
@@ -92,9 +94,22 @@ private:
 			case '0': break;
 			case '3':
 			{
-				cout << "\nWprowadŸ wartoœæ: ";
+				system("cls");
+				cout << "WprowadŸ wartoœæ: ";
 				cin >> ii;
-				lista.push_front(ii);
+				do
+				{
+					system("cls");
+					cout << " [1] Dodaj na pocz¹tek" << endl;
+					cout << " [2] Dodaj na koniec" << endl;
+					cout << " [3] Dodaj na wybrane miejsce" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '1': lista.push_front(ii); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
 			}break;
 			case '5': lista.display(); break;
 			case '8': lista.getSize(); break;

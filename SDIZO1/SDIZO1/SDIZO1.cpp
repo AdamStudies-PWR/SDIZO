@@ -4,7 +4,7 @@
 #include "pch.h"
 #include "Interface.h"
 #include "List.h"
-
+// main jest w osobnym pliku tylko dlatego, ¿eby by³o go ³atwiej znaleŸæ
 int main()
 {
 	setlocale(LC_ALL, "pl");

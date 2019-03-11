@@ -39,7 +39,7 @@ public:
 		 cout << "\nObecny rozmiar listy to: " << size;
 		 _getch();
 	 }
-
+	 // Funkcja dodaje nowy element na pocz¹tek listy
 	 void push_front(int val)
 	 {
 		 ElemList *newEl = new ElemList;
