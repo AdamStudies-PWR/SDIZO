@@ -1,0 +1,2 @@
+# SDIZO
+Projekt na studia
