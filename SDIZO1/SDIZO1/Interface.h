@@ -54,13 +54,14 @@ private:
 		system("cls");
 		cout << "\t---" << name << "---" << endl;
 		cout << " [1] Wczytaj z pliku" << endl;
-		cout << " [2] Usuñ" << endl;
-		cout << " [3] Dodaj" << endl;
-		cout << " [4] ZnajdŸ" << endl;
-		cout << " [5] Wyswietl" << endl;
-		cout << " [6] Stwórz losowo" << endl;
-		cout << " [7] Testowanie" << endl;
-		cout << " [8] Rozmiar " << name << endl;
+		cout << " [2] Zapisz do pliku" << endl;
+		cout << " [3] Usuñ" << endl;
+		cout << " [4] Dodaj" << endl;
+		cout << " [5] ZnajdŸ" << endl;
+		cout << " [6] Wyswietl" << endl;
+		cout << " [7] Stwórz losowo" << endl;
+		cout << " [8] Testowanie" << endl;
+		cout << " [9] Rozmiar " << name << endl;
 		cout << " [0] Wróæ" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -94,6 +95,23 @@ private:
 			case '0': break;
 			case '3':
 			{
+				do
+				{
+					system("cls");
+					cout << " [1] Usuñ z pocz¹tku" << endl;
+					cout << " [2] Usuñ z koñca" << endl;
+					cout << " [3] Usuñ z wybranego miejsca" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '1': lista.pop_front(); break;
+					case '2': lista.pop_tail(); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
+			}break;
+			case '4':
+			{
 				system("cls");
 				cout << "WprowadŸ wartoœæ: ";
 				cin >> ii;
@@ -111,8 +129,8 @@ private:
 					}
 				} while (choice != '1' && choice != '2');
 			}break;
-			case '5': lista.display(); break;
-			case '8': lista.getSize(); break;
+			case '6': lista.display(); break;
+			case '9': lista.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
