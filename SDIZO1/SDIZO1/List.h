@@ -51,6 +51,22 @@ public:
 		 size++;
 		 display();
 	 }
+	 //Funkcja dodaj¹ca nowy element na koñcu listy
+	 void push_tail(int val)
+	 {
+		 ElemList *tail = getTail();
+		 if (tail == nullptr) push_front(val);
+		 else
+		 {
+			 ElemList *newEl = new ElemList;
+			 newEl->data = val;
+			 newEl->next = nullptr;
+			 newEl->prev = tail;
+			 tail->next = newEl;
+			 size++;
+			 display();
+		 }
+	 }
 	 //Funkcja usuwaj¹ca wartoœæ z pocz¹tku
 	 void pop_front()
 	 {
@@ -80,6 +96,7 @@ public:
 			 display();
 		 }
 	 }
+private:
 	 //Funkcja zwracaj¹ca ogon
 	 ElemList *getTail()
 	 {

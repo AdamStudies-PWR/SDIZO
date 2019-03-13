@@ -114,6 +114,7 @@ private:
 			{
 				system("cls");
 				cout << "WprowadŸ wartoœæ: ";
+				cin.ignore();
 				cin >> ii;
 				do
 				{
@@ -125,6 +126,7 @@ private:
 					switch (choice)
 					{
 					case '1': lista.push_front(ii); break;
+					case '2': lista.push_tail(ii); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2');
