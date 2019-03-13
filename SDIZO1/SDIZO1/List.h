@@ -52,6 +52,36 @@ public:
 		 display();
 	 }
 	 //Funkcja dodaj¹ca nowy element na koñcu listy
+	 void push_chosen(int val)
+	 {
+		 int index;
+		 system("cls");
+		 cout << "Podaj pozycje na której chcesz wstawiæ liczbe: ";
+		 cin >> index;
+		 if (index == (size + 1)) push_tail(val);
+		 else
+		 {
+			 if (index == 1) push_front(val);
+			 else
+			 {
+				 ElemList *oldEl = find(index);
+				 if (oldEl == nullptr)
+				 {
+					 cout << "\nNie mo¿na wstawiæ elementu na t¹ pozycje" << endl;
+					 _getch();
+					 return;
+				 }
+				 ElemList *newEl = new ElemList;
+				 newEl->data = val;
+				 newEl->prev = oldEl->prev;
+				 newEl->next = oldEl;
+				 oldEl->prev->next = newEl;
+				 oldEl->prev = newEl;
+				 size++;
+				 display();
+			 }
+		 }
+	 }
 	 void push_tail(int val)
 	 {
 		 ElemList *tail = getTail();
@@ -109,6 +139,24 @@ private:
 				 tail = tail->next;
 			 }
 			 return tail;
+		 }
+	 }
+	 //Funkcja znajduj¹ca szukany element
+	 ElemList *find(int index)
+	 {
+		 if (head == nullptr) return nullptr;
+		 else
+		 {
+			 if (index >= size) return nullptr;
+			 else
+			 {
+				 ElemList *searched = head;
+				 for (int i = 1; i < index; i++)
+				 {
+					 searched = searched->next;
+				 }
+				 return searched;
+			 }
 		 }
 	 }
 };
