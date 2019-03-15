@@ -4,6 +4,7 @@
 #include <string>
 #include "pch.h"
 #include "List.h"
+#include "Heap.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class Interface
 {
 private:
 	List lista;
+	Heap heapa;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -32,7 +34,7 @@ public:
 			{
 			case '1': table(); break;
 			case '2': list(); break;
-			case '3': cout << "TBA" << endl; break;
+			case '3': heap(); break;
 			case '4': cout << "TBA" << endl; break;
 			case '5': cout << "TBA" << endl; break;
 			case '0':
@@ -159,6 +161,20 @@ private:
 				lista.generate(ii);
 			} break;
 			case '9': lista.getSize(); break;
+			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+			}
+		} while (choice != '0');
+	}
+	//Funkcja obs³uguj¹ca interfejs kopca
+	void heap()
+	{
+		char choice;
+		do
+		{
+			choice = printmenu("Kopiec");
+			switch (choice)
+			{
+			case '6': heapa.display(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
