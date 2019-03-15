@@ -16,6 +16,42 @@ private:
 	int size = 0;
 	ElemList *head = nullptr;
 public:
+	//Funkcja zapisu
+	void save(string filename)
+	{
+		ofstream plik(filename + ".txt");
+		if (plik.good() == true)
+		{
+			plik << size << endl;
+			ElemList *out = head;
+			while (out != nullptr)
+			{
+				plik << out->data << endl;
+				out = out->next;
+			}
+		}
+		else cout << "B³¹d zapisu" << endl, _getch();
+	}
+	//Funkcja odczytu
+	void load(string filename)
+	{
+		ifstream plik(filename + ".txt");
+		if (plik.good() == true)
+		{
+			pop_all();
+			plik >> size;
+			for (int i = 0; i < size; i++)
+			{
+				ElemList *newEl = new ElemList;
+				plik >> newEl->data;
+				newEl->next = head;
+				newEl->prev = nullptr;
+				if (head != nullptr) head->prev = newEl;
+				head = newEl;
+			}
+		}
+		else cout << "B³¹d odczytu" << endl, _getch();
+	}
 	//Funkcja wyœwietla liste na ekranie
 	 void display()
 	 {

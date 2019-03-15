@@ -92,6 +92,22 @@ private:
 			switch (choice)
 			{
 			case '0': break;
+			case '1':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				lista.load(name);
+			}break;
+			case '2':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				lista.save(name);
+			}break;
 			case '3':
 			{
 				do
