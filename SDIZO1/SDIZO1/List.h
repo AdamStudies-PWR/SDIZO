@@ -1,7 +1,6 @@
 #pragma once
 //Klasa obs³uguj¹ca funkcje Listy
 #include "pch.h"
-#include <iostream>
 
 using namespace std;
 
@@ -51,7 +50,7 @@ public:
 		 size++;
 		 display();
 	 }
-	 //Funkcja dodaj¹ca nowy element na koñcu listy
+	 //Funkcja dodajaca element na dowolnie wynranej pozycji
 	 void push_chosen(int val)
 	 {
 		 int index;
@@ -61,6 +60,12 @@ public:
 		 if (index == (size + 1)) push_tail(val);
 		 else
 		 {
+			 if (index <= 0)
+			 {
+				 cout << "\nPozycje indeksowane od 1" << endl;
+				 _getch();
+				 return;
+			 }
 			 if (index == 1) push_front(val);
 			 else
 			 {
@@ -82,6 +87,7 @@ public:
 			 }
 		 }
 	 }
+	 //Funkcja dodaj¹ca nowy element na koñcu listy
 	 void push_tail(int val)
 	 {
 		 ElemList *tail = getTail();
@@ -126,6 +132,98 @@ public:
 			 display();
 		 }
 	 }
+	 //Funkcja usuwaj¹ca dowolny element
+	 void pop_chosen()
+	 {
+		 int index;
+		 system("cls");
+		 cout << "Podaj pozycje, z której chcesz usun¹æ liczbe: ";
+		 cin >> index;
+		 if (index > size || index <= 0)
+		 {
+			 cout << "\nNie mo¿na usn¹æ elementu na podanej pozycji" << endl;
+			 _getch();
+			 return;
+		 }
+		 if (index == 1) pop_front();
+		 else
+		 {
+			 if (index == size) pop_tail();
+			 else
+			 {
+				 ElemList *oldEl = find(index);
+				 if (oldEl == nullptr)
+				 {
+					 cout << "\nWyst¹pi³ niespodziewany b³¹d" << endl;
+					 _getch();
+					 return;
+				 }
+				 oldEl->prev->next = oldEl->next;
+				 oldEl->next->prev = oldEl->prev;
+				 size--;
+				 delete oldEl;
+				 display();
+			 }
+		 }
+	 }
+	 //Funkcja usuwaj¹ca wszytkie elementy listy
+	 void pop_all()
+	 {
+		 ElemList *element;
+		 if (head == nullptr) cout << "\nLista jest pusta" << endl, _getch();
+		 else
+		 {
+			 while (head != nullptr)
+			 {
+				 element = head;
+				 head = head->next;
+				 delete element;
+				 size--;
+			 }
+			 display();
+		 }
+	 }
+	 //Funkcja zwracaj¹ca wartoœæ na wskazanej prze¿ u¿ytkownika pozycji
+	 void get_value()
+	 {
+		 int index;
+		 system("cls");
+		 cout << "Podaj pozycje, z której chcesz uzyskaæ wartoœæ: ";
+		 cin >> index;
+		 if (index > size || index <= 0)
+		 {
+			 cout << "\nNie mo¿na znale¿æ elementu na podanej pozycji" << endl;
+			 _getch();
+			 return;
+		 }
+		 else
+		 {
+			 ElemList *searched = find(index);
+			 if(searched == nullptr) 
+			 {
+				 cout << "\nWyst¹pi³ nieoczekiwany b³¹d" << endl;
+				 _getch();
+				 return;
+			 }
+			 else cout << "\n " << searched->data << endl, _getch();
+		 }
+	 }
+	 //Funkcja tworzy lsite o podanym rozmiarze
+	 void generate(int lenght)
+	 {
+		 srand(time(nullptr));
+		 for (int i = 0; i < lenght; i++)
+		 {
+			 ElemList *newEl = new ElemList;
+			 newEl->data = rand();
+			 newEl->next = head;
+			 newEl->prev = nullptr;
+			 if (head != nullptr) head->prev = newEl;
+			 head = newEl;
+			 size++;
+		 }
+		 display();
+	 }
 private:
 	 //Funkcja zwracaj¹ca ogon
 	 ElemList *getTail()
@@ -147,7 +245,7 @@ private:
 		 if (head == nullptr) return nullptr;
 		 else
 		 {
-			 if (index >= size) return nullptr;
+			 if (index > size) return nullptr;
 			 else
 			 {
 				 ElemList *searched = head;

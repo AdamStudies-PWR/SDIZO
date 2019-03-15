@@ -1,6 +1,5 @@
 #pragma once
 // Interface.h Klasa ta zawiera wszystkie elementy interfejsu u¿ytkownika
-#include <iostream>
 #include <conio.h>
 #include <string>
 #include "pch.h"
@@ -101,14 +100,17 @@ private:
 					cout << " [1] Usuñ z pocz¹tku" << endl;
 					cout << " [2] Usuñ z koñca" << endl;
 					cout << " [3] Usuñ z wybranego miejsca" << endl;
+					cout << " [4] Usuñ wszytko" << endl;
 					choice = _getch();
 					switch (choice)
 					{
 					case '1': lista.pop_front(); break;
 					case '2': lista.pop_tail(); break;
+					case '3': lista.pop_chosen(); break;
+					case '4': lista.pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
-				} while (choice != '1' && choice != '2');
+				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 			}break;
 			case '4':
 			{
@@ -131,7 +133,15 @@ private:
 					}
 				} while (choice != '1' && choice != '2' && choice != '3');
 			}break;
+			case '5': lista.get_value(); break;
 			case '6': lista.display(); break;
+			case '7': 
+			{
+				system("cls");
+				cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
+				cin >> ii;
+				lista.generate(ii);
+			} break;
 			case '9': lista.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
