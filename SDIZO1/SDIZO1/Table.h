@@ -37,6 +37,7 @@ public:
 		newpointer[0] = val;
 		delete pointer;
 		pointer = newpointer;
+		display();
 	}
 	//Funkcja zwracaj¹ca rozmar tablicy
 	void getSize()
