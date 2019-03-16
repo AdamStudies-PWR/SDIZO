@@ -7,6 +7,7 @@
 // main jest w osobnym pliku tylko dlatego, ¿eby by³o go ³atwiej znaleŸæ
 int main()
 {
+	srand(time(nullptr));
 	setlocale(LC_ALL, "pl");
 	Interface usr;
 	usr.mmenu();

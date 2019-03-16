@@ -202,7 +202,13 @@ private:
 					choice = _getch();
 					switch (choice)
 					{
-					case '1': break;
+					case '1': 
+					{
+						system("cls");
+						cout << "WprowadŸ element, który chesz usun¹æ: ";
+						cin >> ii;
+						heapa.pop(ii);
+					} break;
 					case '2': heapa.pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
@@ -226,6 +232,13 @@ private:
 				_getche();
 			} break;
 			case '6': heapa.display(); break;
+			case '7': 
+			{
+				system("cls");
+				cout << "WprowadŸ d³ugoœæ: ";
+				cin >> ii;
+				heapa.push_random(ii);
+			} break;
 			case '9': heapa.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}

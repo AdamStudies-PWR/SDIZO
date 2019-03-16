@@ -76,6 +76,18 @@ public:
 			display();
 		}
 	}
+	//Funkcja dodaj¹ca losowo do podanego rozmiaru
+	void push_random(int lenght)
+	{
+		for (int i = 0; i < lenght; i++)
+		{
+			heap_tab[i] = rand();
+			used_size++;
+			if (i == 0) continue;
+			fix_from_bottom(i);
+		}
+		display();
+	}
 	//Funkcja usuwaj¹ca wybrany Element
 	void pop(int val)
 	{
@@ -85,7 +97,7 @@ public:
 		{
 			used_size--;
 			if (used_size == 0) return;
-			heap_tab[used_size] == heap_tab[index];
+			heap_tab[index] = heap_tab[used_size];
 			fix_from_top(index);
 			display();
 		}
@@ -136,7 +148,28 @@ private:
 		int greater, buffer;
 		while (kid1 < used_size || kid2 < used_size)
 		{
-
+			if (kid2 >= used_size)
+			{
+				if (heap_tab[index] < heap_tab[kid1])
+				{
+					buffer = heap_tab[index];
+					heap_tab[index] = heap_tab[kid1];
+					heap_tab[kid1] = buffer;
+				}
+				return;
+			}
+			if (heap_tab[kid1] > heap_tab[kid2]) greater = kid1;
+			else greater = kid2;
+			if (heap_tab[greater] > heap_tab[index])
+			{
+				buffer = heap_tab[greater];
+				heap_tab[greater] = heap_tab[index];
+				heap_tab[index] = buffer;
+				index = greater;
+				kid1 =  2 * index + 1;
+				kid2 = 2 * index + 2;
+			}
+			else return;
 		}
 	}
 };

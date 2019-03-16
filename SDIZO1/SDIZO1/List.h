@@ -247,7 +247,6 @@ public:
 	 //Funkcja tworzy lsite o podanym rozmiarze
 	 void generate(int lenght)
 	 {
-		 srand(time(nullptr));
 		 for (int i = 0; i < lenght; i++)
 		 {
 			 ElemList *newEl = new ElemList;
