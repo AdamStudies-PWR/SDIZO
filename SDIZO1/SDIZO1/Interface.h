@@ -25,8 +25,8 @@ public:
 			cout << " [1] Tablica" << endl;
 			cout << " [2] Lista" << endl;
 			cout << " [3] Kopiec" << endl;
-			cout << " [4] Drzewo DST" << endl;
-			cout << " [5] Drzewo CB" << endl;
+			cout << " [4] Drzewo BST" << endl;
+			cout << " [5] Drzewo CC" << endl;
 			cout << " [0] Zakoñcz program" << endl;
 			cout << " Wybór: ";
 			choice = _getche();
@@ -175,6 +175,39 @@ private:
 			choice = printmenu("Kopiec");
 			switch (choice)
 			{
+			case '0': break;
+			case '1':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				heapa.load(name);
+			}break;
+			case '2':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				heapa.save(name);
+			}break;
+			case '3':
+			{
+				do
+				{
+					system("cls");
+					cout << " [1] Usuñ z wybrane miejsca" << endl;
+					cout << " [2] Usuñ wszytko" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '1': break;
+					case '2': heapa.pop_all(); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
+			}break;
 			case '4': 
 			{
 				system("cls");
