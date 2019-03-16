@@ -76,6 +76,20 @@ public:
 			display();
 		}
 	}
+	//Funkcja usuwaj¹ca wybrany Element
+	void pop(int val)
+	{
+		int index = find(val);
+		if (index == -1) cout << "Nie ma takiego elementu" << endl, _getche();
+		else
+		{
+			used_size--;
+			if (used_size == 0) return;
+			heap_tab[used_size] == heap_tab[index];
+			fix_from_top(index);
+			display();
+		}
+	}
 	//Funkcja usuwaj¹ca wszytkie elementy w kopcu
 	void pop_all()
 	{
@@ -86,6 +100,15 @@ public:
 	{
 		cout << "\nObecny rozmiar kopca to: " << used_size;
 		_getch();
+	}
+	//Funkcja szukaj¹ca elementu w kopcu
+	int find(int val)
+	{
+		for (int i = 0; i < used_size; i++)
+		{
+			if (val == heap_tab[i]) return i;
+		}
+		return -1;
 	}
 private:
 	//Funkcja sprawdzaj¹ca kopioec od spodu
@@ -108,6 +131,12 @@ private:
 	//Funkcja sprawdzaj¹ca kopiec od góry
 	void fix_from_top(int index)
 	{
-		//TODO
+		int kid1 = 2 * index + 1;
+		int kid2 = 2 * index + 2;
+		int greater, buffer;
+		while (kid1 < used_size || kid2 < used_size)
+		{
+
+		}
 	}
 };

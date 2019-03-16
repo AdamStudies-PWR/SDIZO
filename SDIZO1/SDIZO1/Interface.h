@@ -215,6 +215,16 @@ private:
 				cin >> ii;
 				heapa.push(ii);
 			} break;
+			case '5':
+			{
+				system("cls");
+				cout << "WprowadŸ szukany element: ";
+				cin >> ii;
+				ii = heapa.find(ii);
+				if (ii == -1) cout << "Nie znaleziono szukanego elementu" << endl;
+				else cout << "Szukany element znajduje siê na pozycji: " << ii << endl;
+				_getche();
+			} break;
 			case '6': heapa.display(); break;
 			case '9': heapa.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
