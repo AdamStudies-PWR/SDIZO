@@ -155,6 +155,7 @@
     <ClInclude Include="Interface.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Table.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

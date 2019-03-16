@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "List.h"
 #include "Heap.h"
+#include "Table.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class Interface
 private:
 	List lista;
 	Heap heapa;
+	Table tab;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -71,14 +73,35 @@ private:
 	//Funkcja obs³uguj¹ca interfejs tablicy
 	void table()
 	{
+		int ii;
 		char choice;
 		do
 		{
 			choice = printmenu("Tablica");
 			switch (choice)
 			{
-			case '1': break;
 			case '0': break;
+			case '4':
+			{
+				system("cls");
+				cout << "WprowadŸ wartoœæ: ";
+				cin >> ii;
+				do
+				{
+					system("cls");
+					cout << " [1] Dodaj na pocz¹tek" << endl;
+					cout << " [2] Dodaj na koniec" << endl;
+					cout << " [3] Dodaj na wybrane miejsce" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '1': tab.push_front(ii); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2' && choice != '3');
+			}break;
+			case '6': tab.display(); break;
+			case '9': tab.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
