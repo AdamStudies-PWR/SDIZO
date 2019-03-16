@@ -168,13 +168,22 @@ private:
 	//Funkcja obs³uguj¹ca interfejs kopca
 	void heap()
 	{
+		int ii;
 		char choice;
 		do
 		{
 			choice = printmenu("Kopiec");
 			switch (choice)
 			{
+			case '4': 
+			{
+				system("cls");
+				cout << "WprowadŸ wartoœæ: ";
+				cin >> ii;
+				heapa.push(ii);
+			} break;
 			case '6': heapa.display(); break;
+			case '9': heapa.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
