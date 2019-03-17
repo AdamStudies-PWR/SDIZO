@@ -32,6 +32,7 @@ public:
 					plik << out->data << endl;
 					out = out->next;
 				}
+				plik.close();
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -54,6 +55,7 @@ public:
 				head = newEl;
 			}
 			display();
+			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}

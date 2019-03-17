@@ -80,7 +80,7 @@ private:
 			choice = printmenu("Tablica");
 			switch (choice)
 			{
-			case '0': tab.pop_all();  break;
+			case '0': break;
 			case '1':
 			{
 				string name;
@@ -109,6 +109,9 @@ private:
 					choice = _getch();
 					switch (choice)
 					{
+					case '1': tab.pop_front(); break;
+					case '2': tab.pop_back(); break;
+					case '3': tab.pop_chosen(); break;
 					case '4': tab.pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
@@ -130,11 +133,29 @@ private:
 					{
 					case '1': tab.push_front(ii); break;
 					case '2': tab.push_back(ii); break;
+					case '3': tab.push_chosen(ii); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2' && choice != '3');
 			}break;
+			case '5':
+			{
+				system("cls");
+				cout << "WprowadŸ szukan¹ wartoœæ: ";
+				cin >> ii;
+				ii = tab.find(ii);
+				if (ii == -1) cout << "W tablicy nie ma takiej wartoœci" << endl;
+				else cout << "Szukana wartoœæ znajduje siê na pozycji: " << ii << endl;
+				_getch();
+			} break;
 			case '6': tab.display(); break;
+			case '7':
+			{
+				system("cls");
+				cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
+				cin >> ii;
+				tab.push_random(ii);
+			} break;
 			case '9': tab.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
