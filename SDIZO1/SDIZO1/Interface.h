@@ -14,7 +14,7 @@ class Interface
 private:
 	List lista;
 	Heap heapa;
-	Table tab;
+	Table *tab = new Table;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -80,14 +80,14 @@ private:
 			choice = printmenu("Tablica");
 			switch (choice)
 			{
-			case '0': break;
+			case '0': delete tab;  break;
 			case '1':
 			{
 				string name;
 				system("cls");
 				cout << "WprowadŸ nazwe pliku: ";
 				cin >> name;
-				tab.load(name);
+				tab->load(name);
 			}break;
 			case '2':
 			{
@@ -95,7 +95,7 @@ private:
 				system("cls");
 				cout << "WprowadŸ nazwe pliku: ";
 				cin >> name;
-				tab.save(name);
+				tab->save(name);
 			}break;
 			case '3':
 			{
@@ -109,7 +109,7 @@ private:
 					choice = _getch();
 					switch (choice)
 					{
-					case '4': tab.pop_all(); break;
+					case '4': tab->pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
@@ -128,14 +128,14 @@ private:
 					choice = _getch();
 					switch (choice)
 					{
-					case '1': tab.push_front(ii); break;
-					case '2': tab.push_back(ii); break;
+					case '1': tab->push_front(ii); break;
+					case '2': tab->push_back(ii); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2' && choice != '3');
 			}break;
-			case '6': tab.display(); break;
-			case '9': tab.getSize(); break;
+			case '6': tab->display(); break;
+			case '9': tab->getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');

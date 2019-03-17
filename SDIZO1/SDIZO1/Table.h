@@ -5,9 +5,22 @@
 class Table
 {
 private:
-	int size = 0;
-	int *pointer = nullptr;
+	int size;
+	int *pointer;
 public:
+	Table()
+	{
+		size = 0;
+		pointer = nullptr;
+	}
+	~Table()
+	{
+		if (pointer != nullptr)
+		{
+			delete[] pointer;
+		}
+		size = 0;
+	}
 	//Funkcja zapisu
 	void save(string filename)
 	{
@@ -32,7 +45,6 @@ public:
 		ifstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
-			pop_all();
 			int *newpointer = new int[size];
 			plik >> size;
 			for (int i = 0; i < size; i++)
@@ -98,11 +110,9 @@ public:
 	{
 		if (pointer != nullptr)
 		{
-			int *oldpointer = pointer;
-			pointer = nullptr;
-			delete oldpointer;
-			size = 0;
+			delete[] pointer;
 		}
+		size = 0;
 	}
 	//Funkcja zwracaj¹ca rozmar tablicy
 	void getSize()
