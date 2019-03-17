@@ -12,16 +12,20 @@ public:
 	//Funkcja zapisu
 	void save(string filename)
 	{
-		ofstream plik(filename + ".txt");
-		if (plik.good() == true)
+		if (used_size == 0) cout << "\nKopiec jest pusty!" << endl, _getche();
+		else
 		{
-			plik << used_size << endl;
-			for (int i = 0; i < used_size; i++)
+			ofstream plik(filename + ".txt");
+			if (plik.good() == true)
 			{
-				plik << heap_tab[i] << endl;
+				plik << used_size << endl;
+				for (int i = 0; i < used_size; i++)
+				{
+					plik << heap_tab[i] << endl;
+				}
 			}
+			else cout << "B³¹d zapisu" << endl, _getch();
 		}
-		else cout << "B³¹d zapisu" << endl, _getch();
 	}
 	//Funkcja odczytu
 	void load(string filename)
@@ -35,6 +39,7 @@ public:
 			{
 				plik >> heap_tab[i];
 			}
+			display();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}

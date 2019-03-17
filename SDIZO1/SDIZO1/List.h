@@ -211,17 +211,12 @@ public:
 	 void pop_all()
 	 {
 		 ElemList *element;
-		 if (head == nullptr) cout << "\nLista jest pusta" << endl, _getch();
-		 else
+		 while (head != nullptr)
 		 {
-			 while (head != nullptr)
-			 {
-				 element = head;
-				 head = head->next;
-				 delete element;
-				 size--;
-			 }
-			 display();
+			element = head;
+			head = head->next;
+			delete element;
+			size--;
 		 }
 	 }
 	 //Funkcja zwracaj¹ca wartoœæ na wskazanej prze¿ u¿ytkownika pozycji
