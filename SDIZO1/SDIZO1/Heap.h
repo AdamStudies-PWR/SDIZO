@@ -23,6 +23,7 @@ public:
 				{
 					plik << heap_tab[i] << endl;
 				}
+				plik.close();
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -40,6 +41,7 @@ public:
 				plik >> heap_tab[i];
 			}
 			display();
+			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}
