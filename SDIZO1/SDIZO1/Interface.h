@@ -6,6 +6,7 @@
 #include "List.h"
 #include "Heap.h"
 #include "Table.h"
+#include "TreeB.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
 	List lista;
 	Heap heapa;
 	Table tab;
+	TreeB btree;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -37,7 +39,7 @@ public:
 			case '1': table(); break;
 			case '2': list(); break;
 			case '3': heap(); break;
-			case '4': cout << "TBA" << endl; break;
+			case '4': binarytree(); break;
 			case '5': cout << "TBA" << endl; break;
 			case '0':
 			{
@@ -318,6 +320,21 @@ private:
 				heapa.push_random(ii);
 			} break;
 			case '9': heapa.getSize(); break;
+			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+			}
+		} while (choice != '0');
+	}
+	//Funkcja obs³uguj¹ca interfejs kopca
+	void binarytree()
+	{
+		int ii;
+		char choice;
+		do
+		{
+			choice = printmenu("Drzewo binarne");
+			switch (choice)
+			{
+			case '0': break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
