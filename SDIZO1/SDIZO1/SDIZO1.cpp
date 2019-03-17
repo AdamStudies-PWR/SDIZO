@@ -10,6 +10,7 @@ int main()
 	setlocale(LC_ALL, "pl");
 	Interface usr;
 	usr.mmenu();
+	return 0;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

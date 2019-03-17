@@ -19,18 +19,22 @@ public:
 	//Funkcja zapisu
 	void save(string filename)
 	{
-		ofstream plik(filename + ".txt");
-		if (plik.good() == true)
+		if (size == 0) cout << "\nLista jest pusta!" << endl, _getche();
+		else
 		{
-			plik << size << endl;
-			ElemList *out = head;
-			while (out != nullptr)
+			ofstream plik(filename + ".txt");
+			if (plik.good() == true)
 			{
-				plik << out->data << endl;
-				out = out->next;
+				plik << size << endl;
+				ElemList *out = head;
+				while (out != nullptr)
+				{
+					plik << out->data << endl;
+					out = out->next;
+				}
 			}
+			else cout << "B³¹d zapisu" << endl, _getch();
 		}
-		else cout << "B³¹d zapisu" << endl, _getch();
 	}
 	//Funkcja odczytu
 	void load(string filename)
@@ -49,6 +53,7 @@ public:
 				if (head != nullptr) head->prev = newEl;
 				head = newEl;
 			}
+			display();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}

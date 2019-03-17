@@ -81,6 +81,14 @@ private:
 			switch (choice)
 			{
 			case '0': break;
+			case '2':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				tab.save(name);
+			}break;
 			case '4':
 			{
 				system("cls");
@@ -96,6 +104,7 @@ private:
 					switch (choice)
 					{
 					case '1': tab.push_front(ii); break;
+					case '2': tab.push_back(ii); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2' && choice != '3');
