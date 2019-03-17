@@ -81,6 +81,14 @@ private:
 			switch (choice)
 			{
 			case '0': break;
+			case '1':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				tab.load(name);
+			}break;
 			case '2':
 			{
 				string name;
@@ -88,6 +96,23 @@ private:
 				cout << "WprowadŸ nazwe pliku: ";
 				cin >> name;
 				tab.save(name);
+			}break;
+			case '3':
+			{
+				do
+				{
+					system("cls");
+					cout << " [1] Usuñ z pocz¹tku" << endl;
+					cout << " [2] Usuñ z koñca" << endl;
+					cout << " [3] Usuñ z wybranego miejsca" << endl;
+					cout << " [4] Usuñ wszystko" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '4': tab.pop_all(); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 			}break;
 			case '4':
 			{

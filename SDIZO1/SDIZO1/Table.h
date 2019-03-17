@@ -11,16 +11,38 @@ public:
 	//Funkcja zapisu
 	void save(string filename)
 	{
-		ofstream plik(filename + ".txt");
+		if (size == 0) cout << "\nTablica jest pusta!" << endl, _getche();
+		else
+		{
+			ofstream plik(filename + ".txt");
+			if (plik.good() == true)
+			{
+				plik << size << endl;
+				for (int i = 0; i < size; i++)
+				{
+					plik << pointer[i] << endl;
+				}
+			}
+			else cout << "B³¹d zapisu" << endl, _getch();
+		}
+	}
+	//Funkcja odczytu
+	void load(string filename)
+	{
+		ifstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
-			plik << size << endl;
-			for (int i = 1; i < size; i++)
+			pop_all();
+			int *newpointer = new int[size];
+			plik >> size;
+			for (int i = 0; i < size; i++)
 			{
-				plik << pointer[i] << endl;
+				plik >> newpointer[i];
 			}
+			pointer = newpointer;
+			display();
 		}
-		else cout << "B³¹d zapisu" << endl, _getch();
+		else cout << "B³¹d odczytu" << endl, _getch();
 	}
 	//Funkcja wyœwietlaj¹ca wartoœæ
 	void display()
@@ -31,7 +53,7 @@ public:
 		{
 			for (int i = 0; i < size; i++)
 			{
-				cout << " " << pointer[i];
+				cout << " " <<pointer[i];
 			}
 		}
 		_getche();
@@ -70,6 +92,17 @@ public:
 		delete pointer;
 		pointer = newpointer;
 		display();
+	}
+	//Funkcja kasuj¹ca wszytko
+	void pop_all()
+	{
+		if (pointer != nullptr)
+		{
+			int *oldpointer = pointer;
+			pointer = nullptr;
+			delete oldpointer;
+			size = 0;
+		}
 	}
 	//Funkcja zwracaj¹ca rozmar tablicy
 	void getSize()
