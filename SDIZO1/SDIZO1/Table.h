@@ -35,6 +35,7 @@ public:
 				{
 					plik << pointer[i] << endl;
 				}
+				plik.close();
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -54,6 +55,7 @@ public:
 			pop_all();
 			pointer = newpointer;
 			display();
+			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}
@@ -205,7 +207,7 @@ public:
 				if (index == (size - 1)) pop_back();
 				else
 				{
-					if (index > size || index < 0) cout << "\nElement poza list¹" << endl, _getch();
+					if (index >= size || index < 0) cout << "\nElement poza list¹" << endl, _getch();
 					else
 					{
 						size--;
@@ -216,9 +218,9 @@ public:
 							newpointer[i] = pointer[i];
 						}
 						i = i + 1;
-						for (i; i < (size); i++)
+						for (i; i < (size + 1); i++)
 						{
-							newpointer[i] = pointer[i - 1];
+							newpointer[i - 1] = pointer[i];
 						}
 						delete pointer;
 						pointer = newpointer;
