@@ -26,11 +26,11 @@ public:
 			if (plik.good() == true)
 			{
 				plik << size << endl;
-				ElemList *out = head;
+				ElemList *out = getTail();
 				while (out != nullptr)
 				{
 					plik << out->data << endl;
-					out = out->next;
+					out = out->prev;
 				}
 				plik.close();
 			}
