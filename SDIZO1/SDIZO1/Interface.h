@@ -335,6 +335,15 @@ private:
 			switch (choice)
 			{
 			case '0': break;
+			case '4':
+			{
+				system("cls");
+				cout << "WprowadŸ wartoœæ: ";
+				cin >> ii;
+				btree.push(ii);
+			} break;
+			case '6': btree.display(); break;
+			case '9': btree.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
