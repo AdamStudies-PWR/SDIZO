@@ -23,6 +23,7 @@ public:
 				{
 					plik << heap_tab[i] << endl;
 				}
+				plik.close();
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -40,6 +41,7 @@ public:
 				plik >> heap_tab[i];
 			}
 			display();
+			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
 	}
@@ -121,6 +123,7 @@ public:
 	//Funkcja szukaj¹ca elementu w kopcu
 	int find(int val)
 	{
+		if (used_size == 0) return -1;
 		for (int i = 0; i < used_size; i++)
 		{
 			if (val == heap_tab[i]) return i;

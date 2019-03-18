@@ -6,6 +6,7 @@
 #include "List.h"
 #include "Heap.h"
 #include "Table.h"
+#include "TreeB.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
 	List lista;
 	Heap heapa;
 	Table tab;
+	TreeB btree;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -37,7 +39,7 @@ public:
 			case '1': table(); break;
 			case '2': list(); break;
 			case '3': heap(); break;
-			case '4': cout << "TBA" << endl; break;
+			case '4': binarytree(); break;
 			case '5': cout << "TBA" << endl; break;
 			case '0':
 			{
@@ -109,6 +111,9 @@ private:
 					choice = _getch();
 					switch (choice)
 					{
+					case '1': tab.pop_front(); break;
+					case '2': tab.pop_back(); break;
+					case '3': tab.pop_chosen(); break;
 					case '4': tab.pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
@@ -130,11 +135,29 @@ private:
 					{
 					case '1': tab.push_front(ii); break;
 					case '2': tab.push_back(ii); break;
+					case '3': tab.push_chosen(ii); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
 				} while (choice != '1' && choice != '2' && choice != '3');
 			}break;
+			case '5':
+			{
+				system("cls");
+				cout << "WprowadŸ szukan¹ wartoœæ: ";
+				cin >> ii;
+				ii = tab.find(ii);
+				if (ii == -1) cout << "W tablicy nie ma takiej wartoœci" << endl;
+				else cout << "Szukana wartoœæ znajduje siê na pozycji: " << ii << endl;
+				_getch();
+			} break;
 			case '6': tab.display(); break;
+			case '7':
+			{
+				system("cls");
+				cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
+				cin >> ii;
+				tab.push_random(ii);
+			} break;
 			case '9': tab.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
@@ -297,6 +320,86 @@ private:
 				heapa.push_random(ii);
 			} break;
 			case '9': heapa.getSize(); break;
+			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+			}
+		} while (choice != '0');
+	}
+	//Funkcja obs³uguj¹ca interfejs drzewa
+	void binarytree()
+	{
+		int ii;
+		char choice;
+		do
+		{
+			choice = printmenu("Drzewo binarne");
+			switch (choice)
+			{
+			case '0': break;
+			case '1':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				btree.load(name);
+			}break;
+			case '2': 
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				btree.save(name);
+			}break;
+			case '3':
+			{
+				do
+				{
+					system("cls");
+					cout << " [1] Usuñ z wybrane miejsca" << endl;
+					cout << " [2] Usuñ wszytko" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					/*case '1':
+					{
+						system("cls");
+						cout << "WprowadŸ element, który chesz usun¹æ: ";
+						cin >> ii;
+						heapa.pop(ii);
+					} break;*/
+					case '2': btree.pop_all(); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
+			}break;
+			case '4':
+			{
+				system("cls");
+				cout << "WprowadŸ wartoœæ: ";
+				cin >> ii;
+				btree.push(ii, true);
+			} break;
+			case '5':
+			{
+				bool searched;
+				system("cls");
+				cout << "WprowadŸ szukany element: ";
+				cin >> ii;
+				searched = btree.find(ii);
+				if (searched) cout << "Szukany element znajduje siê w drzewie" << endl;
+				else cout << "Nie znaleziono szukanego elementu" << endl;
+				_getche();
+			} break;
+			case '6': btree.display(); break;
+			case '7':
+			{
+				system("cls");
+				cout << "WprowadŸ d³ugoœæ: ";
+				cin >> ii;
+				btree.push_random(ii);
+			} break;
+			case '9': btree.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
