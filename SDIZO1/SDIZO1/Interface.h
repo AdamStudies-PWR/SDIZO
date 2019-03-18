@@ -82,7 +82,7 @@ private:
 			choice = printmenu("Tablica");
 			switch (choice)
 			{
-			case '0': break;
+			case '0': tab.pop_all();  break;
 			case '1':
 			{
 				string name;
