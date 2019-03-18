@@ -60,6 +60,7 @@ public:
 		ifstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
+			pop_all();
 			plik >> size;
 			for (int i = 0; i < (size - 1); i++)
 			{
@@ -110,6 +111,16 @@ public:
 		}
 		if(show) display();
 	}
+	//Funkcja losowa wype³niaj¹ca drzewo
+	void push_random(int lenght)
+	{
+		pop_all();
+		for (int i = 0; i < lenght; i++)
+		{
+			push(rand(), false);
+		}
+		display();
+	}
 	//Funkcja usuwaj¹ca ca³e drzewo
 	void pop_all()
 	{
@@ -122,7 +133,10 @@ public:
 			if (oldNode->right != nullptr) pop_allloop(oldNode->right);
 			delete oldNode;
 		}
-		else cout << "\nDrzewo ju¿ jest puste!" << endl, _getche();
+	}
+	void pop_chosen()
+	{
+		//TODO
 	}
 	//Funkcja zwraca aktualny rozmiar listy
 	void getSize()
@@ -133,13 +147,22 @@ public:
 	//Funkcja sprawdzaj¹ca czy podana wartoœæ jest w fukcji
 	bool find(int val)
 	{
-		if (head == nullptr) cout << "Drzewo jest puste" << endl, _getche();
+		bool found;
+		if (head == nullptr) return false;
 		else
 		{
 			if (head->data == val) return true;
-			if (head->left != nullptr) return findloop(val, head->left);
-			else if (head->right != nullptr) return findloop(val, head->right);
-			else return false;
+			if (head->left != nullptr)
+			{
+				found = findloop(val, head->left);
+				if (found) return found;
+			}
+			if (head->right != nullptr) 
+			{
+				found = findloop(val, head->right);
+				if (found) return found;
+			}
+			return false;
 		}
 	}
 private:
@@ -199,9 +222,18 @@ private:
 	//Funkcja szukaj¹ca rekrencyjnie w drzewie
 	bool findloop(int val, Node *searched)
 	{
+		bool found;
 		if (searched->data == val) return true;
-		if (searched->left != nullptr) return findloop(val, searched->left);
-		else if (searched->right != nullptr) return findloop(val, searched->right);
-		else return false;
+		if (searched->left != nullptr)
+		{
+			found = findloop(val, searched->left);
+			if (found) return found;
+		}
+		if (searched->right != nullptr)
+		{
+			found = findloop(val, searched->right);
+			if (found) return found;
+		}
+		return false;
 	}
 };

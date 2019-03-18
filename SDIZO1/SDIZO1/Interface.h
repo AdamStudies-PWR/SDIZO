@@ -392,6 +392,13 @@ private:
 				_getche();
 			} break;
 			case '6': btree.display(); break;
+			case '7':
+			{
+				system("cls");
+				cout << "WprowadŸ d³ugoœæ: ";
+				cin >> ii;
+				btree.push_random(ii);
+			} break;
 			case '9': btree.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
