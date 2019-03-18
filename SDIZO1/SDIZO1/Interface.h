@@ -324,7 +324,7 @@ private:
 			}
 		} while (choice != '0');
 	}
-	//Funkcja obs³uguj¹ca interfejs kopca
+	//Funkcja obs³uguj¹ca interfejs drzewa
 	void binarytree()
 	{
 		int ii;
@@ -351,12 +351,45 @@ private:
 				cin >> name;
 				btree.save(name);
 			}break;
+			case '3':
+			{
+				do
+				{
+					system("cls");
+					cout << " [1] Usuñ z wybrane miejsca" << endl;
+					cout << " [2] Usuñ wszytko" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					/*case '1':
+					{
+						system("cls");
+						cout << "WprowadŸ element, który chesz usun¹æ: ";
+						cin >> ii;
+						heapa.pop(ii);
+					} break;*/
+					case '2': btree.pop_all(); break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
+			}break;
 			case '4':
 			{
 				system("cls");
 				cout << "WprowadŸ wartoœæ: ";
 				cin >> ii;
 				btree.push(ii, true);
+			} break;
+			case '5':
+			{
+				bool searched;
+				system("cls");
+				cout << "WprowadŸ szukany element: ";
+				cin >> ii;
+				searched = btree.find(ii);
+				if (searched) cout << "Szukany element znajduje siê w drzewie" << endl;
+				else cout << "Nie znaleziono szukanego elementu" << endl;
+				_getche();
 			} break;
 			case '6': btree.display(); break;
 			case '9': btree.getSize(); break;

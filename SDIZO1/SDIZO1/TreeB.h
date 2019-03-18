@@ -110,11 +110,37 @@ public:
 		}
 		if(show) display();
 	}
+	//Funkcja usuwaj¹ca ca³e drzewo
+	void pop_all()
+	{
+		if (head != nullptr)
+		{
+			Node *oldNode = head;
+			size = 0;
+			head = nullptr;
+			if (oldNode->left != nullptr) pop_allloop(oldNode->left);
+			if (oldNode->right != nullptr) pop_allloop(oldNode->right);
+			delete oldNode;
+		}
+		else cout << "\nDrzewo ju¿ jest puste!" << endl, _getche();
+	}
 	//Funkcja zwraca aktualny rozmiar listy
 	void getSize()
 	{
 		cout << "\nObecny rozmiar listy to: " << size;
 		_getch();
+	}
+	//Funkcja sprawdzaj¹ca czy podana wartoœæ jest w fukcji
+	bool find(int val)
+	{
+		if (head == nullptr) cout << "Drzewo jest puste" << endl, _getche();
+		else
+		{
+			if (head->data == val) return true;
+			if (head->left != nullptr) return findloop(val, head->left);
+			else if (head->right != nullptr) return findloop(val, head->right);
+			else return false;
+		}
 	}
 private:
 	//Funkcja wyœwietlaj¹ca drzewo (dalsza rekurencyjna czêœæ)
@@ -162,5 +188,20 @@ private:
 		*plik << out->data << endl;
 		if (out->left != nullptr) saveloop(out->left, plik);
 		if (out->right != nullptr) saveloop(out->right, plik);
+	}
+	//Funkcja usuwaj¹ca rekrencyjnie ca³e drzewo
+	void pop_allloop(Node *oldNode)
+	{
+		if (oldNode->left != nullptr) pop_allloop(oldNode->left);
+		if (oldNode->right != nullptr) pop_allloop(oldNode->right);
+		delete oldNode;
+	}
+	//Funkcja szukaj¹ca rekrencyjnie w drzewie
+	bool findloop(int val, Node *searched)
+	{
+		if (searched->data == val) return true;
+		if (searched->left != nullptr) return findloop(val, searched->left);
+		else if (searched->right != nullptr) return findloop(val, searched->right);
+		else return false;
 	}
 };
