@@ -33,23 +33,53 @@ public:
 			_getche();
 		}
 	}
+	//Funkcja obs³uguj¹ca zapis
 	void save(string filename)
 	{
 		if (size == 0) cout << "\nLista jest pusta!" << endl, _getche();
 		else
 		{
-
+			ofstream *plik = new ofstream(filename + ".txt");
+			if (plik->good() == true)
+			{
+				*plik << size << endl;
+				*plik << head->data << endl;
+				if (head->left != nullptr) saveloop(head->left, plik);
+				if (head->right != nullptr) saveloop(head->right, plik);
+				plik->close();
+				delete plik;
+			}
+			else cout << "B³¹d zapisu" << endl, _getch();
 		}
+
+	}
+	//Funkjca odczytuj¹ca dane z pliku
+	void load(string filename)
+	{
+		int ii;
+		ifstream plik(filename + ".txt");
+		if (plik.good() == true)
+		{
+			plik >> size;
+			for (int i = 0; i < (size - 1); i++)
+			{
+				plik >> ii;
+				push(ii, false);
+			}
+			display();
+			plik.close();
+		}
+		else cout << "B³¹d odczytu" << endl, _getch();
 	}
 	//Funkcja dodaj¹ca nowy element do drzewa (pocz¹tek)
-	void push(int val)
+	void push(int val, bool show)
 	{
 		if (head == nullptr)
 		{
 			Node *newNode = new Node;
 			newNode->data = val;
 			head = newNode;
-			size++;
+			if(show) size++;
 		}
 		else
 		{
@@ -61,9 +91,9 @@ public:
 					newNode->data = val;
 					newNode->parent = head;
 					head->left = newNode;
-					size++;
+					if(show) size++;
 				}
-				else pushloop(head->left, val);
+				else pushloop(head->left, val, show);
 			}
 			else
 			{
@@ -73,12 +103,12 @@ public:
 					newNode->data = val;
 					newNode->parent = head;
 					head->right = newNode;
-					size++;
+					if(show) size++;
 				}
-				else pushloop(head->right, val);
+				else pushloop(head->right, val, show);
 			}
 		}
-		display();
+		if(show) display();
 	}
 	//Funkcja zwraca aktualny rozmiar listy
 	void getSize()
@@ -99,7 +129,7 @@ private:
 		cout << ")";
 	}
 	//Funkcja dodaj¹ca nowy element od drzewa (dalsza czêœæ rekurencyjna)
-	void pushloop(Node *oldNode, int val)
+	void pushloop(Node *oldNode, int val, bool rise)
 	{
 		if (val < oldNode->data)
 		{
@@ -109,9 +139,9 @@ private:
 				newNode->data = val;
 				newNode->parent = oldNode;
 				oldNode->left = newNode;
-				size++;
+				if(rise) size++;
 			}
-			else pushloop(oldNode->left, val);
+			else pushloop(oldNode->left, val, rise);
 		}
 		else
 		{
@@ -121,9 +151,16 @@ private:
 				newNode->data = val;
 				newNode->parent = oldNode;
 				oldNode->right = newNode;
-				size++;
+				if(rise) size++;
 			}
-			else pushloop(oldNode->right, val);
+			else pushloop(oldNode->right, val, rise);
 		}
+	}
+	//Funkcja zapisu (rekurencyjna)
+	void saveloop(Node *out, ofstream *plik)
+	{
+		*plik << out->data << endl;
+		if (out->left != nullptr) saveloop(out->left, plik);
+		if (out->right != nullptr) saveloop(out->right, plik);
 	}
 };

@@ -335,12 +335,28 @@ private:
 			switch (choice)
 			{
 			case '0': break;
+			case '1':
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				btree.load(name);
+			}break;
+			case '2': 
+			{
+				string name;
+				system("cls");
+				cout << "WprowadŸ nazwe pliku: ";
+				cin >> name;
+				btree.save(name);
+			}break;
 			case '4':
 			{
 				system("cls");
 				cout << "WprowadŸ wartoœæ: ";
 				cin >> ii;
-				btree.push(ii);
+				btree.push(ii, true);
 			} break;
 			case '6': btree.display(); break;
 			case '9': btree.getSize(); break;
