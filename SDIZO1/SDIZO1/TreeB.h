@@ -134,9 +134,39 @@ public:
 			delete oldNode;
 		}
 	}
-	void pop_chosen()
+	//Funkcja usuwaj¹ca wybrany element z drzewa
+	void pop_chosen(int val)
 	{
-		//TODO
+		if (head == nullptr) 
+		{
+			cout << "\nDrzewo jest puste!" << endl;
+			_getche();
+			return;
+		}
+		Node *deleteNode = find_delete(val, head);
+		if (deleteNode == nullptr) cout << "\nNie znaleziono takiego elementu w drzewie" << endl, _getche();
+		else
+		{
+			Node *y, *x;
+			if((deleteNode->left == nullptr) || (deleteNode->right == nullptr)) y = deleteNode;
+			else y = find_successor(deleteNode);
+			if (y->left != nullptr) x = y->left;
+			else x = y->right;
+			if (x != nullptr) x->parent = y->parent;
+			if (y->parent == nullptr) head = x;
+			else
+			{
+				if (y == y->parent->left) y->parent->left = x;
+				else y->parent->right = x;
+			}
+			if (y != deleteNode)
+			{
+				deleteNode->data = y->data;
+				delete y;
+			}
+			size--;
+			display();
+		}
 	}
 	//Funkcja zwraca aktualny rozmiar listy
 	void getSize()
@@ -235,5 +265,43 @@ private:
 			if (found) return found;
 		}
 		return false;
+	}
+	//Funkcja znajduj¹ca usuwany element
+	Node *find_delete(int val, Node *searched)
+	{
+		Node *temp;
+		if (searched->data == val) return searched;
+		if (searched->left != nullptr)
+		{
+			temp = find_delete(val, searched->left);
+			if (temp != nullptr) return temp;
+		}
+		if (searched->right != nullptr)
+		{
+			temp = find_delete(val, searched->right);
+			if (temp != nullptr) return temp;
+		}
+		return nullptr;
+	}
+	//Funkcja znajduj¹ca nastêpce
+	Node *find_successor(Node *node)
+	{
+		if (node->right != nullptr) return search_min(node->right);
+		Node *temp = node->parent;
+		while (temp != nullptr && temp->left != node)
+		{
+			node = temp;
+			temp = temp->parent;
+		}
+		return node;
+	}
+	//Funkcja szukaj¹ca minimum w drzewie
+	Node *search_min(Node * node)
+	{
+		while (node->left != nullptr)
+		{
+			node = node->left;
+		}
+		return node;
 	}
 };

@@ -40,7 +40,7 @@ public:
 			case '2': list(); break;
 			case '3': heap(); break;
 			case '4': binarytree(); break;
-			case '5': cout << "TBA" << endl; break;
+			case '5': cout << "\nTBA" << endl, _getche(); break;
 			case '0':
 			{
 				system("cls");
@@ -129,7 +129,7 @@ private:
 					system("cls");
 					cout << " [1] Dodaj na pocz¹tek" << endl;
 					cout << " [2] Dodaj na koniec" << endl;
-					cout << " [3] Dodaj na wybrane miejsce" << endl;
+					cout << " [3] Dodaj na wybranego miejsce" << endl;
 					choice = _getch();
 					switch (choice)
 					{
@@ -277,7 +277,7 @@ private:
 				do
 				{
 					system("cls");
-					cout << " [1] Usuñ z wybrane miejsca" << endl;
+					cout << " [1] Usuñ z wybranego miejsca" << endl;
 					cout << " [2] Usuñ wszytko" << endl;
 					choice = _getch();
 					switch (choice)
@@ -356,18 +356,18 @@ private:
 				do
 				{
 					system("cls");
-					cout << " [1] Usuñ z wybrane miejsca" << endl;
+					cout << " [1] Usuñ z wybranego miejsca" << endl;
 					cout << " [2] Usuñ wszytko" << endl;
 					choice = _getch();
 					switch (choice)
 					{
-					/*case '1':
+					case '1':
 					{
 						system("cls");
 						cout << "WprowadŸ element, który chesz usun¹æ: ";
 						cin >> ii;
-						heapa.pop(ii);
-					} break;*/
+						btree.pop_chosen(ii);
+					} break;
 					case '2': btree.pop_all(); break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
