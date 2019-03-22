@@ -67,6 +67,7 @@ public:
 				plik >> ii;
 				push(ii, false);
 			}
+			balance_tree();
 			display();
 			plik.close();
 		}
@@ -194,6 +195,27 @@ public:
 			}
 			return false;
 		}
+	}
+	// Równowa¿enie drzewa - algorytm DSW
+	void balance_tree()
+	{
+		//Etap 1 - prostowanie
+		Node *temp = head;
+		while (temp != nullptr)
+		{
+			if (temp->left != nullptr)
+			{
+				if (temp->parent == nullptr) head = temp->left;
+				else temp->parent->right = temp->left;
+				temp->left->parent = temp->parent;
+				temp->parent = temp->left;
+				temp->left = temp->left->right;
+				temp->parent->right = temp;
+				temp = temp->parent;
+			}
+			else temp = temp->right;
+		}
+		//Etap 2 - równowa¿enie
 	}
 private:
 	//Funkcja wyœwietlaj¹ca drzewo (dalsza rekurencyjna czêœæ)

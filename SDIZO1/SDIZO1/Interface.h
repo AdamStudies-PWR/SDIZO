@@ -31,6 +31,7 @@ public:
 			cout << " [3] Kopiec" << endl;
 			cout << " [4] Drzewo BST" << endl;
 			cout << " [5] Drzewo CC" << endl;
+			cout << " [6] Testowanie" << endl;
 			cout << " [0] Zakoñcz program" << endl;
 			cout << " Wybór: ";
 			choice = _getche();
@@ -41,6 +42,7 @@ public:
 			case '3': heap(); break;
 			case '4': binarytree(); break;
 			case '5': cout << "\nTBA" << endl, _getche(); break;
+			case '6': cout << "\nTBA" << endl, _getche(); break;
 			case '0':
 			{
 				system("cls");
@@ -53,7 +55,7 @@ public:
 	}
 private:
 	//Funkcja wyœwietlaj¹ca g³ówne menu oraz przyjmuj¹ca input
-	char printmenu(string name)
+	char printmenu(string name, bool tree)
 	{
 		char choice;
 		system("cls");
@@ -64,9 +66,8 @@ private:
 		cout << " [4] Dodaj" << endl;
 		cout << " [5] ZnajdŸ" << endl;
 		cout << " [6] Wyswietl" << endl;
-		cout << " [7] Stwórz losowo" << endl;
-		cout << " [8] Testowanie" << endl;
-		cout << " [9] Rozmiar " << name << endl;
+		cout << " [7] Rozmiar " << name << endl;
+		if(tree) cout << " [8] Równowa¿enie drzewa" << endl;
 		cout << " [0] Wróæ" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -79,7 +80,7 @@ private:
 		char choice;
 		do
 		{
-			choice = printmenu("Tablica");
+			choice = printmenu("Tablica", false);
 			switch (choice)
 			{
 			case '0': tab.pop_all();  break;
@@ -121,24 +122,35 @@ private:
 			}break;
 			case '4':
 			{
-				system("cls");
-				cout << "WprowadŸ wartoœæ: ";
-				cin >> ii;
 				do
 				{
 					system("cls");
 					cout << " [1] Dodaj na pocz¹tek" << endl;
 					cout << " [2] Dodaj na koniec" << endl;
 					cout << " [3] Dodaj na wybranego miejsce" << endl;
+					cout << " [4] Utwórz tablice losowo" << endl;
 					choice = _getch();
+					if (choice == '1' || choice == '2' || choice == '3' || choice == '4')
+					{
+						system("cls");
+						cout << "WprowadŸ wartoœæ: ";
+						cin >> ii;
+					}
 					switch (choice)
 					{
 					case '1': tab.push_front(ii); break;
 					case '2': tab.push_back(ii); break;
 					case '3': tab.push_chosen(ii); break;
+					case '4':
+					{
+						system("cls");
+						cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
+						cin >> ii;
+						tab.push_random(ii);
+					}
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
-				} while (choice != '1' && choice != '2' && choice != '3');
+				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 			}break;
 			case '5':
 			{
@@ -151,14 +163,7 @@ private:
 				_getch();
 			} break;
 			case '6': tab.display(); break;
-			case '7':
-			{
-				system("cls");
-				cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
-				cin >> ii;
-				tab.push_random(ii);
-			} break;
-			case '9': tab.getSize(); break;
+			case '7': tab.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
@@ -170,7 +175,7 @@ private:
 		int ii;
 		do
 		{
-			choice = printmenu("Lista");
+			choice = printmenu("Lista", false);
 			switch (choice)
 			{
 			case '0': break;
@@ -212,35 +217,39 @@ private:
 			}break;
 			case '4':
 			{
-				system("cls");
-				cout << "WprowadŸ wartoœæ: ";
-				cin >> ii;
 				do
 				{
 					system("cls");
 					cout << " [1] Dodaj na pocz¹tek" << endl;
 					cout << " [2] Dodaj na koniec" << endl;
 					cout << " [3] Dodaj na wybrane miejsce" << endl;
+					cout << " [4] Utwórz liste losowo" << endl;
 					choice = _getch();
+					if (choice == '1' || choice == '2' || choice == '3')
+					{
+						system("cls");
+						cout << "WprowadŸ wartoœæ: ";
+						cin >> ii;
+					}
 					switch (choice)
 					{
 					case '1': lista.push_front(ii); break;
 					case '2': lista.push_tail(ii); break;
 					case '3': lista.push_chosen(ii); break;
+					case '4':
+					{
+						system("cls");
+						cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
+						cin >> ii;
+						lista.generate(ii);
+					}break;
 					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 					}
-				} while (choice != '1' && choice != '2' && choice != '3');
+				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 			}break;
 			case '5': lista.get_value(); break;
 			case '6': lista.display(); break;
-			case '7': 
-			{
-				system("cls");
-				cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
-				cin >> ii;
-				lista.generate(ii);
-			} break;
-			case '9': lista.getSize(); break;
+			case '7': lista.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
@@ -252,7 +261,7 @@ private:
 		char choice;
 		do
 		{
-			choice = printmenu("Kopiec");
+			choice = printmenu("Kopiec", false);
 			switch (choice)
 			{
 			case '0': break;
@@ -296,10 +305,31 @@ private:
 			}break;
 			case '4': 
 			{
-				system("cls");
-				cout << "WprowadŸ wartoœæ: ";
-				cin >> ii;
-				heapa.push(ii);
+				do
+				{
+					system("cls");
+					cout << " [1] Dodaj normalnie" << endl;
+					cout << " [2] Utwórz losowo" << endl;
+					choice = _getch();
+					switch (choice)
+					{
+					case '1':
+					{
+						system("cls");
+						cout << "WprowadŸ wartoœæ: ";
+						cin >> ii;
+						heapa.push(ii);
+					} break;
+					case '2':
+					{
+						system("cls");
+						cout << "WprowadŸ d³ugoœæ: ";
+						cin >> ii;
+						heapa.push_random(ii);
+					}break;
+					default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+					}
+				} while (choice != '1' && choice != '2');
 			} break;
 			case '5':
 			{
@@ -312,14 +342,7 @@ private:
 				_getche();
 			} break;
 			case '6': heapa.display(); break;
-			case '7': 
-			{
-				system("cls");
-				cout << "WprowadŸ d³ugoœæ: ";
-				cin >> ii;
-				heapa.push_random(ii);
-			} break;
-			case '9': heapa.getSize(); break;
+			case '7': heapa.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
@@ -331,7 +354,7 @@ private:
 		char choice;
 		do
 		{
-			choice = printmenu("Drzewo binarne");
+			choice = printmenu("Drzewo binarne", true);
 			switch (choice)
 			{
 			case '0': break;
@@ -375,10 +398,33 @@ private:
 			}break;
 			case '4':
 			{
-				system("cls");
-				cout << "WprowadŸ wartoœæ: ";
-				cin >> ii;
-				btree.push(ii, true);
+				{
+					do
+					{
+						system("cls");
+						cout << " [1] Dodaj wartoœæ" << endl;
+						cout << " [2] Utwórz losowo" << endl;
+						choice = _getch();
+						switch (choice)
+						{
+						case '1':
+						{
+							system("cls");
+							cout << "WprowadŸ wartoœæ: ";
+							cin >> ii;
+							btree.push(ii, true);
+						} break;
+						case '2':
+						{
+							system("cls");
+							cout << "WprowadŸ d³ugoœæ: ";
+							cin >> ii;
+							btree.push_random(ii);
+						} break;
+						default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
+						}
+					} while (choice != '1' && choice != '2');
+				}break;
 			} break;
 			case '5':
 			{
@@ -392,14 +438,7 @@ private:
 				_getche();
 			} break;
 			case '6': btree.display(); break;
-			case '7':
-			{
-				system("cls");
-				cout << "WprowadŸ d³ugoœæ: ";
-				cin >> ii;
-				btree.push_random(ii);
-			} break;
-			case '9': btree.getSize(); break;
+			case '7': btree.getSize(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
