@@ -1,6 +1,7 @@
 #pragma once
 // Klasa obs³uguj¹ca funkcje drzewa binarnego
 #include "pch.h"
+#include "math.h"
 
 struct Node
 {
@@ -62,12 +63,11 @@ public:
 		{
 			pop_all();
 			plik >> size;
-			for (int i = 0; i < (size - 1); i++)
+			for (int i = 0; i < size; i++)
 			{
 				plik >> ii;
 				push(ii, false);
 			}
-			balance_tree();
 			display();
 			plik.close();
 		}
@@ -116,6 +116,7 @@ public:
 	void push_random(int lenght)
 	{
 		pop_all();
+		size = lenght;
 		for (int i = 0; i < lenght; i++)
 		{
 			push(rand(), false);
@@ -216,6 +217,35 @@ public:
 			else temp = temp->right;
 		}
 		//Etap 2 - równowa¿enie
+		int t = log2(size + 1);
+		int m = pow(2, t) - 1;
+		temp = head;
+		for (int i = 0; i < (size - m); i++)
+		{
+			if (temp->parent == nullptr) head = temp->right;
+			else temp->parent->right = temp->right;
+			temp->right->parent = temp->parent;
+			temp->parent = temp->right;
+			temp->right = temp->parent->left;
+			temp->parent->left = temp;
+			temp = temp->parent->right;
+		}
+		while (m > 1)
+		{
+			m = m / 2;
+			temp = head;
+			for (int i = 0; i < m; i++)
+			{
+				if (temp->parent == nullptr) head = temp->right;
+				else temp->parent->right = temp->right;
+				temp->right->parent = temp->parent;
+				temp->parent = temp->right;
+				temp->right = temp->parent->left;
+				temp->parent->left = temp;
+				temp = temp->parent->right;
+			}
+		}
+		display();
 	}
 private:
 	//Funkcja wyœwietlaj¹ca drzewo (dalsza rekurencyjna czêœæ)

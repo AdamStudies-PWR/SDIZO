@@ -439,6 +439,7 @@ private:
 			} break;
 			case '6': btree.display(); break;
 			case '7': btree.getSize(); break;
+			case '8': btree.balance_tree(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');
