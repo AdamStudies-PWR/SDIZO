@@ -1,7 +1,7 @@
 #pragma once
 // Klasa obs³uguj¹ca funkcje drzewa binarnego
 #include "pch.h"
-#include "math.h"
+#include "Counter.h"
 
 struct Node
 {

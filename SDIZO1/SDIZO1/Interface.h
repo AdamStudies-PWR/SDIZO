@@ -1,7 +1,6 @@
 #pragma once
 // Interface.h Klasa ta zawiera wszystkie elementy interfejsu u¿ytkownika
 #include <conio.h>
-#include <string>
 #include "pch.h"
 #include "List.h"
 #include "Heap.h"
@@ -17,6 +16,7 @@ private:
 	Heap heapa;
 	Table tab;
 	TreeB btree;
+	bool test = false;
 public:
 	//G³ówne menu programu
 	void mmenu()
@@ -42,7 +42,26 @@ public:
 			case '3': heap(); break;
 			case '4': binarytree(); break;
 			case '5': cout << "\nTBA" << endl, _getche(); break;
-			case '6': cout << "\nTBA" << endl, _getche(); break;
+			case '6': 
+			{
+				do
+				{
+					if (test) cout << "\nCzy chcesz wy³¹czyæ testowanie? T/N" << endl;
+					else cout << "\nCzy chcesz w³¹czyæ testowanie? T/N" << endl;
+					choice = _getche();
+					switch (choice)
+					{
+					case 't':;
+					case 'T':
+					{
+						test = !test;
+						lista.switch_test();
+					}break;
+					case 'n': break;
+					case 'N': break;
+					}
+				} while (choice != 't' && choice != 'T' && choice != 'n' && choice != 'N');
+			}break;
 			case '0':
 			{
 				system("cls");
@@ -68,6 +87,7 @@ private:
 		cout << " [6] Wyswietl" << endl;
 		cout << " [7] Rozmiar " << name << endl;
 		if(tree) cout << " [8] Równowa¿enie drzewa" << endl;
+		if(test) cout << " [9] Zapisz wyniki testów" << endl;
 		cout << " [0] Wróæ" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -250,6 +270,7 @@ private:
 			case '5': lista.get_value(); break;
 			case '6': lista.display(); break;
 			case '7': lista.getSize(); break;
+			case '9': lista.save_data("listatesty"), cout << "\nZapisano" << endl, _getch(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');

@@ -13,5 +13,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <math.h>
+#include <string>
+#include "Tests.h"
 
 #endif //PCH_H

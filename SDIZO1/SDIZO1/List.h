@@ -10,10 +10,9 @@ struct ElemList
 	ElemList *next = nullptr, *prev = nullptr;
 };
 
-class List
+class List: public Tests
 {
 private:
-	int size = 0;
 	ElemList *head = nullptr;
 public:
 	//Funkcja zapisu
@@ -66,12 +65,14 @@ public:
 		 if (head == nullptr) cout << "\nLista jest pusta!" << endl , _getch();
 		 else
 		 {
+			 if (tests) tester.StartCounter();
 			 ElemList *out = head;
 			 while (out != nullptr)
 			 {
 				 cout << " " << out->data;
 				 out = out->next;
 			 }
+			 if (tests) adddisplay(tester.GetCounter());
 			 _getch();
 		 }
 	 }
@@ -249,6 +250,7 @@ public:
 	 //Funkcja tworzy lsite o podanym rozmiarze
 	 void generate(int lenght)
 	 {
+		 pop_all();
 		 for (int i = 0; i < lenght; i++)
 		 {
 			 ElemList *newEl = new ElemList;
@@ -261,6 +263,8 @@ public:
 		 }
 		 display();
 	 }
+	 //W³anczanie wy³¹czanie testowania
+	 void switch_test() { tests = !tests; }
 private:
 	 //Funkcja zwracaj¹ca ogon
 	 ElemList *getTail()

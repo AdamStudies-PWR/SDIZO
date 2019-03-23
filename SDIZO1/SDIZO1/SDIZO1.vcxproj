@@ -156,6 +156,8 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="Counter.h" />
+    <ClInclude Include="Tests.h" />
     <ClInclude Include="TreeB.h" />
   </ItemGroup>
   <ItemGroup>

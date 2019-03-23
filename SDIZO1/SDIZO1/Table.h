@@ -18,8 +18,8 @@ public:
 		if (pointer != NULL)
 		{
 			delete pointer;
+			//size = 0;
 		}
-		//size = 0;
 	}
 	//Funkcja zapisu
 	void save(string filename)
