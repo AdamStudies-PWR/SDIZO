@@ -2,6 +2,13 @@
 #include "pch.h"
 #include "TreeB.h"
 using namespace std;
+
+//konstruktor drzewa
+TreeB::TreeB()
+{
+	Tests();
+	for (int i = 0; i < number; i++) balancing[i] = 0;
+}
 //Funkcja wyœwietlaj¹ca drzewo (pocz¹tek)
 void TreeB::display()
 {
@@ -25,6 +32,7 @@ void TreeB::save(string filename)
 	if (size == 0) cout << "\nLista jest pusta!" << endl, _getche();
 	else
 	{
+		if (tests) tester.StartCounter();
 		ofstream *plik = new ofstream(filename + ".txt");
 		if (plik->good() == true)
 		{
@@ -33,27 +41,30 @@ void TreeB::save(string filename)
 			if (head->left != nullptr) saveloop(head->left, plik);
 			if (head->right != nullptr) saveloop(head->right, plik);
 			plik->close();
+			if (tests) addsave(tester.GetCounter());
 			delete plik;
 		}
 		else cout << "B³¹d zapisu" << endl, _getch();
 	}
-
 }
 //Funkjca odczytuj¹ca dane z pliku
 void TreeB::load(string filename)
 {
-	int ii;
+	int ii, temp;
 	ifstream plik(filename + ".txt");
 	if (plik.good() == true)
 	{
-		pop_all();
-		plik >> size;
-		for (int i = 0; i < size; i++)
+		if (!automatic) pop_all();
+		if (tests) tester.StartCounter();
+		plik >> temp;
+		for (int i = 0; i < temp; i++)
 		{
 			plik >> ii;
+			size++;
 			push(ii, false);
 		}
-		display();
+		if (tests) addload(tester.GetCounter());
+		if (!automatic) display();
 		plik.close();
 	}
 	else cout << "B³¹d odczytu" << endl, _getch();
@@ -61,6 +72,7 @@ void TreeB::load(string filename)
 //Funkcja dodaj¹ca nowy element do drzewa (pocz¹tek)
 void TreeB::push(int val, bool show)
 {
+	if (tests && show) tester.StartCounter();
 	if (head == nullptr)
 	{
 		Node *newNode = new Node;
@@ -95,7 +107,9 @@ void TreeB::push(int val, bool show)
 			else pushloop(head->right, val, show);
 		}
 	}
-	if (show) display();
+	//balance_tree(show);
+	if (tests && show) addchosen(tester.GetCounter());
+	if (!automatic && show) display();
 }
 //Funkcja losowa wype³niaj¹ca drzewo
 void TreeB::push_random(int lenght)
@@ -113,12 +127,14 @@ void TreeB::pop_all()
 {
 	if (head != nullptr)
 	{
+		if (tests) tester.StartCounter();
 		Node *oldNode = head;
 		size = 0;
 		head = nullptr;
 		if (oldNode->left != nullptr) pop_allloop(oldNode->left);
 		if (oldNode->right != nullptr) pop_allloop(oldNode->right);
 		delete oldNode;
+		if (tests) addpopa(tester.GetCounter());
 	}
 }
 //Funkcja usuwaj¹ca wybrany element z drzewa
@@ -130,6 +146,7 @@ void TreeB::pop_chosen(int val)
 		_getche();
 		return;
 	}
+	if (tests) tester.StartCounter();
 	Node *deleteNode = find_delete(val, head);
 	if (deleteNode == nullptr) cout << "\nNie znaleziono takiego elementu w drzewie" << endl, _getche();
 	else
@@ -152,7 +169,9 @@ void TreeB::pop_chosen(int val)
 			delete y;
 		}
 		size--;
-		display();
+		balance_tree(!tests);
+		if (tests) addpop(tester.GetCounter());
+		if (!automatic) display();
 	}
 }
 //Funkcja zwraca aktualny rozmiar listy
@@ -164,27 +183,46 @@ void TreeB::getSize()
 //Funkcja sprawdzaj¹ca czy podana wartoœæ jest w fukcji
 bool TreeB::find(int val)
 {
+	if (tests) tester.StartCounter();
 	bool found;
-	if (head == nullptr) return false;
+	if (head == nullptr)
+	{
+		if (tests) addsearch(tester.GetCounter());
+		return false;
+	}
 	else
 	{
-		if (head->data == val) return true;
+		if (head->data == val)
+		{
+			if (tests) addsearch(tester.GetCounter());
+			return true;
+		}
 		if (head->left != nullptr)
 		{
 			found = findloop(val, head->left);
-			if (found) return found;
+			if (found)
+			{
+				if (tests) addsearch(tester.GetCounter());
+				return found;
+			}
 		}
 		if (head->right != nullptr)
 		{
 			found = findloop(val, head->right);
-			if (found) return found;
+			if (found)
+			{
+				if (tests) addsearch(tester.GetCounter());
+				return found;
+			}
 		}
+		if (tests) addsearch(tester.GetCounter());
 		return false;
 	}
 }
 // Równowa¿enie drzewa - algorytm DSW
-void TreeB::balance_tree()
+void TreeB::balance_tree(bool show)
 {
+	if (tests || show) tester.StartCounter();
 	//Etap 1 - prostowanie
 	Node *temp = head;
 	while (temp != nullptr)
@@ -230,7 +268,25 @@ void TreeB::balance_tree()
 			temp = temp->parent->right;
 		}
 	}
-	display();
+	if (tests || show) addbal(tester.GetCounter());
+	if(!automatic && show) display();
+}
+//W³¹czanie wy³¹czanie testowania
+void TreeB::switch_test() { tests = !tests; }
+//Przeci¹¿enie funkcji zapisu
+void TreeB::save_data(string filename)
+{
+	ofstream plik(filename + ".txt");
+	if (plik.good() == true)
+	{
+		plik << "wczytywanie;zapisywanie;usuwanie;usuwanie ostatniego;usuwanie pierwszego;usuwanie wszystkiego;dodawanie;dodawaniena pierwszego;dodawanie ostatniego;wyszukiwanie;równowa¿enie drzewa" << endl;
+		for (int i = 0; i < 100; i++)
+		{
+			plik << loading[i] << ";" << saving[i] << ";" << deletech[i] << ";" << deletelast[i] << ";" << deletefirst[i] << ";" << deleteall[i] << ";" << addch[i] << ";" << addfirst[i] << ";" << addlast[i] << ";" << finder[i] << ";" << balancing[i] << endl;
+		}
+		plik.close();
+	}
+	else cout << "B³¹d zapisu" << endl, system("pasue");
 }
 //Funkcja wyœwietlaj¹ca drzewo (dalsza rekurencyjna czêœæ)
 void TreeB::displayloop(Node *out)
@@ -339,4 +395,11 @@ Node *TreeB::search_min(Node * node)
 		node = node->left;
 	}
 	return node;
+}
+//Funkcja umieszczaj¹ca wynik pomiaru w tabeli
+void TreeB::addbal(double numb)
+{
+	balancing[bnumber] = numb;
+	bnumber++;
+	displayresult(numb, bnumber);
 }

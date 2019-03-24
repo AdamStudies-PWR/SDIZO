@@ -17,6 +17,7 @@ void Interface::mmenu()
 		cout << " [4] Drzewo BST" << endl;
 		cout << " [5] Drzewo CC" << endl;
 		cout << " [6] Testowanie" << endl;
+		cout << " [7] Automatyczne testy [EKSPERYMENTALNE]" << endl;
 		cout << " [0] Zakoñcz program" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -43,12 +44,24 @@ void Interface::mmenu()
 					lista.switch_test();
 					tab.switch_test();
 					heapa.switch_test();
+					btree.switch_test();
 				}break;
 				case 'n': break;
 				case 'N': break;
 				}
 			} while (choice != 't' && choice != 'T' && choice != 'n' && choice != 'N');
 		}break;
+		case '7':
+		{
+			lista.switch_test();
+			tab.switch_test();
+			heapa.switch_test();
+			btree.switch_test();
+			int ii;
+			system("cls");
+			cout << "Iloœæ danych: ";
+			cin >> ii;
+		}
 		case '0':
 		{
 			system("cls");
@@ -457,7 +470,8 @@ void Interface::binarytree()
 		} break;
 		case '6': btree.display(); break;
 		case '7': btree.getSize(); break;
-		case '8': btree.balance_tree(); break;
+		case '8': btree.balance_tree(true); break;
+		case '9': btree.save_data("drzewotesty"), cout << "\nZapisano" << endl, _getch(); break;
 		default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 		}
 	} while (choice != '0');

@@ -1,6 +1,6 @@
 #pragma once
 //Klasa obs³uguj¹ca funkcje Tablicy
-#include "Tests.h";
+#include "Tests.h"
 
 class Table: public Tests
 {

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef TreeB_hpp
 #define TreeB_hpp
-#include "Counter.h"
+#include "Tests.h"
 
 struct Node
 {
@@ -12,12 +12,15 @@ struct Node
 };
 
 // Klasa obs³uguj¹ca funkcje drzewa binarnego
-class TreeB
+class TreeB: public Tests
 {
 private:
 	int size = 0;
 	Node *head = nullptr;
+	double balancing[number];
+	int bnumber = 0;
 public:
+	TreeB();
 	void display();
 	void save(string filename);
 	void load(string filename);
@@ -27,7 +30,9 @@ public:
 	void pop_chosen(int val);
 	void getSize();
 	bool find(int val);
-	void balance_tree();
+	void balance_tree(bool show);
+	void switch_test();
+	void save_data(string filename);
 private:
 	void displayloop(Node *out);
 	void pushloop(Node *oldNode, int val, bool rise);
@@ -37,5 +42,6 @@ private:
 	Node *find_delete(int val, Node *searched);
 	Node *find_successor(Node *node);
 	Node *search_min(Node * node);
+	void addbal(double numb);
 };
 #endif

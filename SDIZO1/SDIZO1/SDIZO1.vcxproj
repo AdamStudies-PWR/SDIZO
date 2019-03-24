@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Automatic.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="List.h" />
