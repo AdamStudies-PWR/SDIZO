@@ -60,7 +60,7 @@ void Interface::mmenu()
 			btree.switch_test();
 			int ii;
 			system("cls");
-			cout << "[MAX 5000] Iloœæ danych: ";
+			cout << "[MAX 30000] Iloœæ danych: ";
 			cin >> ii;
 			lista.setquantity(ii);
 			tab.setquantity(ii);

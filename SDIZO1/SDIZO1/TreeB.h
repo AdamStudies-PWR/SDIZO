@@ -5,7 +5,7 @@
 
 struct Node
 {
-	int data;
+	_int64 data;
 	Node *left = nullptr;
 	Node *right = nullptr;
 	Node *parent = nullptr;

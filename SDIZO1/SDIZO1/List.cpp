@@ -185,9 +185,9 @@ void List::pop_tail()
 void List::pop_chosen()
 {
 	int index;
-	system("cls");
 	if (!automatic)
 	{
+		system("cls");
 		cout << "Podaj pozycje, z której chcesz usun¹æ liczbe: ";
 		cin >> index;
 	}

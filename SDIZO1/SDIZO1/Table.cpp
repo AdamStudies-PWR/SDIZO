@@ -14,7 +14,6 @@ Table::~Table()
 	if (pointer != NULL)
 	{
 		delete pointer;
-		//size = 0;
 	}
 }
 //Funkcja zapisu

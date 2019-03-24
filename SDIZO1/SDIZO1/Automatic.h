@@ -17,6 +17,7 @@ void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 		list.pop_front();
 		list.push_front(rand());
 		list.pop_tail();
+		list.push_tail(rand());
 		list.pop_chosen();
 		list.push_chosen(44);
 		list.get_value(44);
@@ -42,6 +43,7 @@ void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 		table.pop_front();
 		table.push_front(rand());
 		table.pop_back();
+		table.push_back(rand());
 		table.pop_chosen();
 		table.push_chosen(44);
 		table.find(44);
