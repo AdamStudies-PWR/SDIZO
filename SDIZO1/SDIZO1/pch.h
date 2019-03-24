@@ -15,6 +15,8 @@
 #include <fstream>
 #include <math.h>
 #include <string>
-#include "Tests.h"
+#include <stdio.h>
+#include <conio.h>
+#include <Windows.h>
 
 #endif //PCH_H
