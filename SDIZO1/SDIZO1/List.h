@@ -21,6 +21,7 @@ public:
 		if (size == 0) cout << "\nLista jest pusta!" << endl, _getche();
 		else
 		{
+			if(tests) tester.StartCounter();
 			ofstream plik(filename + ".txt");
 			if (plik.good() == true)
 			{
@@ -32,6 +33,7 @@ public:
 					out = out->prev;
 				}
 				plik.close();
+				if(tests) addsave(tester.GetCounter());
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -43,6 +45,7 @@ public:
 		if (plik.good() == true)
 		{
 			pop_all();
+			if (tests) tester.StartCounter();
 			plik >> size;
 			for (int i = 0; i < size; i++)
 			{
@@ -53,7 +56,8 @@ public:
 				if (head != nullptr) head->prev = newEl;
 				head = newEl;
 			}
-			display();
+			if (tests) addload(tester.GetCounter());
+			if(!automatic) display();
 			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
@@ -73,7 +77,7 @@ public:
 				 out = out->next;
 			 }
 			 if (tests) adddisplay(tester.GetCounter());
-			 _getch();
+			 if(!automatic) _getch();
 		 }
 	 }
 	 //Funkcja zwraca aktualny rozmiar listy
@@ -85,6 +89,7 @@ public:
 	 //Funkcja dodaje nowy element na pocz¹tek listy
 	 void push_front(int val)
 	 {
+		 if (tests) tester.StartCounter();
 		 ElemList *newEl = new ElemList;
 		 newEl->data = val;
 		 newEl->next = head;
@@ -92,15 +97,20 @@ public:
 		 if(head != nullptr) head->prev = newEl;
 		 head = newEl;
 		 size++;
-		 display();
+		 if (tests) addfront(tester.GetCounter());
+		 if(!automatic) display();
 	 }
-	 //Funkcja dodajaca element na dowolnie wynranej pozycji
+	 //Funkcja dodajaca element na dowolnie wybranej pozycji
 	 void push_chosen(int val)
 	 {
 		 int index;
-		 system("cls");
-		 cout << "Podaj pozycje na której chcesz wstawiæ liczbe: ";
-		 cin >> index;
+		 if (!automatic)
+		 {
+			 system("cls");
+			 cout << "Podaj pozycje na której chcesz wstawiæ liczbe: ";
+			 cin >> index;
+		 }
+		 else index = (rand() % (quantity - 2)) + 1;
 		 if (index == (size + 1)) push_tail(val);
 		 else
 		 {
@@ -113,6 +123,7 @@ public:
 			 if (index == 1) push_front(val);
 			 else
 			 {
+				 if (tests) tester.StartCounter();
 				 ElemList *oldEl = find(index);
 				 if (oldEl == nullptr)
 				 {
@@ -127,13 +138,15 @@ public:
 				 oldEl->prev->next = newEl;
 				 oldEl->prev = newEl;
 				 size++;
-				 display();
+				 if (tests) addchosen(tester.GetCounter());
+				 if (!automatic) display();
 			 }
 		 }
 	 }
 	 //Funkcja dodaj¹ca nowy element na koñcu listy
 	 void push_tail(int val)
 	 {
+		 if (tests) tester.StartCounter();
 		 ElemList *tail = getTail();
 		 if (tail == nullptr) push_front(val);
 		 else
@@ -144,7 +157,8 @@ public:
 			 newEl->prev = tail;
 			 tail->next = newEl;
 			 size++;
-			 display();
+			 if (tests) addback(tester.GetCounter());
+			 if(!automatic) display();
 		 }
 	 }
 	 //Funkcja usuwaj¹ca wartoœæ z pocz¹tku
@@ -153,17 +167,20 @@ public:
 		 if (head == nullptr) cout << "\nLista jest pusta!" << endl, _getch();
 		 else
 		 {
+			 if (tests) tester.StartCounter();
 			 ElemList *temp = head;
 			 head = head->next;
 			 if (head != nullptr) head->prev = nullptr;
 			 delete temp;
 			 size--;
-			 display();
+			 if (tests) addpopf(tester.GetCounter());
+			 if (!automatic) display();
 		 }
 	 }
 	 //Funkcja usuwaj¹ca z ogona
 	 void pop_tail()
 	 {
+		 if (tests) tester.StartCounter();
 		 ElemList *tail = getTail();
 		 ElemList *temp = tail->prev;
 		 if(tail == nullptr) cout << "\nLista jest pusta!" << endl, _getch();
@@ -173,7 +190,8 @@ public:
 			 else head = nullptr;
 			 delete tail;
 			 size--;
-			 display();
+			 if (tests) addpopl(tester.GetCounter());
+			 if (!automatic) display();
 		 }
 	 }
 	 //Funkcja usuwaj¹ca dowolny element
@@ -181,8 +199,12 @@ public:
 	 {
 		 int index;
 		 system("cls");
-		 cout << "Podaj pozycje, z której chcesz usun¹æ liczbe: ";
-		 cin >> index;
+		 if (!automatic)
+		 {
+			 cout << "Podaj pozycje, z której chcesz usun¹æ liczbe: ";
+			 cin >> index;
+		 }
+		 else index = (rand() % (quantity - 2)) + 1;
 		 if (index > size || index <= 0)
 		 {
 			 cout << "\nNie mo¿na usn¹æ elementu na podanej pozycji" << endl;
@@ -195,6 +217,7 @@ public:
 			 if (index == size) pop_tail();
 			 else
 			 {
+				 if (tests) tester.StartCounter();
 				 ElemList *oldEl = find(index);
 				 if (oldEl == nullptr)
 				 {
@@ -206,13 +229,15 @@ public:
 				 oldEl->next->prev = oldEl->prev;
 				 size--;
 				 delete oldEl;
-				 display();
+				 if (tests) addpop(tester.GetCounter());
+				 if (!automatic) display();
 			 }
 		 }
 	 }
 	 //Funkcja usuwaj¹ca wszytkie elementy listy
 	 void pop_all()
 	 {
+		 if (tests) tester.StartCounter();
 		 ElemList *element;
 		 while (head != nullptr)
 		 {
@@ -221,31 +246,20 @@ public:
 			delete element;
 			size--;
 		 }
+		 if (tests) addpopa(tester.GetCounter());
 	 }
 	 //Funkcja zwracaj¹ca wartoœæ na wskazanej prze¿ u¿ytkownika pozycji
-	 void get_value()
+	 int get_value(int val)
+
 	 {
-		 int index;
-		 system("cls");
-		 cout << "Podaj pozycje, z której chcesz uzyskaæ wartoœæ: ";
-		 cin >> index;
-		 if (index > size || index <= 0)
+		 int i = 0;
+		 ElemList *searched = head;
+		 while (searched != nullptr)
 		 {
-			 cout << "\nNie mo¿na znale¿æ elementu na podanej pozycji" << endl;
-			 _getch();
-			 return;
+			 if (searched->data == val) return i;
+			 i++;
 		 }
-		 else
-		 {
-			 ElemList *searched = find(index);
-			 if(searched == nullptr) 
-			 {
-				 cout << "\nWyst¹pi³ nieoczekiwany b³¹d" << endl;
-				 _getch();
-				 return;
-			 }
-			 else cout << "\n " << searched->data << endl, _getch();
-		 }
+		 return -1;
 	 }
 	 //Funkcja tworzy lsite o podanym rozmiarze
 	 void generate(int lenght)

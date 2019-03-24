@@ -267,7 +267,16 @@ private:
 					}
 				} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 			}break;
-			case '5': lista.get_value(); break;
+			case '5':
+			{
+				system("cls");
+				cout << "WprowadŸ szukany element: ";
+				cin >> ii;
+				ii = lista.get_value(ii);
+				if (ii == -1) cout << "Nie znaleziono szukanego elementu" << endl;
+				else cout << "Szukany element znajduje siê na pozycji: " << ii << endl;
+				_getche();
+			} break;
 			case '6': lista.display(); break;
 			case '7': lista.getSize(); break;
 			case '9': lista.save_data("listatesty"), cout << "\nZapisano" << endl, _getch(); break;

@@ -18,7 +18,7 @@ protected:
 	double addch[number];
 	double addfirst[number];
 	double addlast[number];
-	double create[number];
+	double finder[number];
 	double display[number];
 
 	int ldnumber = 0;
@@ -30,12 +30,14 @@ protected:
 	int achnumber = 0;
 	int afnumber = 0;
 	int alnumber = 0;
-	int cnumber = 0;
+	int fnumber = 0;
 	int dnumber = 0;
 
 	Counter tester;
 	int size = 0;
 	bool tests = false;
+	bool automatic = false;
+	int quantity = 1000;
 public:
 	//konstruktor zerujacy tabele
 	Tests()
@@ -51,7 +53,7 @@ public:
 			addch[i] = 0;
 			addfirst[i] = 0;
 			addlast[i] = 0;
-			create[i] = 0;
+			finder[i] = 0;
 			display[i] = 0;
 		}
 	}
@@ -61,10 +63,10 @@ public:
 		ofstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
-			plik << "wczytywanie;zapisywanie;usuwanie;usuwanie ostatniego;usuwanie pierwszego;usuwanie wszystkiego;dodawanie;dodawaniena pierwszego;dodawanie ostatniego;tworzenie;wyœwietlanie" << endl;
+			plik << "wczytywanie;zapisywanie;usuwanie;usuwanie ostatniego;usuwanie pierwszego;usuwanie wszystkiego;dodawanie;dodawaniena pierwszego;dodawanie ostatniego;wyszukiwanie;wyœwietlanie" << endl;
 			for (int i = 0; i < 100; i++)
 			{
-				plik << loading[i] << ";" << saving[i] << ";" << deletech[i] << ";" << deletelast[i] << ";" << deletefirst[i] << ";" << deleteall[i] << ";" << addch[i] << ";" << addfirst[i] << ";" << addlast[i] << ";" << create[i] << ";" << display[i] << endl;
+				plik << loading[i] << ";" << saving[i] << ";" << deletech[i] << ";" << deletelast[i] << ";" << deletefirst[i] << ";" << deleteall[i] << ";" << addch[i] << ";" << addfirst[i] << ";" << addlast[i] << ";" << finder[i] << ";" << display[i] << endl;
 			}
 			plik.close();
 		}
@@ -73,12 +75,70 @@ public:
 	//Funkcja wyswietlaj¹ca wynik testu
 	void displayresult(double numb, int info)
 	{
-		cout << "\n" << info << " Wynik testu: " << numb << endl;
+		if (!automatic)
+		{
+			cout << "\n" << info << " Wynik testu: " << numb << endl;
+			system("pause");
+		}
 	}
 	void adddisplay(double numb)
 	{
 		display[dnumber] = numb;
 		dnumber++;
 		displayresult(numb, dnumber);
+	}
+	void addsave(double numb)
+	{
+		saving[svnumber] = numb;
+		svnumber++;
+		displayresult(numb, svnumber);
+	}
+	void addload(double numb)
+	{
+		loading[ldnumber] = numb;
+		ldnumber++;
+		displayresult(numb, ldnumber);
+	}
+	void addchosen(double numb)
+	{
+		addch[achnumber] = numb;
+		achnumber++;
+		displayresult(numb, achnumber);
+	}
+	void addfront(double numb)
+	{
+		addfirst[afnumber] = numb;
+		afnumber++;
+		displayresult(numb, afnumber);
+	}
+	void addback(double numb)
+	{
+		addlast[alnumber] = numb;
+		alnumber++;
+		displayresult(numb, alnumber);
+	}
+	void addpopf(double numb)
+	{
+		deletefirst[dfnumber] = numb;
+		dfnumber++;
+		displayresult(numb, dfnumber);
+	}
+	void addpopl(double numb)
+	{
+		deletelast[dlnumber] = numb;
+		dlnumber++;
+		displayresult(numb, dlnumber);
+	}
+	void addpop(double numb)
+	{
+		deletech[dchnumber] = numb;
+		dchnumber++;
+		displayresult(numb, dchnumber);
+	}
+	void addpopa(double numb)
+	{
+		deleteall[danumber] = numb;
+		danumber++;
+		displayresult(numb, danumber);
 	}
 };
