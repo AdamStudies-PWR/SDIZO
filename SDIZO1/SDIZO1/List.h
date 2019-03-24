@@ -250,7 +250,6 @@ public:
 	 }
 	 //Funkcja zwracaj¹ca wartoœæ na wskazanej prze¿ u¿ytkownika pozycji
 	 int get_value(int val)
-
 	 {
 		 int i = 0;
 		 ElemList *searched = head;
@@ -258,6 +257,7 @@ public:
 		 {
 			 if (searched->data == val) return i;
 			 i++;
+			 searched = searched->next;
 		 }
 		 return -1;
 	 }

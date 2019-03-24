@@ -56,6 +56,7 @@ public:
 					{
 						test = !test;
 						lista.switch_test();
+						tab.switch_test();
 					}break;
 					case 'n': break;
 					case 'N': break;
@@ -184,6 +185,7 @@ private:
 			} break;
 			case '6': tab.display(); break;
 			case '7': tab.getSize(); break;
+			case '9': tab.save_data("tablicatesty"), cout << "\nZapisano" << endl, _getch(); break;
 			default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 			}
 		} while (choice != '0');

@@ -2,7 +2,7 @@
 //Klasa obs³uguj¹ca funkcje Tablicy
 #include "pch.h"
 
-class Table
+class Table: public Tests
 {
 private:
 	int size;
@@ -27,6 +27,7 @@ public:
 		if (size == 0) cout << "\nTablica jest pusta!" << endl, _getche();
 		else
 		{
+			if (tests) tester.StartCounter();
 			ofstream plik(filename + ".txt");
 			if (plik.good() == true)
 			{
@@ -36,6 +37,7 @@ public:
 					plik << pointer[i] << endl;
 				}
 				plik.close();
+				if (tests) addsave(tester.GetCounter());
 			}
 			else cout << "B³¹d zapisu" << endl, _getch();
 		}
@@ -47,14 +49,16 @@ public:
 		if (plik.good() == true)
 		{
 			plik >> size;
+			if (tests) tester.StartCounter();
 			int *newpointer = new int[size];
 			for (int i = 0; i < size; i++)
 			{
 				plik >> newpointer[i];
 			}
+			if (tests) addload(tester.GetCounter());
 			pop_all();
 			pointer = newpointer;
-			display();
+			if (!automatic) display();
 			plik.close();
 		}
 		else cout << "B³¹d odczytu" << endl, _getch();
@@ -66,16 +70,19 @@ public:
 		if (size == 0) cout << "Tablica jest pusta" << endl;
 		else
 		{
+			if (tests) tester.StartCounter();
 			for (int i = 0; i < size; i++)
 			{
 				cout << " " <<pointer[i];
 			}
+			if (tests) adddisplay(tester.GetCounter());
 		}
-		_getche();
+		if(!automatic) _getche();
 	}
 	//Funkcja dodaj¹ca elementy na pocz¹tek tablicy
 	void push_front(int val)
 	{
+		if (tests) tester.StartCounter();
 		size++;
 		int *newpointer = new int[size];
 		if (size != 1)
@@ -88,11 +95,13 @@ public:
 		newpointer[0] = val;
 		delete pointer;
 		pointer = newpointer;
-		display();
+		if (tests) addfront(tester.GetCounter());
+		if (!automatic) display();
 	}
 	//Funkcja dodaj¹ca wartoœæ na koñcu tablicy
 	void push_back(int val)
 	{
+		if (tests) tester.StartCounter();
 		size++;
 		int *newpointer = new int[size];
 		if (size == 1) newpointer[0] = val;
@@ -106,15 +115,20 @@ public:
 		}
 		delete pointer;
 		pointer = newpointer;
-		display();
+		if (tests) addback(tester.GetCounter());
+		if (!automatic) display();
 	}
 	//Funkcja dodaj¹ca elementy na wybrane miejsce
 	void push_chosen(int val)
 	{
 		int index;
-		system("cls");
-		cout << "Podaj pozycje na której chcesz wstawiæ liczbe: ";
-		cin >> index;
+		if (!automatic)
+		{
+			system("cls");
+			cout << "Podaj pozycje na której chcesz wstawiæ liczbe: ";
+			cin >> index;
+		}
+		else index = (rand() % (quantity - 2)) + 1;
 		if (index == 0) push_front(val);
 		else
 		{
@@ -124,6 +138,7 @@ public:
 				if (index > size || index < 0) cout << "\nElement poza list¹" << endl, _getch();
 				else
 				{
+					if (tests) tester.StartCounter();
 					size++;
 					int i = 0;
 					int *newpointer = new int[size + 1];
@@ -139,7 +154,8 @@ public:
 					}
 					delete pointer;
 					pointer = newpointer;
-					display();
+					if (tests) addchosen(tester.GetCounter());
+					if (!automatic) display();
 				}
 			}
 		}
@@ -163,6 +179,7 @@ public:
 		if (size == 0) cout << "\nTablica jest pusta!" << endl, _getch();
 		else
 		{
+			if (tests) tester.StartCounter();
 			size--;
 			int *newpointer = new int[size];
 			for (int i = 0; i < size; i++)
@@ -171,7 +188,8 @@ public:
 			}
 			delete pointer;
 			pointer = newpointer;
-			display();
+			if (tests) addpopf(tester.GetCounter());
+			if (!automatic) display();
 		}
 	}
 	//Funkcja usuwaj¹ca z koñca
@@ -180,6 +198,7 @@ public:
 		if (size == 0) cout << "\nTablica jest pusta!" << endl, _getch();
 		else
 		{
+			if (tests) tester.StartCounter();
 			size--;
 			int *newpointer = new int[size];
 			for (int i = 0; i < size; i++)
@@ -188,7 +207,8 @@ public:
 			}
 			delete pointer;
 			pointer = newpointer;
-			display();
+			if (tests) addpopl(tester.GetCounter());
+			if (!automatic) display();
 		}
 	}
 	//Funkcja usuwaj¹ca wybrane
@@ -198,9 +218,12 @@ public:
 		else
 		{
 			int index;
-			system("cls");
-			cout << "Podaj pozycje z której chcesz usun¹æ liczbe: ";
-			cin >> index;
+			if (!automatic)
+			{
+				cout << "Podaj pozycje, z której chcesz usun¹æ liczbe: ";
+				cin >> index;
+			}
+			else index = (rand() % (quantity - 2)) + 1;
 			if (index == 0) pop_front();
 			else
 			{
@@ -210,6 +233,7 @@ public:
 					if (index >= size || index < 0) cout << "\nElement poza list¹" << endl, _getch();
 					else
 					{
+						if (tests) tester.StartCounter();
 						size--;
 						int i = 0;
 						int *newpointer = new int[size + 1];
@@ -224,7 +248,8 @@ public:
 						}
 						delete pointer;
 						pointer = newpointer;
-						display();
+						if (tests) addpop(tester.GetCounter());
+						if (!automatic) display();
 					}
 				}
 			}
@@ -235,10 +260,12 @@ public:
 	{
 		if (pointer != NULL)
 		{
+			if (tests) tester.StartCounter();
 			int *newpointer = NULL;
 			delete pointer;
 			pointer = newpointer;
 			size = 0;
+			if (tests) addpopa(tester.GetCounter());
 		}
 	}
 	//Funkcja zwracaj¹ca rozmar tablicy
@@ -260,4 +287,6 @@ public:
 			return -1;
 		}
 	}
+	//W³¹czanie wy³¹czanie testowania
+	void switch_test() { tests = !tests; }
 };
