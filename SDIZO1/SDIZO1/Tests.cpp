@@ -35,6 +35,12 @@ void Tests::save_data(string filename)
 	}
 	else cout << "B³¹d zapisu" << endl, system("pasue");
 }
+//Funkcja ustawiaj¹ca wielkosæ testowanych obiektów
+void Tests::setquantity(int newdata) 
+{ 
+	quantity = newdata; 
+	automatic = true;
+}
 //Funkcja wyswietlaj¹ca wynik testu
 void Tests:: displayresult(double numb, int info)
 {

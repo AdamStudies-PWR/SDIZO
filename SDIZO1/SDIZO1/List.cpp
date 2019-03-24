@@ -268,7 +268,7 @@ void List::generate(int lenght)
 		head = newEl;
 		size++;
 	}
-	display();
+	if (!automatic) display();
 }
 //W³¹czanie wy³¹czanie testowania
 void List::switch_test() { tests = !tests; }

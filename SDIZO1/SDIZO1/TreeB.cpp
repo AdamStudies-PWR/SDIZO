@@ -120,7 +120,7 @@ void TreeB::push_random(int lenght)
 	{
 		push(rand(), false);
 	}
-	display();
+	if (!automatic) display();
 }
 //Funkcja usuwaj¹ca ca³e drzewo
 void TreeB::pop_all()

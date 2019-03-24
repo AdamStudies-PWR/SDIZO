@@ -9,7 +9,7 @@ class Heap: public Tests
 {
 private:
 	//Zmienne
-	const static int size = quantity;
+	const static int size = 5000;
 	int used_size = 0;
 	int heap_tab[size];
 public:

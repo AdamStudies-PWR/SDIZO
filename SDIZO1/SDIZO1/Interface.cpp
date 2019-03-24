@@ -1,6 +1,7 @@
 // Interface.h Klasa ta zawiera wszystkie elementy interfejsu u¿ytkownika
 #include "pch.h"
 #include "Interface.h"
+#include "Automatic.h"
 using namespace std;
 
 //G³ówne menu programu
@@ -59,8 +60,13 @@ void Interface::mmenu()
 			btree.switch_test();
 			int ii;
 			system("cls");
-			cout << "Iloœæ danych: ";
+			cout << "[MAX 5000] Iloœæ danych: ";
 			cin >> ii;
+			lista.setquantity(ii);
+			tab.setquantity(ii);
+			heapa.setquantity(ii);
+			btree.setquantity(ii);
+			auto_testing(lista, heapa, btree, tab, ii);
 		}
 		case '0':
 		{
@@ -70,7 +76,7 @@ void Interface::mmenu()
 		} break;
 		default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 		}
-	} while (choice != '0');
+	} while (choice != '0' && choice!= '7');
 }
 //Funkcja wyœwietlaj¹ca g³ówne menu oraz przyjmuj¹ca input
 char Interface::printmenu(string name, bool tree)

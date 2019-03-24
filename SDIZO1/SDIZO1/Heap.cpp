@@ -87,6 +87,7 @@ void Heap::push(int val)
 //Funkcja dodaj¹ca losowo do podanego rozmiaru
 void Heap::push_random(int lenght)
 {
+	used_size = 0;
 	for (int i = 0; i < lenght; i++)
 	{
 		heap_tab[i] = rand();
@@ -94,7 +95,7 @@ void Heap::push_random(int lenght)
 		if (i == 0) continue;
 		fix_from_bottom(i);
 	}
-	display();
+	if(!automatic) display();
 }
 //Funkcja usuwaj¹ca wybrany Element
 void Heap::pop(int val)

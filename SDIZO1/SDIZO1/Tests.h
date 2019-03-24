@@ -35,11 +35,12 @@ protected:
 	int size = 0;
 	bool tests = false;
 	bool automatic = false;
-	const static int quantity = 1000;
+	int quantity = 1000;
 public:
 	//Funkcje
 	Tests();
 	void save_data(string filename);
+	void setquantity(int newdata);
 protected:
 	void displayresult(double numb, int info);
 	void addsave(double numb);

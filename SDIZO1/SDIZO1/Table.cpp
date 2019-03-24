@@ -165,7 +165,7 @@ void Table::push_random(int lenght)
 	}
 	delete pointer;
 	pointer = newpointer;
-	display();
+	if (!automatic) display();
 }
 //Funkca usuwaj¹ca wartoœci z pocz¹tku
 void Table::pop_front()
