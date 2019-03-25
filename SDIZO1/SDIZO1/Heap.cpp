@@ -31,7 +31,6 @@ void Heap::load(string filename)
 	if (plik.good() == true)
 	{
 		int temp, data;
-		used_size = 0;
 		if (!automatic) pop_all();
 		if (tests) tester.StartfileCounter();
 		plik >> temp;
@@ -76,14 +75,14 @@ void Heap::display()
 //Funkcja dodaj¹ca elementy do kopca
 void Heap::push(int val, bool show)
 {
-	if (tests) tester.StartCounter();
+	if (tests && show) tester.StartCounter();
 	if ((used_size + 1) == size) cout << "\nKopiec jest zape³niony" << endl, _getch();
 	else
 	{
 		heap_tab[used_size] = val;
 		used_size++;
 		if (used_size != 1) fix_from_bottom(used_size - 1);
-		if (tests) addchosen(tester.GetCounter());
+		if (tests && show) addchosen(tester.GetCounter());
 		if (!automatic && show) display();
 	}
 }
