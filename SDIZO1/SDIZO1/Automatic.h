@@ -25,14 +25,14 @@ void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 		heap.save("test");
 		heap.pop_all();
 		heap.load("test");
-		heap.push(44);
+		heap.push(44, false);
 		heap.find(44);
 		heap.pop(44);
 		btree.push_random(size);
 		btree.save("test");
 		btree.pop_all();
 		btree.load("test");
-		btree.push(44, false);
+		btree.push(44, true);
 		btree.find(44);
 		btree.pop_chosen(44);
 		btree.balance_tree(false);

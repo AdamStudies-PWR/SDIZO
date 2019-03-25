@@ -9,7 +9,7 @@ void Heap::save(string filename)
 	if (used_size == 0) cout << "\nKopiec jest pusty!" << endl, _getche();
 	else
 	{
-		if (tests) tester.StartCounter();
+		if (tests) tester.StartfileCounter();
 		ofstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
@@ -30,12 +30,15 @@ void Heap::load(string filename)
 	ifstream plik(filename + ".txt");
 	if (plik.good() == true)
 	{
+		int temp, data;
+		used_size = 0;
 		if (!automatic) pop_all();
-		if (tests) tester.StartCounter();
-		plik >> used_size;
-		for (int i = 0; i < used_size; i++)
+		if (tests) tester.StartfileCounter();
+		plik >> temp;
+		for (int i = 0; i < temp; i++)
 		{
-			plik >> heap_tab[i];
+			plik >> data;
+			push(data, false);
 		}
 		if (tests) addload(tester.GetCounter());
 		if (!automatic) display();
@@ -71,7 +74,7 @@ void Heap::display()
 	_getch();
 }
 //Funkcja dodaj¹ca elementy do kopca
-void Heap::push(int val)
+void Heap::push(int val, bool show)
 {
 	if (tests) tester.StartCounter();
 	if ((used_size + 1) == size) cout << "\nKopiec jest zape³niony" << endl, _getch();
@@ -81,7 +84,7 @@ void Heap::push(int val)
 		used_size++;
 		if (used_size != 1) fix_from_bottom(used_size - 1);
 		if (tests) addchosen(tester.GetCounter());
-		if (!automatic) display();
+		if (!automatic && show) display();
 	}
 }
 //Funkcja dodaj¹ca losowo do podanego rozmiaru

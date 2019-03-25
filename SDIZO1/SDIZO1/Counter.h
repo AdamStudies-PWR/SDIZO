@@ -13,6 +13,7 @@ private:
 public:
 	//Funkcja uruchamiaj¹ca odliczanie
 	void StartCounter();
+	void StartfileCounter();
 	double GetCounter();
 };
 #endif

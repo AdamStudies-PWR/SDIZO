@@ -26,7 +26,7 @@ void Tests::save_data(string filename)
 	ofstream plik(filename + ".txt");
 	if (plik.good() == true)
 	{
-		plik << "wczytywanie;zapisywanie;usuwanie;usuwanie ostatniego;usuwanie pierwszego;usuwanie wszystkiego;dodawanie;dodawaniena pierwszego;dodawanie ostatniego;wyszukiwanie" << endl;
+		plik << "Wczytywanie;Zapisywanie;Usuwanie;Usuwanie ostatniego;Usuwanie pierwszego;Usuwanie wszystkiego;Dodawanie;Dodawaniena pierwszego;Dodawanie ostatniego;Wyszukiwanie" << endl;
 		for (int i = 0; i < 100; i++)
 		{
 			plik << loading[i] << ";" << saving[i] << ";" << deletech[i] << ";" << deletelast[i] << ";" << deletefirst[i] << ";" << deleteall[i] << ";" << addch[i] << ";" << addfirst[i] << ";" << addlast[i] << ";" << finder[i] << endl;

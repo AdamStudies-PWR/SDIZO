@@ -32,7 +32,7 @@ void TreeB::save(string filename)
 	if (size == 0) cout << "\nLista jest pusta!" << endl, _getche();
 	else
 	{
-		if (tests) tester.StartCounter();
+		if (tests) tester.StartfileCounter();
 		ofstream *plik = new ofstream(filename + ".txt");
 		if (plik->good() == true)
 		{
@@ -55,7 +55,7 @@ void TreeB::load(string filename)
 	if (plik.good() == true)
 	{
 		if (!automatic) pop_all();
-		if (tests) tester.StartCounter();
+		if (tests) tester.StartfileCounter();
 		plik >> temp;
 		for (int i = 0; i < temp; i++)
 		{
@@ -279,7 +279,7 @@ void TreeB::save_data(string filename)
 	ofstream plik(filename + ".txt");
 	if (plik.good() == true)
 	{
-		plik << "wczytywanie;zapisywanie;usuwanie;usuwanie ostatniego;usuwanie pierwszego;usuwanie wszystkiego;dodawanie;dodawaniena pierwszego;dodawanie ostatniego;wyszukiwanie;równowa¿enie drzewa" << endl;
+		plik << "Wczytywanie;Zapisywanie;Usuwanie;Usuwanie ostatniego;Usuwanie pierwszego;Usuwanie wszystkiego;Dodawanie;Dodawaniena pierwszego;Dodawanie ostatniego;Wyszukiwanie;Równowa¿enie drzewa" << endl;
 		for (int i = 0; i < 100; i++)
 		{
 			plik << loading[i] << ";" << saving[i] << ";" << deletech[i] << ";" << deletelast[i] << ";" << deletefirst[i] << ";" << deleteall[i] << ";" << addch[i] << ";" << addfirst[i] << ";" << addlast[i] << ";" << finder[i] << ";" << balancing[i] << endl;

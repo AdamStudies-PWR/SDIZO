@@ -17,7 +17,7 @@ public:
 	void save(string filename);
 	void load(string filename);
 	void display();
-	void push(int val);
+	void push(int val, bool show);
 	void push_random(int lenght);
 	void pop(int val);
 	void pop_all();

@@ -22,7 +22,7 @@ void Table::save(string filename)
 	if (size == 0) cout << "\nTablica jest pusta!" << endl, _getche();
 	else
 	{
-		if (tests) tester.StartCounter();
+		if (tests) tester.StartfileCounter();
 		ofstream plik(filename + ".txt");
 		if (plik.good() == true)
 		{
@@ -44,7 +44,7 @@ void Table::load(string filename)
 	if (plik.good() == true)
 	{
 		plik >> size;
-		if (tests) tester.StartCounter();
+		if (tests) tester.StartfileCounter();
 		int *newpointer = new int[size];
 		for (int i = 0; i < size; i++)
 		{

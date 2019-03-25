@@ -354,7 +354,7 @@ void Interface::heap()
 					system("cls");
 					cout << "WprowadŸ wartoœæ: ";
 					cin >> ii;
-					heapa.push(ii);
+					heapa.push(ii, true);
 				} break;
 				case '2':
 				{
