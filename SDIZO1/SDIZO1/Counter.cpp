@@ -7,7 +7,7 @@ void Counter::StartCounter()
 {
 	LARGE_INTEGER li;
 	if (!QueryPerformanceFrequency(&li)) cout << "\n B³¹d pomiaru czasu!" << endl;
-	PCFreq = double(li.QuadPart)/1000000;
+	PCFreq = double(li.QuadPart)/1000000.0;
 	QueryPerformanceCounter(&li);
 	CounterStart = li.QuadPart;
 }
@@ -16,7 +16,7 @@ void Counter::StartfileCounter()
 {
 	LARGE_INTEGER li;
 	if (!QueryPerformanceFrequency(&li)) cout << "\n B³¹d pomiaru czasu!" << endl;
-	PCFreq = double(li.QuadPart)/100;
+	PCFreq = double(li.QuadPart)/100.0;
 	QueryPerformanceCounter(&li);
 	CounterStart = li.QuadPart;
 }

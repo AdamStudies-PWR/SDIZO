@@ -7,6 +7,7 @@
 #include "TreeB.h"
 void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 {
+	int ii;
 	for (int i = 0; i < 100; i++)
 	{
 		cout << i  << endl;
@@ -19,22 +20,25 @@ void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 		list.pop_tail();
 		list.push_tail(rand());
 		list.pop_chosen();
-		list.push_chosen(44);
-		list.get_value(44);
+		ii = rand();
+		list.push_chosen(ii);
+		list.get_value(ii);
 		heap.push_random(size);
 		heap.save("test");
 		heap.pop_all();
 		heap.load("test");
-		heap.push(44, false);
-		heap.find(44);
-		heap.pop(44);
+		ii = rand();
+		heap.push(ii, true);
+		heap.find(ii);
+		heap.pop(ii);
 		btree.push_random(size);
 		btree.save("test");
 		btree.pop_all();
 		btree.load("test");
-		btree.push(44, true);
-		btree.find(44);
-		btree.pop_chosen(44);
+		ii = rand();
+		btree.push(ii, true);
+		btree.find(ii);
+		btree.pop_chosen(ii);
 		btree.balance_tree(false);
 		table.push_random(size);
 		table.save("test");
@@ -45,8 +49,9 @@ void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 		table.pop_back();
 		table.push_back(rand());
 		table.pop_chosen();
-		table.push_chosen(44);
-		table.find(44);
+		ii = rand();
+		table.push_chosen(ii);
+		table.find(ii);
 	}
 	list.save_data("danelista");
 	heap.save_data("danekopiec");
