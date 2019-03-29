@@ -5,6 +5,7 @@
 #include "Heap.h"
 #include "Table.h"
 #include "TreeB.h"
+//Funkcja obs³uguj¹ca automatyczne testowanie 
 void auto_testing(List list, Heap heap, TreeB btree, Table table, int size)
 {
 	int ii;

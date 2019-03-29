@@ -43,6 +43,7 @@ void Table::load(string filename)
 	ifstream plik(filename + ".txt");
 	if (plik.good() == true)
 	{
+		if (!automatic) pop_all();
 		plik >> size;
 		if (tests) tester.StartfileCounter();
 		int *newpointer = new int[size];
@@ -51,7 +52,6 @@ void Table::load(string filename)
 			plik >> newpointer[i];
 		}
 		if (tests) addload(tester.GetCounter());
-		if (!automatic) pop_all();
 		pointer = newpointer;
 		if (!automatic) display();
 		plik.close();
