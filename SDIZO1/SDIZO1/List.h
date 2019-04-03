@@ -6,6 +6,7 @@
 
 //using namespace std;
 
+//Struktura elementu tablicy
 struct ElemList
 {
 	int data;

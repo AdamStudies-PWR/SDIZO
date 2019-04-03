@@ -155,7 +155,7 @@ void Interface::table()
 				cout << " [3] Dodaj na wybranego miejsce" << endl;
 				cout << " [4] Utwórz tablice losowo" << endl;
 				choice = _getch();
-				if (choice == '1' || choice == '2' || choice == '3' || choice == '4')
+				if (choice == '1' || choice == '2' || choice == '3')
 				{
 					system("cls");
 					cout << "WprowadŸ wartoœæ: ";
@@ -172,7 +172,7 @@ void Interface::table()
 					cout << "WprowadŸ wielkoœæ porz¹danej tablicy: ";
 					cin >> ii;
 					tab.push_random(ii);
-				}
+				}break;
 				default: cout << "\nB³¹d wprowadzenia, spróbuj ponownie" << endl, _getch();
 				}
 			} while (choice != '1' && choice != '2' && choice != '3' && choice != '4');

@@ -50,6 +50,7 @@ void Tests:: displayresult(double numb, int info)
 		_getche();
 	}
 }
+//Funkcje umieszczaj¹ce wynik testu w  odpowiednich tablicach
 void Tests:: addsave(double numb)
 {
 	saving[svnumber] = numb;

@@ -3,6 +3,7 @@
 #include "Table.h"
 using namespace std;
 
+//Konstruktor i destruktor obiketu tablicy
 Table::Table()
 {
 	Tests();

@@ -3,6 +3,7 @@
 #define TreeB_hpp
 #include "Tests.h"
 
+//Struktura pojedynczego liœcia drzewa
 struct Node
 {
 	_int64 data;
@@ -15,11 +16,13 @@ struct Node
 class TreeB: public Tests
 {
 private:
+	//Zmienne
 	int size = 0;
 	Node *head = nullptr;
 	double balancing[number];
 	int bnumber = 0;
 public:
+	//Metody
 	TreeB();
 	void display();
 	void save(string filename);
