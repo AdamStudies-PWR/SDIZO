@@ -1,8 +1,7 @@
 #pragma once
-
+//Klasa obs³uguj¹ca funkcje Tablicy
 #include "Tests.h"
 
-//Klasa obs³uguj¹ca funkcje Tablicy
 class Table: public Tests
 {
 private:

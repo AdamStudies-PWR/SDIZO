@@ -37,7 +37,7 @@ protected:
 	bool automatic = false;
 	int quantity = 1000;
 public:
-	//Metody
+	//Funkcje
 	Tests();
 	void save_data(string filename);
 	void setquantity(int newdata);

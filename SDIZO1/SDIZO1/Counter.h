@@ -4,15 +4,14 @@
 // Klasa obs³uguj¹ca funkcje mierzenia czasu
 using namespace std;
 
-//Klasa odpowiedzialna za obliczanie czasu
+
 class Counter
 {
 private:
-	//Zmienne potrzebne do obliczania czasu
 	double PCFreq = 0.0;
 	_int64 CounterStart = 0;
 public:
-	//Metody
+	//Funkcja uruchamiaj¹ca odliczanie
 	void StartCounter();
 	void StartfileCounter();
 	double GetCounter();

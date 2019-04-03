@@ -109,7 +109,7 @@ void TreeB::push(int val, bool show)
 	}
 	//balance_tree(show);
 	if (tests && show) addchosen(tester.GetCounter());
-	if (!automatic && show) display(), balance_tree(false);
+	if (!automatic && show) display();
 }
 //Funkcja losowa wype³niaj¹ca drzewo
 void TreeB::push_random(int lenght)

@@ -3,7 +3,6 @@
 #include "Table.h"
 using namespace std;
 
-//Konstruktur i destruktor tablicy
 Table::Table()
 {
 	Tests();
