@@ -165,6 +165,7 @@ void Heap::fix_from_bottom(int index)
 //Funkcja sprawdzaj¹ca kopiec od góry
 void Heap::fix_from_top(int index)
 {
+	//obliczane indeksów dzieci ze wzorów
 	int kid1 = 2 * index + 1;
 	int kid2 = 2 * index + 2;
 	int greater, buffer;

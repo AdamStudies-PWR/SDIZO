@@ -2,9 +2,8 @@
 #ifndef Heap_hpp
 #define Heap_hpp
 #include "Tests.h"
+
 //Klasa obs³uguj¹ca funkcje Kopca
-
-
 class Heap: public Tests
 {
 private:

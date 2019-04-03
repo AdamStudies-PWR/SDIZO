@@ -7,6 +7,7 @@
 #include "TreeB.h"
 
 using namespace std;
+
 // Klasa obs³uguj¹ interakcje z u¿ytkownikiem
 class Interface
 {

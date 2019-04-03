@@ -1,17 +1,18 @@
 #pragma once
 #ifndef List_hpp
 #define List_hpp
-//Klasa obs³uguj¹ca funkcje Listy
 #include "Tests.h"
 
 //using namespace std;
 
+//Struktura listy
 struct ElemList
 {
 	int data;
 	ElemList *next = nullptr, *prev = nullptr;
 };
 
+//Klasa obs³uguj¹ca funkcje Listy
 class List: public Tests
 {
 private:
