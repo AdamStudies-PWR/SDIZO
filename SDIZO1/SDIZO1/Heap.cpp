@@ -111,6 +111,7 @@ void Heap::pop(int val)
 		if (used_size == 0) return;
 		heap_tab[index] = heap_tab[used_size];
 		fix_from_top(index);
+		fix_from_bottom(index);
 		if (tests) addpop(tester.GetCounter());
 		if (!automatic) display();
 	}

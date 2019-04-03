@@ -64,6 +64,14 @@ void List:: display()
 			cout << " " << out->data;
 			out = out->next;
 		}
+		cout << endl;
+		cout << endl;
+		out = getTail();
+		while (out != nullptr)
+		{
+			cout << " " << out->data;
+			out = out->prev;
+		}
 		_getch();
 	}
 }
