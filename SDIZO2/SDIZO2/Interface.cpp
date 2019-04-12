@@ -12,7 +12,7 @@ void Interface::main_menu()
 	{
 		system("cls");
 		cout << "\t---Główne Menu---" << endl;
-		cout << " [1] Graf" << endl;
+		cout << " [1] Grafy" << endl;
 		cout << " [0] Zakończ program" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
@@ -20,7 +20,7 @@ void Interface::main_menu()
 		{
 		case '0': break;
 		case '1': cout << "\nTBA" << endl, _getch(); break;
-		default: cout << "Błąd wprowadzenia, spróbuj ponowne" << endl; _getch();
+		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne" << endl; _getch();
 		}
 	} while (choice != '0');
 }
