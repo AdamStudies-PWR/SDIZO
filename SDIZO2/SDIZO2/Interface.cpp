@@ -12,7 +12,8 @@ void Interface::main_menu()
 	{
 		system("cls");
 		cout << "\t---Główne Menu---" << endl;
-		cout << " [1] Grafy" << endl;
+		cout << " [1] Graf - reprezentacja macierzowa" << endl;
+		cout << " [2] Graf - reprezentacja listowa" << endl;
 		cout << " [0] Zakończ program" << endl;
 		cout << " Wybór: ";
 		choice = _getche();
