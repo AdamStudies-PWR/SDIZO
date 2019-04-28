@@ -4,7 +4,9 @@
 //Klasa obs³uguj¹ca bazowe elemety dla obu typów grafów
 class Graphs
 {
-
+private:
+	int nodes;
+	int edges;
 };
 
 #endif
