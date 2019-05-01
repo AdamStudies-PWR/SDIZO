@@ -11,5 +11,6 @@
 
 #include <iostream>
 #include <conio.h>
+#include <string>
 
 #endif //PCH_H

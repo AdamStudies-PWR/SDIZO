@@ -4,7 +4,9 @@
 
 using namespace std;
 
-void Matrix::create(int Nodes)
+//Funkcja losowo tworz¹ca graf
+void Matrix::create(int NN, int EE)
 {
-
+	Nodes = NN;
+	Edges = EE;
 }

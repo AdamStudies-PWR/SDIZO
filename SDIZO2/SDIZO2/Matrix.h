@@ -7,9 +7,12 @@
 class Matrix: public Graphs
 { 
 private:
-	int *pointer;
+	int **pointer;
+	int Nodes;
+	int Edges;
 public:
-	void create(int Notes);
+	//Funkcja losowo tworz¹ca graf
+	void create(int Nodes, int Edges);
 };
 
 #endif

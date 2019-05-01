@@ -11,6 +11,8 @@ public:
 	//metody
 	//G³ówne menu propgramu
 	void main_menu();
+	//Menu struktury
+	char structure_menu(string name);
 };
 
 #endif
