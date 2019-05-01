@@ -46,10 +46,11 @@ char Interface::structure_menu(string name)
 	return choice;
 }
 
+//Obsługa losowego tworzenia grafu
 void Interface::create_ui(Graphs *gg)
 {
-	int nodes;
-	char edges;
+	int nodes, edge;
+	int maxedge, mindensity;
 	do
 	{
 		system("cls");
@@ -57,17 +58,15 @@ void Interface::create_ui(Graphs *gg)
 		cin >> nodes;
 		if (nodes <= 1) cout << "\nIlość wierzchołków musi być większa od 1!" << endl, _getche();
 	} while (nodes <= 1);
+	maxedge = nodes * (nodes - 1);
+	mindensity = ceil(((nodes - 1) * 100) / maxedge);
 	do
 	{
 		system("cls");
-		cout << " Wybierz gęstość:" << endl;
-		cout << " [1] 25%" << endl;
-		cout << " [2] 50%" << endl;
-		cout << " [3] 75%" << endl;
-		cout << " [4] 99%" << endl;
-		edges = _getche();
-	} while (edges != '1' && edges != '2' && edges != '3' && edges != '4');
-	gg->create(nodes, 0);
+		cout << "Podaj porządaną gęstość, > " << mindensity << "%" << endl;
+		cin >> edge;
+	} while (edge < mindensity || edge > 100);
+	gg->create(nodes, edge);
 }
 
 //Obsługa funkcji dla implementacji macierzowej

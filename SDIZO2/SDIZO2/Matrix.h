@@ -13,6 +13,8 @@ public:
 	//Metody
 	//Funkcja losowo tworz¹ca graf
 	void create(int node, int edge);
+	//Funkcja wyœwietlaj¹ca graf
+	void display();
 };
 
 #endif
