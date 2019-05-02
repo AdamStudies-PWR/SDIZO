@@ -50,7 +50,9 @@ char Interface::structure_menu(string name)
 void Interface::create_ui(Graphs *gg)
 {
 	int nodes, edge;
-	int maxedge, mindensity;
+	int maxedge;
+	double mindensity;
+	char choice;
 	do
 	{
 		system("cls");
@@ -58,15 +60,30 @@ void Interface::create_ui(Graphs *gg)
 		cin >> nodes;
 		if (nodes <= 1) cout << "\nIlość wierzchołków musi być większa od 1!" << endl, _getche();
 	} while (nodes <= 1);
-	maxedge = nodes * (nodes - 1);
-	mindensity = ceil(((nodes - 1) * 100) / maxedge);
+	do
+	{
+		system("cls");
+		cout << "Czy graf Skierowany? [T/N]" << endl;
+		choice = _getche();
+	} while (choice != 't' && choice != 'T' && choice != 'n' && choice != 'N');
+	if (choice == 't' || choice == 'T')
+	{
+		maxedge = (nodes * (nodes - 1)) / 2;
+		directed = true;
+	}
+	else
+	{
+		maxedge = nodes * (nodes - 1);
+		directed = false;
+	}
+	mindensity = ceil((((double)nodes - 1) * 100) / (double)maxedge);
 	do
 	{
 		system("cls");
 		cout << "Podaj porządaną gęstość, > " << mindensity << "%" << endl;
 		cin >> edge;
 	} while (edge < mindensity || edge > 100);
-	gg->create(nodes, edge);
+	gg->create(nodes, edge, maxedge, directed);
 }
 
 //Obsługa funkcji dla implementacji macierzowej
@@ -80,6 +97,7 @@ void Interface::matrix()
 		{
 		case '0': break;
 		case '2': create_ui(&mat); break;
+		case '3': mat.display(); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');

@@ -7,6 +7,7 @@
 int main()
 {
 	setlocale(LC_ALL, "pl");
+	srand(time(NULL));
 	Interface usr;
 	usr.main_menu();
 	return 0;

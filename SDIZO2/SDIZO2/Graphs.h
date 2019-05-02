@@ -10,7 +10,7 @@ protected:
 	int edges;
 public:
 	//Funkcja losowo tworz¹ca graf
-	virtual void create(int nodes, int edges) = 0;
+	virtual void create(int nodes, double edges, int maxedges, bool directed) = 0;
 };
 
 #endif

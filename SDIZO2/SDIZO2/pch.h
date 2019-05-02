@@ -12,5 +12,7 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#include <cstdlib>
+#include <time.h>
 
 #endif //PCH_H

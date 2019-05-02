@@ -11,6 +11,7 @@ class Interface
 private:
 	//zmienne
 	Matrix mat;
+	bool directed = false;
 public:
 	//metody
 	//G³ówne menu propgramu
