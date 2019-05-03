@@ -9,9 +9,11 @@ void Matrix::create(int NN, double EE, int ME, bool directed)
 {
 	nodes = NN;
 	edges = ME * (EE/100);
+	int *visited = new int [nodes];
 	pointer = new int *[nodes];
 	for (int i = 0; i < nodes; i++)
 	{
+		visited[i] = 0;
 		pointer[i] = new int[nodes];
 		for (int j = 0; j < nodes; j++)
 		{
