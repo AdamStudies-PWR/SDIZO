@@ -15,6 +15,9 @@ public:
 	void create(int nodes, double edges, int maxedges, bool directed);
 	//Funkcja wyœwietlaj¹ca graf
 	void display();
+private:
+	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
+	void spanningtree(int *visited);
 };
 
 #endif
