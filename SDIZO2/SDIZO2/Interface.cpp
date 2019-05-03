@@ -66,9 +66,16 @@ void Interface::create_ui(Graphs *gg)
 		cout << "Czy graf Skierowany? [T/N]" << endl;
 		choice = _getche();
 	} while (choice != 't' && choice != 'T' && choice != 'n' && choice != 'N');
-	if (choice == 't' || choice == 'T') directed = true;
-	else directed = false;
-	maxedge = nodes * (nodes - 1);
+	if (choice == 't' || choice == 'T')
+	{
+		directed = true;
+		maxedge = nodes * (nodes - 1);
+	}
+	else
+	{
+		directed = false;
+		maxedge = (nodes * (nodes - 1))/2;
+	}
 	mindensity = ceil((((double)nodes - 1) * 100) / (double)maxedge);
 	do
 	{
