@@ -32,7 +32,7 @@ void List::display()
 			Edge *out = temp->head;
 			while (out != nullptr)
 			{
-				cout << out->target << "|" << out->weight << " ";
+				cout << out->target->index << "|" << out->weight << " ";
 				out = out->next;
 			}
 			temp = temp->next;
@@ -44,25 +44,48 @@ void List::display()
 
 void List::spanningtree(int *visited)
 {
+	tail = head;
 	Node *create = head;
+	Node *newNode;
 	Edge *child;
-	int children, count;
-	int node = 0;
+	Edge *temp;
+	int children, count, rr;
 	int created = 1;
-	visited[node] = 1;
 	do
 	{
 		count = 0;
 		children = (rand() % 2) + 2;
 		do
 		{
-			if (create->head == nullptr)
+			child = new Edge();
+			child->source = create;
+			newNode = new Node();
+			child->target = newNode;
+			newNode->index = created;
+			created++;
+			tail->next = newNode;
+			newNode->prev = tail;
+			tail = newNode;
+			child->weight = (rand() % 99) + 1;
+			if (create->head == nullptr) create->head = child;
+			else
 			{
-				child = new Edge();
-				child->source = create;
+				temp = create->head;
+				while (temp->next != nullptr) temp = temp->next;
+				temp->next = child;
 			}
+			count++;
 			if (created == nodes) return;
-
 		} while (count != children);
+		while (true)
+		{
+			rr = rand() % (created - 1);
+			create = head;
+			for (int i = 0; i < rr; i++);
+			{
+				create = create->next;
+			}
+			if (create->head == nullptr) break;
+		}
 	} while (created != nodes);
 }

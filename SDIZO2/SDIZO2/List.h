@@ -28,6 +28,7 @@ class List : public Graphs
 private:
 	//Zmienne
 	Node *head = nullptr;
+	Node *tail = nullptr;
 public:
 	//Metody
 	//Funkcja losowo tworz¹ca graf
