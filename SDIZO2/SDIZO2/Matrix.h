@@ -8,7 +8,7 @@ class Matrix: public Graphs
 { 
 private:
 	//Zmienne
-	int **pointer;
+	int **pointer = nullptr;
 public:
 	//Metody
 	//Funkcja losowo tworz¹ca graf

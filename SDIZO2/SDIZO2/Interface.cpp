@@ -21,7 +21,7 @@ void Interface::main_menu()
 		{
 		case '0': break;
 		case '1': matrix(); break;
-		case '2': cout << "\nTBA" << endl, _getch(); break;
+		case '2': glist(); break;
 		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne." << endl; _getch();
 		}
 	} while (choice != '0');
@@ -98,6 +98,23 @@ void Interface::matrix()
 		case '0': break;
 		case '2': create_ui(&mat); break;
 		case '3': mat.display(); break;
+		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
+		}
+	} while (choice != '0');
+}
+
+//Obsługa funkcji dla implementacji listwoej
+void Interface::glist()
+{
+	char choice;
+	do
+	{
+		choice = structure_menu("Reprezentacja Listowa");
+		switch (choice)
+		{
+		case '0': break;
+		case '2': create_ui(&list); break;
+		case '3': list.display(); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');

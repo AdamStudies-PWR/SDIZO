@@ -8,7 +8,7 @@ using namespace std;
 void Matrix::create(int NN, double EE, int ME, bool directed) 
 {
 	nodes = NN;
-	edges = ME * (EE/100);
+	edges = ME * (EE/100);edges = ME * (EE/100);
 	int counter = nodes;
 	int begin, end;
 	int *visited = new int [nodes];
@@ -50,30 +50,34 @@ void Matrix::create(int NN, double EE, int ME, bool directed)
 void Matrix::display()
 {
 	system("cls");
-	cout << "Macierz s¹siedztwa: " << endl;
-	cout << "  ";
-	for (int i = 0; i < nodes; i++)
+	if (pointer == nullptr) cout << "Graf nie istnieje!" << endl;
+	else
 	{
-		if (i > 10) cout << " ";
-		else cout << "  ";
-		cout << i;
-	}
-	cout << "\n" << endl;
-	for (int i = 0; i < nodes; i++)
-	{
-		cout << i;
-		if (i < 10) cout << " ";
-		for (int j = 0; j < nodes; j++)
+		cout << "\nMacierz s¹siedztwa: " << endl;
+		cout << "  ";
+		for (int i = 0; i < nodes; i++)
 		{
-			if (j > 0)
-			{
-				if (pointer[i][j - 1] >= 10) cout << " ";
-				else cout << "  ";
-			}
+			if (i > 10) cout << " ";
 			else cout << "  ";
-			cout << pointer[i][j];
+			cout << i;
 		}
-		cout << endl;
+		cout << "\n" << endl;
+		for (int i = 0; i < nodes; i++)
+		{
+			cout << i;
+			if (i < 10) cout << " ";
+			for (int j = 0; j < nodes; j++)
+			{
+				if (j > 0)
+				{
+					if (pointer[i][j - 1] >= 10) cout << " ";
+					else cout << "  ";
+				}
+				else cout << "  ";
+				cout << pointer[i][j];
+			}
+			cout << endl;
+		}
 	}
 	_getche();
 }
