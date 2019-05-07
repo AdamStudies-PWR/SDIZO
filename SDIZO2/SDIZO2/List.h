@@ -37,7 +37,7 @@ public:
 	void display();
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
-	void spanningtree(int *visited);
+	void spanningtree();
 };
 
 #endif

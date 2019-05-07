@@ -9,10 +9,8 @@ void List::create(int NN, double EE, int ME, bool directed)
 {
 	nodes = NN;
 	edges = ME * (EE / 100);
-	int *visited = new int[nodes];
-	for (int i = 0; i < nodes; i++) visited[i] = 0;
 	head = new Node();
-	spanningtree(visited);
+	spanningtree();
 
 	display();
 }
@@ -42,14 +40,14 @@ void List::display()
 	_getche();
 }
 
-void List::spanningtree(int *visited)
+void List::spanningtree()
 {
 	tail = head;
 	Node *create = head;
 	Node *newNode;
 	Edge *child;
 	Edge *temp;
-	int children, count, rr;
+	int children, count, rr, ii;
 	int created = 1;
 	do
 	{
@@ -63,6 +61,7 @@ void List::spanningtree(int *visited)
 			child->target = newNode;
 			newNode->index = created;
 			created++;
+			cout << "Here!" << endl;
 			tail->next = newNode;
 			newNode->prev = tail;
 			tail = newNode;
@@ -77,15 +76,16 @@ void List::spanningtree(int *visited)
 			count++;
 			if (created == nodes) return;
 		} while (count != children);
-		while (true)
+		while (create->head != nullptr)
 		{
-			rr = rand() % (created - 1);
+			rr = rand() % (created + 1);
 			create = head;
-			for (int i = 0; i < rr; i++);
+			for (ii = 0; ii < rr; ii++)
 			{
 				create = create->next;
 			}
-			if (create->head == nullptr) break;
+			cout << rr << ", " << ii << ", " << create->index << endl;
+			_getche();
 		}
 	} while (created != nodes);
 }
