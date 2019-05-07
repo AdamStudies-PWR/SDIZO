@@ -53,6 +53,7 @@ void Matrix::display()
 	if (pointer == nullptr) cout << "Graf nie istnieje!" << endl;
 	else
 	{
+		cout << "\nWierzcho³ki: " << nodes << ", Krawêdzie: " << edges;
 		cout << "\nMacierz s¹siedztwa: " << endl;
 		cout << "  ";
 		for (int i = 0; i < nodes; i++)
