@@ -5,10 +5,10 @@
 using namespace std;
 
 //Funkcja losowo tworz¹ca graf
-void Matrix::create(int NN, double EE, int ME, bool directed) 
+void Matrix::create(int NN, double EE, double ME, bool directed) 
 {
 	nodes = NN;
-	edges = ME * (EE/100);edges = ME * (EE/100);
+	edges = ME * (EE/100);
 	int counter = nodes;
 	int begin, end;
 	int *visited = new int [nodes];

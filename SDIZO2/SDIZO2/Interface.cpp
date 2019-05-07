@@ -50,7 +50,7 @@ char Interface::structure_menu(string name)
 void Interface::create_ui(Graphs *gg)
 {
 	int nodes, edge;
-	int maxedge;
+	double maxedge;
 	double mindensity;
 	char choice;
 	do
@@ -76,7 +76,7 @@ void Interface::create_ui(Graphs *gg)
 		directed = false;
 		maxedge = (nodes * (nodes - 1))/2;
 	}
-	mindensity = ceil((((double)nodes - 1) * 100) / (double)maxedge);
+	mindensity = ceil((((double)nodes - 1) * 100) / maxedge);
 	do
 	{
 		system("cls");

@@ -7,10 +7,10 @@ class Graphs
 protected:
 	//Zmienne
 	int nodes;
-	int edges;
+	double edges;
 public:
 	//Funkcja losowo tworz¹ca graf
-	virtual void create(int nodes, double edges, int maxedges, bool directed) = 0;
+	virtual void create(int nodes, double edges, double maxedges, bool directed) = 0;
 };
 
 #endif

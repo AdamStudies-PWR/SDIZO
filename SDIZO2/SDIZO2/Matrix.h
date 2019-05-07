@@ -12,7 +12,7 @@ private:
 public:
 	//Metody
 	//Funkcja losowo tworz¹ca graf
-	void create(int nodes, double edges, int maxedges, bool directed);
+	void create(int nodes, double edges, double maxedges, bool directed);
 	//Funkcja wyœwietlaj¹ca graf
 	void display();
 private:

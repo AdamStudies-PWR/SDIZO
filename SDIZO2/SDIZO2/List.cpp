@@ -5,7 +5,7 @@
 using namespace std;
 
 //Funkcja losowo tworz¹ca graf
-void List::create(int NN, double EE, int ME, bool directed)
+void List::create(int NN, double EE, double ME, bool directed)
 {
 	bool np;
 	system("cls");
