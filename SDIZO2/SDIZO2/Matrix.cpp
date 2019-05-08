@@ -51,6 +51,7 @@ void Matrix::create(int NN, double EE, double ME, bool directed)
 		if (!directed) pointer[end][begin] = pointer[begin][end];
 		counter++;
 	}
+	delete visited;
 	display();
 }
 

@@ -7,11 +7,13 @@ using namespace std;
 //Funkcja losowo tworz¹ca graf
 void List::create(int NN, double EE, double ME, bool directed)
 {
+	system("cls");
 	Edge *els;
 	Edge *newEdge;
 	nodes = NN;
 	edges = ME * (EE / 100);
 	vector<Node *> vnodes(nodes);
+	int *visited = new int[nodes];
 	head = new Node();
 	int counter = nodes;
 	int begin, end;
@@ -53,13 +55,39 @@ void List::create(int NN, double EE, double ME, bool directed)
 			temp = temp->next;
 		}
 	}
+	display();
 	while (counter <= edges)
 	{
+		for (int i = 0; i < nodes; i++) visited[i] = 0;
 		begin = rand() % nodes;
 		temp = vnodes[begin];
 		if (temp->connections == (nodes - 1)) continue;
-		end = 0;
+		els = temp->head;
+		for (int i = 0; i < temp->connections; i++)
+		{
+			visited[els->target->index] = 1;
+			els = els->next;
+		}
+		for (end = 0; end < temp->connections; end++)
+		{
+			if (end != temp->index && visited[end] == 0) break;
+		}
+		newEdge = new Edge();
+		newEdge->weight = (rand() % 99) + 1;
+		newEdge->source = temp;
+		newEdge->target = vnodes[end];
+		if (temp->head == nullptr)
+		{
+			temp->head = newEdge;
+			temp->tail = newEdge;
+		}
+		else
+		{
+			temp->tail->next = newEdge;
+			temp->tail = newEdge;
+		}
 
+		temp->connections++;
 		counter++;
 	}
 	display();
@@ -68,7 +96,7 @@ void List::create(int NN, double EE, double ME, bool directed)
 //Funkcja wyœwietlaj¹ca graf
 void List::display()
 {
-	system("cls");
+	//system("cls");
 	if (head == nullptr) cout << "Graf nie istnieje!" << endl;
 	else
 	{
