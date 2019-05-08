@@ -9,6 +9,7 @@ void Matrix::create(int NN, double EE, double ME, bool directed)
 {
 	nodes = NN;
 	edges = ME * (EE/100);
+	bool found;
 	int counter = nodes;
 	int begin, end;
 	int *visited = new int [nodes];
@@ -23,25 +24,32 @@ void Matrix::create(int NN, double EE, double ME, bool directed)
 		}
 	}
 	spanningtree(visited);
-	while (counter <= edges)
-	{
-		begin = rand() % nodes;
-		end = rand() % nodes;
-		if (begin == end) continue;
-		if (pointer[begin][end] != 0) continue;
-		if(!directed) if(pointer[end][begin] != 0) continue;
-		pointer[begin][end] = (rand() % 99) + 1;
-		counter++;
-	}
 	if (!directed)
 	{
 		for (int i = 0; i < nodes; i++)
 		{
 			for (int j = 0; j < nodes; j++)
 			{
-				if(pointer[i][j] != 0) pointer[j][i] = pointer[i][j];
+				if (pointer[i][j] != 0) pointer[j][i] = pointer[i][j];
 			}
 		}
+	}
+	while (counter <= edges)
+	{
+		found = false;
+		begin = rand() % nodes;
+		for (int i = 0; i < nodes; i++)
+		{
+			if (i != begin && pointer[begin][i] == 0)
+			{
+				found = true;
+				end = i;
+			}
+		}
+		if (!found) continue;
+		pointer[begin][end] = (rand() % 99) + 1;
+		if (!directed) pointer[end][begin] = pointer[begin][end];
+		counter++;
 	}
 	display();
 }

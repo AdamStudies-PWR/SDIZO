@@ -7,63 +7,20 @@ using namespace std;
 //Funkcja losowo tworz¹ca graf
 void List::create(int NN, double EE, double ME, bool directed)
 {
-	bool np;
-	system("cls");
-	Node *temp;
-	Node *direct;
 	Edge *els;
 	Edge *newEdge;
-	Edge *edge;
 	nodes = NN;
 	edges = ME * (EE / 100);
+	vector<Node *> vnodes(nodes);
 	head = new Node();
 	int counter = nodes;
 	int begin, end;
 	spanningtree();
-	els = head->head;
-	edge = head->head;
-	while (counter <= edges)
+	Node *temp = head;
+	for (int i = 0; i < nodes; i++)
 	{
-		np = false;
-		temp = head;
-		direct = head;
-		begin = rand() % nodes;
-		end = rand() % nodes;
-		if (begin == end) continue;
-		for (int i = 0; i < begin; i++) temp = temp->next;
-		for (int i = 0; i < end; i++) direct = direct->next;
-		newEdge = temp->head;
-		while (newEdge != nullptr)
-		{
-			if (newEdge->target->index == end)
-			{
-				np = true;
-				break;
-			}
-			els = newEdge;
-			newEdge = newEdge->next;
-		}
-		if (!directed)
-		{
-			newEdge = direct->head;
-			while (newEdge != nullptr)
-			{
-				if (newEdge->target->index == begin)
-				{
-					np = true;
-					break;
-				}
-				newEdge = newEdge->next;
-			}
-		}
-		if (np) continue;
-		newEdge = new Edge();
-		newEdge->weight = (rand() % 99) + 1;
-		newEdge->target = direct;
-		newEdge->source = temp;
-		if (temp->head == nullptr) temp->head = newEdge;
-		else els->next = newEdge;
-		counter++;
+		vnodes[i] = temp;
+		temp = temp->next;
 	}
 	if (!directed)
 	{
@@ -73,35 +30,37 @@ void List::create(int NN, double EE, double ME, bool directed)
 			els = temp->head;
 			while (els != nullptr)
 			{
-				np = false;
-				begin = els->source->index;
-				edge = els->target->head;
-				while (edge != nullptr)
+				if (els->target->index > temp->index)
 				{
-					if (edge->target->index == begin)
+					newEdge = new Edge();
+					newEdge->target = els->source;
+					newEdge->source = els->target;
+					newEdge->weight = els->weight;
+					if (els->target->head == nullptr)
 					{
-						np = true;
-						break;
+						els->target->head = newEdge;
+						els->target->tail = newEdge;
 					}
-					edge = edge->next;
+					else
+					{
+						els->target->tail->next = newEdge;
+						els->target->tail = newEdge;
+					}
+					els->target->connections++;
 				}
-				if (np)
-				{
-					els = els->next;
-					continue;
-				}
-				edge = els->target->head;
-				newEdge = new Edge();
-				if (edge == nullptr) edge = newEdge;
-				else while (edge->next != nullptr) edge = edge->next;
-				edge->next = newEdge;
-				newEdge->source = els->target;
-				newEdge->target = els->source;
-				newEdge->weight = els->weight;
 				els = els->next;
 			}
 			temp = temp->next;
 		}
+	}
+	while (counter <= edges)
+	{
+		begin = rand() % nodes;
+		temp = vnodes[begin];
+		if (temp->connections == (nodes - 1)) continue;
+		end = 0;
+
+		counter++;
 	}
 	display();
 }
@@ -138,7 +97,6 @@ void List::spanningtree()
 	Node *create = head;
 	Node *newNode;
 	Edge *child;
-	Edge *temp;
 	int children, count, rr, ii;
 	int created = 1;
 	do
@@ -157,13 +115,17 @@ void List::spanningtree()
 			newNode->prev = tail;
 			tail = newNode;
 			child->weight = (rand() % 99) + 1;
-			if (create->head == nullptr) create->head = child;
+			if (create->head == nullptr)
+			{
+				create->head = child;
+				create->tail = child;
+			}
 			else
 			{
-				temp = create->head;
-				while (temp->next != nullptr) temp = temp->next;
-				temp->next = child;
+				create->tail->next = child;
+				create->tail = child;
 			}
+			create->connections++;
 			count++;
 			if (created == nodes) return;
 		} while (count != children);

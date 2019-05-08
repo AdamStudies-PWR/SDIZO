@@ -11,8 +11,10 @@ struct Node
 {
 	int index = 0;
 	Edge *head = nullptr;
+	Edge *tail = nullptr;
 	Node *next = nullptr;
 	Node *prev = nullptr;
+	int connections = 0;
 };
 
 struct Edge
