@@ -12,7 +12,7 @@ void List::create(int NN, double EE, double ME, bool directed)
 	Edge *newEdge;
 	nodes = NN;
 	edges = ME * (EE / 100);
-	vector<Node *> vnodes(nodes);
+	Node **vnodes = new Node*[nodes];
 	int *visited = new int[nodes];
 	head = new Node();
 	int counter = nodes;
@@ -55,7 +55,7 @@ void List::create(int NN, double EE, double ME, bool directed)
 			temp = temp->next;
 		}
 	}
-	display();
+	//display();
 	while (counter <= edges)
 	{
 		for (int i = 0; i < nodes; i++) visited[i] = 0;
@@ -63,14 +63,14 @@ void List::create(int NN, double EE, double ME, bool directed)
 		temp = vnodes[begin];
 		if (temp->connections == (nodes - 1)) continue;
 		els = temp->head;
-		for (int i = 0; i < temp->connections; i++)
+		for (int i = 0; i < (temp->connections); i++)
 		{
 			visited[els->target->index] = 1;
 			els = els->next;
 		}
-		for (end = 0; end < temp->connections; end++)
+		for (end = 0; end < (temp->connections + 1); end++)
 		{
-			if (end != temp->index && visited[end] == 0) break;
+			if (end != (temp->index) && visited[end] == 0) break;
 		}
 		newEdge = new Edge();
 		newEdge->weight = (rand() % 99) + 1;
