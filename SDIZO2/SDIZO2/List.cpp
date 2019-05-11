@@ -142,6 +142,7 @@ void List::display()
 	_getche();
 }
 
+//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 void List::spanningtree()
 {
 	tail = head;
@@ -190,4 +191,9 @@ void List::spanningtree()
 			}
 		}
 	} while (created != nodes);
+}
+
+void List::mst_Dijkstra(int start)
+{
+
 }

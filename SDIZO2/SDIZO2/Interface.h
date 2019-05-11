@@ -14,6 +14,8 @@ private:
 	Matrix mat;
 	List list;
 	bool directed = false;
+	bool exists = false;
+	int size_n;
 public:
 	//metody
 	//G³ówne menu propgramu
@@ -27,6 +29,8 @@ private:
 	void create_ui(Graphs *g);
 	//Obs³uga funkcji dla implementacji listwoej
 	void glist();
+	//Obs³uga algorytmu Dijsktry
+	void dijkstra_ui(Graphs *g);
 };
 
 #endif

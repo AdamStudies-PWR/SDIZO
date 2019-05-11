@@ -15,6 +15,8 @@ public:
 	void create(int nodes, double edges, double maxedges, bool directed);
 	//Funkcja wyœwietlaj¹ca graf
 	void display();
+	//Funkcja obs³uguj¹ca algorytm Dijsktry
+	void mst_Dijkstra(int start);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);

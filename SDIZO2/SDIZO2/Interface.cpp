@@ -83,7 +83,29 @@ void Interface::create_ui(Graphs *gg)
 		cout << "Podaj porządaną gęstość, > " << mindensity << "%" << endl;
 		cin >> edge;
 	} while (edge < mindensity || edge > 100);
+	size_n = nodes;
+	exists = true;
 	gg->create(nodes, edge, maxedge, directed);
+}
+
+void Interface::dijkstra_ui(Graphs *gg)
+{
+	int node;
+	if (directed) cout << "\n Graf musi być nieskierowany" << endl, _getche();
+	else
+	{
+		if(!exists) cout << "\n Graf nie istnieje" << endl, _getche();
+		else
+		{
+			do
+			{
+				system("cls");
+				cout << "Podaj węzeł początkowy [0 - " << size_n - 1 << "]:" << endl;
+				cin >> node;
+			} while (node < 0 || node > (size_n - 1));
+			gg->mst_Dijkstra(node);
+		}
+	}
 }
 
 //Obsługa funkcji dla implementacji macierzowej
@@ -98,6 +120,7 @@ void Interface::matrix()
 		case '0': break;
 		case '2': create_ui(&mat); break;
 		case '3': mat.display(); break;
+		case '4': dijkstra_ui(&mat); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');

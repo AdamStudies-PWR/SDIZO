@@ -133,3 +133,15 @@ void Matrix::spanningtree(int *visited)
 		}
 	} while (created != nodes);
 }
+
+//Funkcja obs³uguj¹ca algorytm Dijsktry
+void Matrix::mst_Dijkstra(int start)
+{
+	dnch = nodes;
+	dch = 0;
+	notchecked = new Dijkstra[dnch];
+	for (int i = 0; i < dnch; i++)
+	{
+		notchecked[i].index = i;
+	}
+}
