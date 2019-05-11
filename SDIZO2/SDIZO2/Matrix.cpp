@@ -158,89 +158,91 @@ void Matrix::mst_Dijkstra(int start)
 int Matrix::relax(int index)
 {
 	Dijkstra *temp;
-	int small = 200;
-	int next = -1;
 	int loop;
+	int fall = 0;
+	int result;
+	int small;
+	for (int i = 0; i < dnch; i++)
+	{
+		if (index == notchecked[i].index)
+		{
+			fall = i;
+			break;
+		}
+	}
+	int j = 0;
 	for (int i = 0; i < nodes; i++)
 	{
-		if (pointer[notchecked[index].index][i] != 0)
+		if (pointer[index][i] != 0)
 		{
-			for (int j = 0; j < dnch; j++)
+			for (j; j < dnch; j++)
 			{
-				if (notchecked[i].index == i)
+				if (notchecked[j].index == i)
 				{
-					if ((notchecked[j].distance > pointer[notchecked[index].index][i]) || (notchecked[j].distance == -1))
+					if (notchecked[fall].index == notchecked[j].index) break;
+					if (notchecked[j].distance < (pointer[index][i]) || notchecked[j].distance == -1)
 					{
-						if (notchecked[index].prev == i) continue;
-						notchecked[j].distance = pointer[notchecked[index].index][i];
-						notchecked[j].prev = notchecked[index].index;
-						if (pointer[notchecked[index].index][i] < small)
-						{
-							small = pointer[notchecked[index].index][i];
-							next = i;
-						}
+						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
+						notchecked[j].prev = index;
 					}
+					break;
 				}
 			}
 		}
 	}
 	temp = new Dijkstra[dch + 1];
-	if (dch == 0)
-	{
-		temp[0] = notchecked[index];
-	}
+	if (dch == 0) temp[0] = notchecked[fall];
 	else
 	{
 		loop = 0;
-		for (int i = 0; i < (dch + 1); i++)
+		for (int i = 0; i < dch; i++)
 		{
-			if (checked[i].index > notchecked[notchecked[index].index].index)
+			if (checked[i].index < notchecked[fall].index)
 			{
-				temp[i] = notchecked[notchecked[index].index];
-				temp[i + 1] = checked[i];
-				loop++;
+				temp[i] = notchecked[fall];
+				temp[i + 1] = checked[loop];
+				i++;
 			}
-			else temp[loop] = checked[i];
+			else
+			{
+				temp[i] = checked[loop];
+			}
 			loop++;
 		}
 		delete checked;
 	}
-	checked = temp;
 	loop = 0;
+	checked = temp;
 	temp = new Dijkstra[dnch - 1];
 	for (int i = 0; i < (dnch - 1); i++)
 	{
-		if (i == notchecked[index].index)
+		if (i == fall)
 		{
-			temp[i] = notchecked[i + 1];
 			loop++;
+			temp[i] = notchecked[loop];
 		}
-		else temp[i] = notchecked[loop];
+		else
+		{
+			temp[i] = notchecked[loop];
+		}
 		loop++;
 	}
 	delete notchecked;
 	notchecked = temp;
-	if (next != -1)
+	result = notchecked[0].index;
+	small = 10000000;
+	for (int i = 0; i < (dnch - 1); i++)
 	{
-		for (int i = 0; i < (dnch - 1); i++)
+		if (notchecked[i].distance != -1)
 		{
-			if (notchecked[i].index == next) return i;
-		}
-	}
-	else
-	{
-		next = 0;
-		small = 200;
-		for (int i = 0; i < (dnch - 1); i++)
-		{
-			if (notchecked[i].distance < small && notchecked[i].distance != -1)
+			if (notchecked[i].distance < small)
 			{
+				result = i;
 				small = notchecked[i].distance;
-				next = notchecked[i].index;
 			}
 		}
-		return next;
 	}
+	return result;
 }
 
 //Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
@@ -256,14 +258,21 @@ void Matrix::display_Dijkstra()
 	for (int i = 0; i < nodes; i++)
 	{
 		cout << checked[i].distance; 
-		if(checked[i].distance > 9) cout << " ";
+		if(checked[i].distance > 9 || checked[i].distance == -1) cout << " ";
 		else cout << "  ";
 	}
 	cout << "\nPrev: ";
 	for (int i = 0; i < nodes; i++)
 	{
 		cout << checked[i].prev;
-		if (checked[i].prev > 9) cout << " ";
+		if (checked[i].prev > 9 || checked[i].prev == -1) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nInde: ";
+	for (int i = 0; i < nodes; i++)
+	{
+		cout << checked[i].index;
+		if (checked[i].index > 9 || checked[i].index == -1) cout << " ";
 		else cout << "  ";
 	}
 	_getche();
