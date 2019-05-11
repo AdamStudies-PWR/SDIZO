@@ -7,9 +7,9 @@ using namespace std;
 //Funkcja losowo tworz¹ca graf
 void List::create(int NN, double EE, double ME, bool directed)
 {
-	system("cls");
 	Edge *els;
 	Edge *newEdge;
+	Edge *revEdge;
 	nodes = NN;
 	edges = ME * (EE / 100);
 	Node **vnodes = new Node*[nodes];
@@ -48,6 +48,11 @@ void List::create(int NN, double EE, double ME, bool directed)
 						els->target->tail->next = newEdge;
 						els->target->tail = newEdge;
 					}
+					if (!directed)
+					{
+						revEdge = new Edge();
+						revEdge->target = newEdge->source;
+					}
 					els->target->connections++;
 				}
 				els = els->next;
@@ -55,7 +60,6 @@ void List::create(int NN, double EE, double ME, bool directed)
 			temp = temp->next;
 		}
 	}
-	//display();
 	while (counter <= edges)
 	{
 		for (int i = 0; i < nodes; i++) visited[i] = 0;
@@ -86,17 +90,36 @@ void List::create(int NN, double EE, double ME, bool directed)
 			temp->tail->next = newEdge;
 			temp->tail = newEdge;
 		}
-
+		if (!directed)
+		{
+			revEdge = new Edge();
+			revEdge->target = newEdge->source;
+			revEdge->source = newEdge->target;
+			revEdge->weight = newEdge->weight;
+			if (revEdge->source->head == nullptr)
+			{
+				revEdge->source->head = revEdge;
+				revEdge->source->tail = revEdge;
+			}
+			else
+			{
+				revEdge->source->tail->next = revEdge;
+				revEdge->source->tail = revEdge;
+			}
+			revEdge->source->connections++;
+		}
 		temp->connections++;
 		counter++;
 	}
 	display();
+	delete visited;
+	delete vnodes;
 }
 
 //Funkcja wyœwietlaj¹ca graf
 void List::display()
 {
-	//system("cls");
+	system("cls");
 	if (head == nullptr) cout << "Graf nie istnieje!" << endl;
 	else
 	{
