@@ -20,6 +20,10 @@ public:
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);
+	//Funkcja relaksuj¹ca s¹siadów
+	int relax(int index);
+	//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
+	void display_Dijkstra();
 };
 
 #endif

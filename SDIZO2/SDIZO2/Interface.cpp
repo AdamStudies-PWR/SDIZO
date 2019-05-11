@@ -91,7 +91,7 @@ void Interface::create_ui(Graphs *gg)
 void Interface::dijkstra_ui(Graphs *gg)
 {
 	int node;
-	if (directed) cout << "\n Graf musi być nieskierowany" << endl, _getche();
+	if (!directed) cout << "\n Graf musi być skierowany" << endl, _getche();
 	else
 	{
 		if(!exists) cout << "\n Graf nie istnieje" << endl, _getche();
@@ -120,7 +120,7 @@ void Interface::matrix()
 		case '0': break;
 		case '2': create_ui(&mat); break;
 		case '3': mat.display(); break;
-		case '4': dijkstra_ui(&mat); break;
+		case '6': dijkstra_ui(&mat); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');
