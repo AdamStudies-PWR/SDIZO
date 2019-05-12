@@ -4,6 +4,41 @@
 
 using namespace std;
 
+void Matrix::test()
+{
+	system("cls");
+	cout << "Node: ";
+	for (int i = 0; i < dnch; i++)
+	{
+		cout << i;
+		if (i > 9) cout << " ";
+		else cout << "  ";
+
+	}
+	cout << "\nDist: ";
+	for (int i = 0; i < dnch; i++)
+	{
+		cout << notchecked[i].distance;
+		if (notchecked[i].distance > 9 || notchecked[i].distance == -1) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nPrev: ";
+	for (int i = 0; i < dnch; i++)
+	{
+		cout << notchecked[i].prev;
+		if (notchecked[i].prev > 9 || notchecked[i].prev == -1) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nInde: ";
+	for (int i = 0; i < dnch; i++)
+	{
+		cout << notchecked[i].index;
+		if (notchecked[i].index > 9 || notchecked[i].index == -1) cout << " ";
+		else cout << "  ";
+	}
+	_getche();
+}
+
 //Funkcja losowo tworz¹ca graf
 void Matrix::create(int NN, double EE, double ME, bool directed) 
 {
@@ -150,6 +185,8 @@ void Matrix::mst_Dijkstra(int start)
 		start = relax(start);
 		dnch--;
 		dch++;
+		test();
+		display_Dijkstra();
 	} while (dnch != 0);
 	display_Dijkstra();
 }
@@ -179,8 +216,8 @@ int Matrix::relax(int index)
 			{
 				if (notchecked[j].index == i)
 				{
-					if (notchecked[fall].index == notchecked[j].index) break;
-					if (notchecked[j].distance < (pointer[index][i]) || notchecked[j].distance == -1)
+					//if (notchecked[fall].index == notchecked[j].index) break;
+					if (notchecked[j].distance < (pointer[index][i])/* || notchecked[j].distance == -1*/)
 					{
 						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
 						notchecked[j].prev = index;
@@ -197,18 +234,19 @@ int Matrix::relax(int index)
 		loop = 0;
 		for (int i = 0; i < dch; i++)
 		{
-			if (checked[i].index < notchecked[fall].index)
+			/*if (checked[i].index > notchecked[fall].index)
 			{
 				temp[i] = notchecked[fall];
 				temp[i + 1] = checked[loop];
 				i++;
 			}
 			else
-			{
+			{*/
 				temp[i] = checked[loop];
-			}
+			//}
 			loop++;
 		}
+		temp[loop] = notchecked[fall];
 		delete checked;
 	}
 	loop = 0;
@@ -250,26 +288,29 @@ void Matrix::display_Dijkstra()
 {
 	system("cls");
 	cout << "Node: ";
-	for (int i = 0; i < nodes; i++)
+	for (int i = 0; i < dch; i++)
 	{
-		cout << i << "  ";
+		cout << i;
+		if (i > 9) cout << " ";
+		else cout << "  ";
+
 	}
 	cout << "\nDist: ";
-	for (int i = 0; i < nodes; i++)
+	for (int i = 0; i < dch; i++)
 	{
 		cout << checked[i].distance; 
 		if(checked[i].distance > 9 || checked[i].distance == -1) cout << " ";
 		else cout << "  ";
 	}
 	cout << "\nPrev: ";
-	for (int i = 0; i < nodes; i++)
+	for (int i = 0; i < dch; i++)
 	{
 		cout << checked[i].prev;
 		if (checked[i].prev > 9 || checked[i].prev == -1) cout << " ";
 		else cout << "  ";
 	}
 	cout << "\nInde: ";
-	for (int i = 0; i < nodes; i++)
+	for (int i = 0; i < dch; i++)
 	{
 		cout << checked[i].index;
 		if (checked[i].index > 9 || checked[i].index == -1) cout << " ";

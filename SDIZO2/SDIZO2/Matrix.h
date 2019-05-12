@@ -24,6 +24,7 @@ private:
 	int relax(int index);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
 	void display_Dijkstra();
+	void test();
 };
 
 #endif
