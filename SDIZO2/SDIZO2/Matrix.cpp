@@ -7,14 +7,7 @@ using namespace std;
 void Matrix::test()
 {
 	system("cls");
-	cout << "Node: ";
-	for (int i = 0; i < dnch; i++)
-	{
-		cout << i;
-		if (i > 9) cout << " ";
-		else cout << "  ";
-
-	}
+	cout << "Notchecked:" << endl;
 	cout << "\nDist: ";
 	for (int i = 0; i < dnch; i++)
 	{
@@ -217,7 +210,7 @@ int Matrix::relax(int index)
 				if (notchecked[j].index == i)
 				{
 					//if (notchecked[fall].index == notchecked[j].index) break;
-					if (notchecked[j].distance < (pointer[index][i])/* || notchecked[j].distance == -1*/)
+					if ((notchecked[fall].distance + pointer[index][i]) < notchecked[j].distance || notchecked[j].distance == -1)
 					{
 						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
 						notchecked[j].prev = index;
@@ -287,6 +280,7 @@ int Matrix::relax(int index)
 void Matrix::display_Dijkstra()
 {
 	system("cls");
+	cout << "Checked:" << endl;
 	cout << "Node: ";
 	for (int i = 0; i < dch; i++)
 	{
