@@ -42,6 +42,8 @@ public:
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree();
+	//Funkcja relaksuj¹ca s¹siadów
+	int relax(int index);
 };
 
 #endif

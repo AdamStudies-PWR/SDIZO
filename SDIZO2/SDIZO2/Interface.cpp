@@ -42,7 +42,7 @@ char Interface::structure_menu(string name)
 	cout << " [7] Algorytm Forda-Bellmana" << endl;
 	cout << " [0] Powrót" << endl;
 	cout << "Wybór: ";
-	choice = _getche();
+ choice = _getche();
 	return choice;
 }
 
@@ -138,6 +138,7 @@ void Interface::glist()
 		case '0': break;
 		case '2': create_ui(&list); break;
 		case '3': list.display(); break;
+		case '6': dijkstra_ui(&list); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');

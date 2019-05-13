@@ -264,7 +264,7 @@ int Matrix::relax(int index)
 }
 
 //Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
-void Matrix::display_Dijkstra()
+/*void Matrix::display_Dijkstra()
 {
 	system("cls");
 	cout << "Checked:" << endl;
@@ -290,4 +290,4 @@ void Matrix::display_Dijkstra()
 		else cout << "  ";
 	}
 	_getche();
-}
+}*/

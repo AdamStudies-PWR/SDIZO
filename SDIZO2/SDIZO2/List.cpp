@@ -195,5 +195,119 @@ void List::spanningtree()
 
 void List::mst_Dijkstra(int start)
 {
+	dnch = nodes;
+	dch = 0;
+	notchecked = new Dijkstra[dnch];
+	for (int i = 0; i < dnch; i++)
+	{
+		notchecked[i].index = i;
+	}
+	notchecked[start].distance = 0;
+	do
+	{
+		start = relax(start);
+		dnch--;
+		dch++;
+	} while (dnch != 0);
+	display_Dijkstra();
+}
 
+int List::relax(int index)
+{
+	Dijkstra *temp;
+	Node *iter = head;
+	Edge *els;
+	int loop;
+	int fall = 0;
+	int result;
+	int small;
+	for (int i = 0; i < dnch; i++)
+	{
+		if (index == notchecked[i].index)
+		{
+			fall = i;
+			break;
+		}
+	}
+	for (int i = 0; i < index; i++) iter = iter->next;
+	els = iter->head;
+	while (els != nullptr)
+	{
+		for (int i = 0; i < dnch; i++)
+		{
+			if (notchecked[i].index == els->target->index)
+			{
+				if ((notchecked[fall].distance + els->weight) < notchecked[i].distance || notchecked[i].distance == -1)
+				{
+					notchecked[i].distance = notchecked[fall].distance + els->weight;
+					notchecked[i].prev = index;
+				}
+				break;
+			}
+		}
+		els = els->next;
+	}
+	/*for (int i = 0; i < nodes; i++)
+	{
+		if (pointer[index][i] != 0)
+		{
+			for (int j = 0; j < dnch; j++)
+			{
+				if (notchecked[j].index == i)
+				{
+					if ((notchecked[fall].distance + pointer[index][i]) < notchecked[j].distance || notchecked[j].distance == -1)
+					{
+						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
+						notchecked[j].prev = index;
+					}
+					break;
+				}
+			}
+		}
+	}*/
+	temp = new Dijkstra[dch + 1];
+	if (dch == 0) temp[0] = notchecked[fall];
+	else
+	{
+		loop = 0;
+		for (int i = 0; i < dch; i++)
+		{
+			temp[i] = checked[i];
+			loop++;
+		}
+		temp[loop] = notchecked[fall];
+		delete checked;
+	}
+	loop = 0;
+	checked = temp;
+	temp = new Dijkstra[dnch - 1];
+	for (int i = 0; i < (dnch - 1); i++)
+	{
+		if (i == fall)
+		{
+			loop++;
+			temp[i] = notchecked[loop];
+		}
+		else
+		{
+			temp[i] = notchecked[loop];
+		}
+		loop++;
+	}
+	delete notchecked;
+	notchecked = temp;
+	result = notchecked[0].index;
+	small = 10000000;
+	for (int i = 0; i < (dnch - 1); i++)
+	{
+		if (notchecked[i].distance != -1)
+		{
+			if (notchecked[i].distance < small)
+			{
+				result = notchecked[i].index;
+				small = notchecked[i].distance;
+			}
+		}
+	}
+	return result;
 }
