@@ -178,8 +178,6 @@ void Matrix::mst_Dijkstra(int start)
 		start = relax(start);
 		dnch--;
 		dch++;
-		test();
-		display_Dijkstra();
 	} while (dnch != 0);
 	display_Dijkstra();
 }
@@ -200,16 +198,14 @@ int Matrix::relax(int index)
 			break;
 		}
 	}
-	int j = 0;
 	for (int i = 0; i < nodes; i++)
 	{
 		if (pointer[index][i] != 0)
 		{
-			for (j; j < dnch; j++)
+			for (int j = 0 ; j < dnch; j++)
 			{
 				if (notchecked[j].index == i)
 				{
-					//if (notchecked[fall].index == notchecked[j].index) break;
 					if ((notchecked[fall].distance + pointer[index][i]) < notchecked[j].distance || notchecked[j].distance == -1)
 					{
 						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
@@ -227,16 +223,7 @@ int Matrix::relax(int index)
 		loop = 0;
 		for (int i = 0; i < dch; i++)
 		{
-			/*if (checked[i].index > notchecked[fall].index)
-			{
-				temp[i] = notchecked[fall];
-				temp[i + 1] = checked[loop];
-				i++;
-			}
-			else
-			{*/
-				temp[i] = checked[loop];
-			//}
+			temp[i] = checked[i];
 			loop++;
 		}
 		temp[loop] = notchecked[fall];
@@ -268,7 +255,7 @@ int Matrix::relax(int index)
 		{
 			if (notchecked[i].distance < small)
 			{
-				result = i;
+				result = notchecked[i].index;
 				small = notchecked[i].distance;
 			}
 		}
@@ -281,14 +268,6 @@ void Matrix::display_Dijkstra()
 {
 	system("cls");
 	cout << "Checked:" << endl;
-	cout << "Node: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << i;
-		if (i > 9) cout << " ";
-		else cout << "  ";
-
-	}
 	cout << "\nDist: ";
 	for (int i = 0; i < dch; i++)
 	{
