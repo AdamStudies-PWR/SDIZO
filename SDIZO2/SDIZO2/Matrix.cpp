@@ -163,7 +163,7 @@ void Matrix::spanningtree(int *visited)
 }
 
 //Funkcja obs³uguj¹ca algorytm Dijsktry
-void Matrix::mst_Dijkstra(int start)
+void Matrix::dijkstra(int start)
 {
 	dnch = nodes;
 	dch = 0;
@@ -263,31 +263,8 @@ int Matrix::relax(int index)
 	return result;
 }
 
-//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
-/*void Matrix::display_Dijkstra()
+//Funckja obs³uguj¹ca algorytm prima
+void Matrix::mst_Prim(int start)
 {
-	system("cls");
-	cout << "Checked:" << endl;
-	cout << "\nDist: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << checked[i].distance; 
-		if(checked[i].distance > 9 || checked[i].distance == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nPrev: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << checked[i].prev;
-		if (checked[i].prev > 9 || checked[i].prev == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nInde: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << checked[i].index;
-		if (checked[i].index > 9 || checked[i].index == -1) cout << " ";
-		else cout << "  ";
-	}
-	_getche();
-}*/
+
+}

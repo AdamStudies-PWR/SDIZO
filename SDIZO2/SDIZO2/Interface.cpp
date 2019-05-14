@@ -88,6 +88,7 @@ void Interface::create_ui(Graphs *gg)
 	gg->create(nodes, edge, maxedge, directed);
 }
 
+//Obsługa algorytmu Dijsktry
 void Interface::dijkstra_ui(Graphs *gg)
 {
 	int node;
@@ -103,7 +104,28 @@ void Interface::dijkstra_ui(Graphs *gg)
 				cout << "Podaj węzeł początkowy [0 - " << size_n - 1 << "]:" << endl;
 				cin >> node;
 			} while (node < 0 || node > (size_n - 1));
-			gg->mst_Dijkstra(node);
+			gg->dijkstra(node);
+		}
+	}
+}
+
+//Obsługa algorytmu Prima
+void Interface::prim_ui(Graphs * gg)
+{
+	int node;
+	if (directed) cout << "\n Graf nie może być skierowany" << endl, _getche();
+	else
+	{
+		if (!exists) cout << "\n Graf nie istnieje" << endl, _getche();
+		else
+		{
+			do
+			{
+				system("cls");
+				cout << "Podaj węzeł początkowy [0 - " << size_n - 1 << "]:" << endl;
+				cin >> node;
+			} while (node < 0 || node >(size_n - 1));
+			gg->mst_Prim(node);
 		}
 	}
 }
@@ -120,6 +142,7 @@ void Interface::matrix()
 		case '0': break;
 		case '2': create_ui(&mat); break;
 		case '3': mat.display(); break;
+		case '4': prim_ui(&mat); break;
 		case '6': dijkstra_ui(&mat); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}

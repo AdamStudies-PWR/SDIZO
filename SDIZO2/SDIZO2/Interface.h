@@ -31,6 +31,8 @@ private:
 	void glist();
 	//Obs³uga algorytmu Dijsktry
 	void dijkstra_ui(Graphs *g);
+	//Obs³uga algorytmu Prima
+	void prim_ui(Graphs * g);
 };
 
 #endif

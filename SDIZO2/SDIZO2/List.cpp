@@ -193,7 +193,7 @@ void List::spanningtree()
 	} while (created != nodes);
 }
 
-void List::mst_Dijkstra(int start)
+void List::dijkstra(int start)
 {
 	dnch = nodes;
 	dch = 0;
@@ -247,24 +247,6 @@ int List::relax(int index)
 		}
 		els = els->next;
 	}
-	/*for (int i = 0; i < nodes; i++)
-	{
-		if (pointer[index][i] != 0)
-		{
-			for (int j = 0; j < dnch; j++)
-			{
-				if (notchecked[j].index == i)
-				{
-					if ((notchecked[fall].distance + pointer[index][i]) < notchecked[j].distance || notchecked[j].distance == -1)
-					{
-						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
-						notchecked[j].prev = index;
-					}
-					break;
-				}
-			}
-		}
-	}*/
 	temp = new Dijkstra[dch + 1];
 	if (dch == 0) temp[0] = notchecked[fall];
 	else
@@ -310,4 +292,10 @@ int List::relax(int index)
 		}
 	}
 	return result;
+}
+
+//Funckja obs³uguj¹ca algorytm prima
+void List::mst_Prim(int start)
+{
+
 }
