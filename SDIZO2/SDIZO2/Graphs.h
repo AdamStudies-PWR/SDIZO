@@ -12,6 +12,13 @@ struct Dijkstra
 	std::string prev = "";
 };
 
+struct Prim
+{
+	int index = 0;
+	int distance = -1;
+	int prev = -1;
+};
+
 //Klasa obs³uguj¹ca bazowe elemety dla obu typów grafów
 class Graphs
 {
@@ -24,8 +31,8 @@ protected:
 	Dijkstra *notchecked;
 	int dch, dnch;
 	//Zmiennie powi¹zane z algorytmem Prima
-	//Nlist *solved;
-	//Nlist *notSolved;
+	Prim *solved;
+	Prim *notSolved;
 	int sol, nsol;
 public:
 	//Funkcja losowo tworz¹ca graf
@@ -37,6 +44,8 @@ public:
 protected:
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
 	void display_Dijkstra(Dijkstra *list, int size);
+	//Funckja drukuj¹ca wynik dzia³ania algorytmu Prima
+	void display_Prim(Prim *list, int size);
 };
 
 #endif

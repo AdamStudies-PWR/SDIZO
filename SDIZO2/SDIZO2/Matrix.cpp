@@ -240,12 +240,11 @@ void Matrix::mst_Prim(int start)
 {
 	sol = 1;
 	nsol = (nodes - 1);
-	//solved = new Dijkstra[sol];
-	//notSolved = new Dijkstra[nsol];
-	//solved[0].distance = 0;
-	//solved[0].index = start;
-	//solved[0].prev = -1;
-	/*int ii = 0;
+	solved = new Prim[sol];
+	notSolved = new Prim[nsol];
+	solved[0].distance = 0;
+	solved[0].index = start;
+	int ii = 0;
 	for (int i = 0; i < nsol; i++)
 	{
 		if (i != start) notSolved[i].index = ii;
@@ -255,5 +254,7 @@ void Matrix::mst_Prim(int start)
 			ii++;
 		}
 		ii++;
-	}*/
+	}
+	display_Prim(solved, sol);
+	display_Prim(notSolved, nsol);
 }

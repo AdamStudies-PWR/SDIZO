@@ -17,3 +17,15 @@ void Graphs::display_Dijkstra(Dijkstra *list, int size)
 	}
 	_getche();
 }
+
+void Graphs::display_Prim(Prim *list, int size)
+{
+	system("cls");
+	cout << "Solution:" << endl;
+	cout << "\nIndeks: ";
+	for (int i = 0; i < size; i++)
+	{
+		cout << list[i].index << ", ";
+	}
+	_getche();
+}
