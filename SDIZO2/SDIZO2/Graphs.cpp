@@ -5,30 +5,15 @@
 using namespace std;
 
 //Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
-void Graphs::display_Dijkstra()
+void Graphs::display_Dijkstra(Dijkstra *list, int size)
 {
 	system("cls");
-	cout << "Checked:" << endl;
-	cout << "\nDist: ";
-	for (int i = 0; i < dch; i++)
+	cout << "Solution:" << endl;
+	for (int i = 0; i < size; i++)
 	{
-		cout << checked[i].distance;
-		if (checked[i].distance > 9 || checked[i].distance == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nPrev: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << checked[i].prev;
-		if (checked[i].prev > 9 || checked[i].prev == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nInde: ";
-	for (int i = 0; i < dch; i++)
-	{
-		cout << checked[i].index;
-		if (checked[i].index > 9 || checked[i].index == -1) cout << " ";
-		else cout << "  ";
+		cout << "\nIndex: " << list[i].index << endl;;
+		cout << "Dist: " << list[i].distance << endl;
+		cout << "Prev: " << list[i].prev << endl;
 	}
 	_getche();
 }

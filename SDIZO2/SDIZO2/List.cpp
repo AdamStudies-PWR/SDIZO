@@ -209,7 +209,7 @@ void List::dijkstra(int start)
 		dnch--;
 		dch++;
 	} while (dnch != 0);
-	display_Dijkstra();
+	display_Dijkstra(checked, dch);
 }
 
 int List::relax(int index)
@@ -240,7 +240,7 @@ int List::relax(int index)
 				if ((notchecked[fall].distance + els->weight) < notchecked[i].distance || notchecked[i].distance == -1)
 				{
 					notchecked[i].distance = notchecked[fall].distance + els->weight;
-					notchecked[i].prev = index;
+					notchecked[i].prev = notchecked[fall].prev + to_string(index) + ", ";
 				}
 				break;
 			}
@@ -258,7 +258,7 @@ int List::relax(int index)
 			loop++;
 		}
 		temp[loop] = notchecked[fall];
-		delete checked;
+		delete[] checked;
 	}
 	loop = 0;
 	checked = temp;
@@ -276,7 +276,7 @@ int List::relax(int index)
 		}
 		loop++;
 	}
-	delete notchecked;
+	delete[] notchecked;
 	notchecked = temp;
 	result = notchecked[0].index;
 	small = 10000000;

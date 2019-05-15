@@ -24,7 +24,6 @@ private:
 	void spanningtree(int *visited);
 	//Funkcja relaksuj¹ca s¹siadów
 	int relax(int index);
-	void test();
 };
 
 #endif

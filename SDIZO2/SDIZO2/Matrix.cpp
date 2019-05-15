@@ -4,34 +4,6 @@
 
 using namespace std;
 
-void Matrix::test()
-{
-	system("cls");
-	cout << "Notchecked:" << endl;
-	cout << "\nDist: ";
-	for (int i = 0; i < dnch; i++)
-	{
-		cout << notchecked[i].distance;
-		if (notchecked[i].distance > 9 || notchecked[i].distance == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nPrev: ";
-	for (int i = 0; i < dnch; i++)
-	{
-		cout << notchecked[i].prev;
-		if (notchecked[i].prev > 9 || notchecked[i].prev == -1) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nInde: ";
-	for (int i = 0; i < dnch; i++)
-	{
-		cout << notchecked[i].index;
-		if (notchecked[i].index > 9 || notchecked[i].index == -1) cout << " ";
-		else cout << "  ";
-	}
-	_getche();
-}
-
 //Funkcja losowo tworz¹ca graf
 void Matrix::create(int NN, double EE, double ME, bool directed) 
 {
@@ -179,7 +151,7 @@ void Matrix::dijkstra(int start)
 		dnch--;
 		dch++;
 	} while (dnch != 0);
-	display_Dijkstra();
+	display_Dijkstra(checked, dch);
 }
 
 //Funkcja relaksuj¹ca s¹siadów
@@ -209,7 +181,7 @@ int Matrix::relax(int index)
 					if ((notchecked[fall].distance + pointer[index][i]) < notchecked[j].distance || notchecked[j].distance == -1)
 					{
 						notchecked[j].distance = notchecked[fall].distance + pointer[index][i];
-						notchecked[j].prev = index;
+						notchecked[j].prev = notchecked[fall].prev + to_string(index) + ", ";
 					}
 					break;
 				}
@@ -227,7 +199,7 @@ int Matrix::relax(int index)
 			loop++;
 		}
 		temp[loop] = notchecked[fall];
-		delete checked;
+		delete[] checked;
 	}
 	loop = 0;
 	checked = temp;
@@ -245,7 +217,7 @@ int Matrix::relax(int index)
 		}
 		loop++;
 	}
-	delete notchecked;
+	delete[] notchecked;
 	notchecked = temp;
 	result = notchecked[0].index;
 	small = 10000000;
@@ -266,5 +238,22 @@ int Matrix::relax(int index)
 //Funckja obs³uguj¹ca algorytm prima
 void Matrix::mst_Prim(int start)
 {
-
+	sol = 1;
+	nsol = (nodes - 1);
+	//solved = new Dijkstra[sol];
+	//notSolved = new Dijkstra[nsol];
+	//solved[0].distance = 0;
+	//solved[0].index = start;
+	//solved[0].prev = -1;
+	/*int ii = 0;
+	for (int i = 0; i < nsol; i++)
+	{
+		if (i != start) notSolved[i].index = ii;
+		else
+		{
+			notSolved[i].index = ii + 1;
+			ii++;
+		}
+		ii++;
+	}*/
 }
