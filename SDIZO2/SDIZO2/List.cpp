@@ -331,24 +331,6 @@ void List::mst_Prim(int start)
 			}
 			els = els->next;
 		}
-		/*for (int i = 0; i < nodes; i++)
-		{
-			if (pointer[fall][i] != 0)
-			{
-				for (int j = 0; j < nsol; j++)
-				{
-					if (notSolved[j].index == i)
-					{
-						if (notSolved[j].distance > pointer[fall][i] || notSolved[j].distance == 0)
-						{
-							notSolved[j].distance = pointer[fall][i];
-							notSolved[j].prev = fall;
-						}
-						break;
-					}
-				}
-			}
-		}*/
 		mst_size = mst_size + notSolved[start].distance;
 		sol++;
 		nsol--;
