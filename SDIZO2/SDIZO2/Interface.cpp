@@ -161,6 +161,7 @@ void Interface::glist()
 		case '0': break;
 		case '2': create_ui(&list); break;
 		case '3': list.display(); break;
+		case '4': prim_ui(&list); break;
 		case '6': dijkstra_ui(&list); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}

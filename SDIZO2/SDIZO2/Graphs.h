@@ -34,6 +34,7 @@ protected:
 	Prim *solved;
 	Prim *notSolved;
 	int sol, nsol;
+	int mst_size;
 public:
 	//Funkcja losowo tworz¹ca graf
 	virtual void create(int nodes, double edges, double maxedges, bool directed) = 0;

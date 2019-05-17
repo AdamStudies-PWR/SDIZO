@@ -238,6 +238,9 @@ int Matrix::relax(int index)
 //Funckja obs³uguj¹ca algorytm prima
 void Matrix::mst_Prim(int start)
 {
+	Prim *temp;
+	int min, index, old, loop, before;
+	mst_size = 0;
 	sol = 1;
 	nsol = (nodes - 1);
 	solved = new Prim[sol];
@@ -255,6 +258,74 @@ void Matrix::mst_Prim(int start)
 		}
 		ii++;
 	}
+	while (sol != nodes)
+	{
+		min = 100;
+		for (int i = 0; i < sol; i++)
+		{
+			start = solved[i].index;
+			for (int j = 0; j < nodes; j++)
+			{
+				for (int m = 0; m < nsol; m++)
+				{
+					if (notSolved[m].index == j)
+					{
+						if (pointer[start][j] != 0)
+						{
+							if (pointer[start][j] < min)
+							{
+								min = pointer[start][j];
+								index = j;
+								before = start;
+							}
+						}
+					}
+				}
+			}
+		}
+		if (min == 100) return;
+		mst_size = mst_size + min;
+		for (int i = 0; i < nsol; i++)
+		{
+			if (index == notSolved[i].index)
+			{
+				notSolved[i].distance = min;
+				notSolved[i].prev = before;
+				old = i;
+				break;
+			}
+		}
+		sol++;
+		nsol--;
+		//Zwiêkszanie listy rozwi¹zanych
+		temp = new Prim[sol];
+		loop = 0;
+		for (int i = 0; i < (sol - 1); i++)
+		{
+			temp[i] = solved[i];
+			loop++;
+		}
+		temp[loop] = notSolved[old];
+		delete[] solved;
+		solved = temp;
+		//Zmiejszanie listy nie rozwi¹zanych
+		loop = 0;
+		temp = new Prim[nsol];
+		for (int i = 0; i < nsol; i++)
+		{
+			if (i == old)
+			{
+				loop++;
+				temp[i] = notSolved[loop];
+			}
+			else
+			{
+				temp[i] = notSolved[loop];
+			}
+			loop++;
+		}
+		delete[] notSolved;
+		notSolved = temp;
+	}
 	display_Prim(solved, sol);
-	display_Prim(notSolved, nsol);
 }

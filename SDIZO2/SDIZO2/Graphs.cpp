@@ -22,10 +22,27 @@ void Graphs::display_Prim(Prim *list, int size)
 {
 	system("cls");
 	cout << "Solution:" << endl;
-	cout << "\nIndeks: ";
+	cout << "Total mst size: " << mst_size << endl;
+	cout << "\nInde:  ";
 	for (int i = 0; i < size; i++)
 	{
-		cout << list[i].index << ", ";
+		cout << list[i].index;
+		if (list[i].index > 9) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nDist:  ";
+	for (int i = 0; i < size; i++)
+	{
+		cout << list[i].distance;
+		if (list[i].distance > 9) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nPrev: ";
+	for (int i = 0; i < size; i++)
+	{
+		cout << list[i].prev;
+		if (list[i].prev > 9) cout << " ";
+		else cout << "  ";
 	}
 	_getche();
 }
