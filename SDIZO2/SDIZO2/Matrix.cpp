@@ -239,81 +239,57 @@ int Matrix::relax(int index)
 void Matrix::mst_Prim(int start)
 {
 	Prim *temp;
-	int min, index, old, loop, before;
+	int min, loop, fall;
 	mst_size = 0;
-	sol = 1;
-	nsol = (nodes - 1);
-	solved = new Prim[sol];
+	fall = start;
+	sol = 0;
+	nsol = nodes;
 	notSolved = new Prim[nsol];
-	solved[0].distance = 0;
-	solved[0].index = start;
-	int ii = 0;
-	for (int i = 0; i < nsol; i++)
-	{
-		if (i != start) notSolved[i].index = ii;
-		else
-		{
-			notSolved[i].index = ii + 1;
-			ii++;
-		}
-		ii++;
-	}
+	for (int i = 0; i < nsol; i++) notSolved[i].index = i;
 	while (sol != nodes)
 	{
-		min = 100;
-		for (int i = 0; i < sol; i++)
+		for (int i = 0; i < nodes; i++)
 		{
-			start = solved[i].index;
-			for (int j = 0; j < nodes; j++)
+			if (pointer[fall][i] != 0)
 			{
-				for (int m = 0; m < nsol; m++)
+				for (int j = 0; j < nsol; j++)
 				{
-					if (notSolved[m].index == j)
+					if (notSolved[j].index == i)
 					{
-						if (pointer[start][j] != 0)
+						if (notSolved[j].distance > pointer[fall][i] || notSolved[j].distance == 0)
 						{
-							if (pointer[start][j] < min)
-							{
-								min = pointer[start][j];
-								index = j;
-								before = start;
-							}
+							notSolved[j].distance = pointer[fall][i];
+							notSolved[j].prev = fall;
 						}
+						break;
 					}
 				}
 			}
 		}
-		if (min == 100) return;
-		mst_size = mst_size + min;
-		for (int i = 0; i < nsol; i++)
-		{
-			if (index == notSolved[i].index)
-			{
-				notSolved[i].distance = min;
-				notSolved[i].prev = before;
-				old = i;
-				break;
-			}
-		}
+		mst_size = mst_size + notSolved[start].distance;
 		sol++;
 		nsol--;
 		//Zwiêkszanie listy rozwi¹zanych
 		temp = new Prim[sol];
 		loop = 0;
-		for (int i = 0; i < (sol - 1); i++)
+		if (sol == 1) temp[0] = notSolved[start];
+		else
 		{
-			temp[i] = solved[i];
-			loop++;
+			for (int i = 0; i < (sol - 1); i++)
+			{
+				temp[i] = solved[i];
+				loop++;
+			}
+			temp[loop] = notSolved[start];
+			delete[] solved;
 		}
-		temp[loop] = notSolved[old];
-		delete[] solved;
 		solved = temp;
 		//Zmiejszanie listy nie rozwi¹zanych
 		loop = 0;
 		temp = new Prim[nsol];
 		for (int i = 0; i < nsol; i++)
 		{
-			if (i == old)
+			if (i == start)
 			{
 				loop++;
 				temp[i] = notSolved[loop];
@@ -326,6 +302,16 @@ void Matrix::mst_Prim(int start)
 		}
 		delete[] notSolved;
 		notSolved = temp;
+		min = 100;
+		for (int i = 0; i < nsol; i++)
+		{
+			if (notSolved[i].distance < min && notSolved[i].distance != 0)
+			{
+				start = i;
+				fall = notSolved[i].index;
+				min = notSolved[i].distance;
+			}
+		}
 	}
 	display_Prim(solved, sol);
 }

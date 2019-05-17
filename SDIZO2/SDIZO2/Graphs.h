@@ -15,7 +15,7 @@ struct Dijkstra
 struct Prim
 {
 	int index = 0;
-	int distance = -1;
+	int distance = 0;
 	int prev = -1;
 };
 
