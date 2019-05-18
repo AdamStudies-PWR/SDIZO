@@ -33,6 +33,8 @@ private:
 	void dijkstra_ui(Graphs *g);
 	//Obs³uga algorytmu Prima
 	void prim_ui(Graphs * g);
+	//Obs³uga algorytmu Kruskala
+	void kruskal_ui(Graphs *g);
 };
 
 #endif

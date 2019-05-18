@@ -319,5 +319,51 @@ void Matrix::mst_Prim(int start)
 //Funkcja obs³uguj¹ca algorytm Kruskala
 void Matrix::mst_Kruskal()
 {
+	int index = 0;
+	line = new Kruskal[edges];
+	for (int i = 0; i < nodes; i++)
+	{
+		for (int j = i; j < nodes; j++)
+		{
+			if (pointer[i][j] != 0)
+			{
+				line[index].source = i;
+				line[index].target = j;
+				line[index].weight = pointer[i][j];
+				index++;
+			}
+			if (index == edges) break;
+		}
+		if (index == edges) break;
+	}
+	sort(line);
 
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	system("cls");
+	cout << "Solution:" << endl;
+	cout << "Total mst size: " << mst_size << endl;
+	cout << "\nWeig:  ";
+	for (int i = 0; i < edges; i++)
+	{
+		cout << line[i].weight;
+		if (line[i].weight > 9) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nSour:  ";
+	for (int i = 0; i < edges; i++)
+	{
+		cout << line[i].source;
+		if (line[i].source > 9) cout << " ";
+		else cout << "  ";
+	}
+	cout << "\nTarg: ";
+	for (int i = 0; i < edges; i++)
+	{
+		cout << line[i].target;
+		if (line[i].target > 9) cout << " ";
+		else cout << "  ";
+	}
+	_getche();
 }

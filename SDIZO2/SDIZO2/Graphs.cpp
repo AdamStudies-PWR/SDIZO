@@ -18,6 +18,7 @@ void Graphs::display_Dijkstra(Dijkstra *list, int size)
 	_getche();
 }
 
+//Funckja drukuj¹ca wynik dzia³ania algorytmu Primy
 void Graphs::display_Prim(Prim *list, int size)
 {
 	system("cls");
@@ -45,4 +46,10 @@ void Graphs::display_Prim(Prim *list, int size)
 		else cout << "  ";
 	}
 	_getche();
+}
+
+//Funkcja sortuj¹ca krawêdzie
+void Graphs::sort(Kruskal *traget)
+{
+
 }

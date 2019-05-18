@@ -110,7 +110,7 @@ void Interface::dijkstra_ui(Graphs *gg)
 }
 
 //Obsługa algorytmu Prima
-void Interface::prim_ui(Graphs * gg)
+void Interface::prim_ui(Graphs *gg)
 {
 	int node;
 	if (directed) cout << "\n Graf nie może być skierowany" << endl, _getche();
@@ -130,6 +130,17 @@ void Interface::prim_ui(Graphs * gg)
 	}
 }
 
+void Interface::kruskal_ui(Graphs *gg)
+{
+	int node;
+	if (directed) cout << "\n Graf nie może być skierowany" << endl, _getche();
+	else
+	{
+		if (!exists) cout << "\n Graf nie istnieje" << endl, _getche();
+		else gg->mst_Kruskal();
+	}
+}
+
 //Obsługa funkcji dla implementacji macierzowej
 void Interface::matrix()
 {
@@ -143,6 +154,7 @@ void Interface::matrix()
 		case '2': create_ui(&mat); break;
 		case '3': mat.display(); break;
 		case '4': prim_ui(&mat); break;
+		case '5': kruskal_ui(&mat); break;
 		case '6': dijkstra_ui(&mat); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
@@ -162,6 +174,7 @@ void Interface::glist()
 		case '2': create_ui(&list); break;
 		case '3': list.display(); break;
 		case '4': prim_ui(&list); break;
+		case '5': kruskal_ui(&mat); break;
 		case '6': dijkstra_ui(&list); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}

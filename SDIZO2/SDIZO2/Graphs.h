@@ -56,6 +56,8 @@ public:
 	//Funkcja obs³uguj¹ca algorytm Kruskala
 	virtual void mst_Kruskal() = 0;
 protected:
+	//Funkcja sortuj¹ca krawêdzie
+	void sort(Kruskal *target);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
 	void display_Dijkstra(Dijkstra *list, int size);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Prima
