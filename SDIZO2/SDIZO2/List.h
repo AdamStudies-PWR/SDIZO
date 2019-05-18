@@ -41,6 +41,8 @@ public:
 	void dijkstra(int start);
 	//Funckja obs³uguj¹ca algorytm prima
 	void mst_Prim(int start);
+	//Funkcja obs³uguj¹ca algorytm Kruskala
+	void mst_Kruskal();
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree();

@@ -380,3 +380,9 @@ void List::mst_Prim(int start)
 	}
 	display_Prim(solved, sol);
 }
+
+//Funkcja obs³uguj¹ca algorytm Kruskala
+void List::mst_Kruskal()
+{
+
+}
