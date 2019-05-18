@@ -371,7 +371,10 @@ void Matrix::mst_Kruskal()
 		found = false;
 		for (int j = 0; j < sizes[tab]; j++)
 		{
-			if (tree[tab][j].index == line[i].target) found = true;
+			if (tree[tab][j].index == line[i].target) 
+			{
+				found = true; break;
+			}
 		}
 		if (found) continue;
 		found = false;
@@ -392,12 +395,13 @@ void Matrix::mst_Kruskal()
 		}
 		if (tab > tab2) connect(tab2, tab);
 		else connect(tab, tab2);
+		//display_Prim(tree[tab], sizes[tab]);
 	}
 	display_Prim(tree[0], nodes);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*system("cls");
+	system("cls");
 	cout << "Solution:" << endl;
 	cout << "Total mst size: " << mst_size << endl;
 	cout << "\nWeig:  ";
@@ -421,5 +425,5 @@ void Matrix::mst_Kruskal()
 		if (line[i].target > 9) cout << " ";
 		else cout << "  ";
 	}
-	_getche();*/
+	_getche();
 }

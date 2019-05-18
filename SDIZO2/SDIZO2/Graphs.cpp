@@ -90,7 +90,7 @@ void Graphs::connect(int tab, int tab2)
 		}
 	}
 	delete[] tree[tab];
-	tree[tab] = 0;
+	tree[tab] = temp;
 	t_size--;
 	temp2 = new Prim*[t_size];
 	temp3 = new int[t_size];
@@ -100,12 +100,18 @@ void Graphs::connect(int tab, int tab2)
 		{
 			loop++;
 			temp2[i] = tree[loop];
+			temp3[i] = sizes[loop];
 		}
-		else temp2[i] = tree[loop];
+		else
+		{
+			temp2[i] = tree[loop];
+			temp3[i] = sizes[loop];
+		}
 		loop++;
 	}
 	delete[] sizes;
-	delete[] tree;
+	//for (int i = 0; i < (t_size + 1); i++) delete[] tree[i];
+	//delete[] tree;
 	sizes = temp3;
 	tree = temp2;
 }
