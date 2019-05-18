@@ -35,6 +35,7 @@ protected:
 	Prim *notSolved;
 	int sol, nsol;
 	int mst_size;
+	//Zmienne powi¹zane z algorytmem Kruskala
 public:
 	//Funkcja losowo tworz¹ca graf
 	virtual void create(int nodes, double edges, double maxedges, bool directed) = 0;
