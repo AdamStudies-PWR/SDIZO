@@ -314,12 +314,27 @@ void Matrix::mst_Prim(int start)
 		}
 	}
 	display_Prim(solved, sol);
+	delete[] solved;
 }
 
 //Funkcja obs³uguj¹ca algorytm Kruskala
 void Matrix::mst_Kruskal()
 {
+	bool found;
+	int tab = 0;
+	int tab2 = 0;
+	t_size = nodes;
+	Prim *temp;
+	tree = new Prim *[t_size];
+	sizes = new int[t_size];
 	int index = 0;
+	for (int i = 0; i < t_size; i++)
+	{
+		sizes[i] = 1;
+		temp = new Prim[1];
+		temp[0].index = i;
+		tree[i] = temp;
+	}
 	line = new Kruskal[edges];
 	for (int i = 0; i < nodes; i++)
 	{
@@ -337,11 +352,52 @@ void Matrix::mst_Kruskal()
 		if (index == edges) break;
 	}
 	sort(line);
-
+	for (int i = 1; i < edges; i++)
+	{
+		found = false;
+		for (int j = 0; j < t_size; j++)
+		{
+			for (int m = 0; m < sizes[j]; m++)
+			{
+				if (tree[j][m].index == line[i].source)
+				{
+					found = true;
+					tab = j;
+					break;
+				}
+			}
+			if (found) break;
+		}
+		found = false;
+		for (int j = 0; j < sizes[tab]; j++)
+		{
+			if (tree[tab][j].index == line[i].target) found = true;
+		}
+		if (found) continue;
+		found = false;
+		for (int j = 0; j < t_size; j++)
+		{
+			for (int m = 0; m < sizes[j]; m++)
+			{
+				if (tree[j][m].index == line[i].target)
+				{
+					tree[j][m].distance = line[i].weight;
+					tree[j][m].prev = line[i].source;
+					found = true;
+					tab2 = j;
+					break;
+				}
+			}
+			if (found) break;
+		}
+		if (tab > tab2) connect(tab2, tab);
+		else connect(tab, tab2);
+	}
+	display_Prim(tree[0], nodes);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	system("cls");
+	/*system("cls");
 	cout << "Solution:" << endl;
 	cout << "Total mst size: " << mst_size << endl;
 	cout << "\nWeig:  ";
@@ -365,5 +421,5 @@ void Matrix::mst_Kruskal()
 		if (line[i].target > 9) cout << " ";
 		else cout << "  ";
 	}
-	_getche();
+	_getche();*/
 }

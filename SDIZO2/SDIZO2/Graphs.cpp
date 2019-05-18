@@ -49,7 +49,63 @@ void Graphs::display_Prim(Prim *list, int size)
 }
 
 //Funkcja sortuj¹ca krawêdzie
-void Graphs::sort(Kruskal *traget)
+void Graphs::sort(Kruskal *target)
 {
+	Kruskal temp;
+	for (int j = 1; j < edges; j++)
+	{
+		for (int i = j; i < edges; i++)
+		{
+			if (target[i].weight < target[j - 1].weight)
+			{
+				temp = target[j - 1];
+				target[j - 1] = target[i];
+				target[i] = temp;
+			}
+		}
+	}
+}
 
+//Funkcja ³¹cz¹ca dwa podzbiory w algorytmie Kruskala
+void Graphs::connect(int tab, int tab2)
+{
+	int loop = 0;
+	Prim *temp;
+	Prim **temp2;
+	int *temp3;
+	int start = sizes[tab];
+	int ind = 0;
+	sizes[tab] = sizes[tab] + sizes[tab2];
+	temp = new Prim[sizes[tab]];
+	for (int i = 0; i < sizes[tab]; i++)
+	{
+		if (i < start)
+		{
+			temp[i] = tree[tab][i];
+		}
+		else
+		{
+			temp[i] = tree[tab2][ind];
+			ind++;
+		}
+	}
+	delete[] tree[tab];
+	tree[tab] = 0;
+	t_size--;
+	temp2 = new Prim*[t_size];
+	temp3 = new int[t_size];
+	for (int i = 0; i < t_size; i++)
+	{
+		if (i == tab2)
+		{
+			loop++;
+			temp2[i] = tree[loop];
+		}
+		else temp2[i] = tree[loop];
+		loop++;
+	}
+	delete[] sizes;
+	delete[] tree;
+	sizes = temp3;
+	tree = temp2;
 }

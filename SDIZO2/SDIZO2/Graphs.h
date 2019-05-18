@@ -39,13 +39,16 @@ protected:
 	Dijkstra *checked;
 	Dijkstra *notchecked;
 	int dch, dnch;
-	//Zmiennie powi¹zane z algorytmem Prima
+	//Zmiennie powi¹zane z algorytmem Prima (czêœæ dzielona z Kruskalem)
 	Prim *solved;
 	Prim *notSolved;
 	int sol, nsol;
 	int mst_size;
 	//Zmienne powi¹zane z algorytmem Kruskala
 	Kruskal *line;
+	Prim **tree;
+	int t_size;
+	int *sizes;
 public:
 	//Funkcja losowo tworz¹ca graf
 	virtual void create(int nodes, double edges, double maxedges, bool directed) = 0;
@@ -58,6 +61,8 @@ public:
 protected:
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);
+	//£¹czenie dwóch zbiorów 
+	void connect(int tab, int tab2);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
 	void display_Dijkstra(Dijkstra *list, int size);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Prima
