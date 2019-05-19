@@ -320,29 +320,26 @@ void Matrix::mst_Prim(int start)
 //Funkcja obs³uguj¹ca algorytm Kruskala
 void Matrix::mst_Kruskal()
 {
-	bool found, connected;
-	int tab = 0;
-	int tab2 = 0;
-	int index2 = 0;
-	int charge = 0;
-	int from = 0;
+	bool found;
+	int *temp;
+	int index2, ind, tab, tab2;
 	mst_size = 0;
+	cnt = 0;
 	t_size = nodes;
-	Prim *temp;
-	tree = new Prim *[t_size];
 	sizes = new int[t_size];
+	tree = new int*[t_size];
 	int index = 0;
 	for (int i = 0; i < t_size; i++)
 	{
-		sizes[i] = 1;
-		temp = new Prim[1];
-		temp[0].index = i;
+		temp = new int[1];
+		temp[0] = i;
 		tree[i] = temp;
+		sizes[i] = 1;
 	}
-	line = new Kruskal[2*edges];
+	line = new Kruskal[edges];
 	for (int i = 0; i < nodes; i++)
 	{
-		for (int j = 0; j < nodes; j++)
+		for (int j = i; j < nodes; j++)
 		{
 			if (pointer[i][j] != 0)
 			{
@@ -351,97 +348,36 @@ void Matrix::mst_Kruskal()
 				line[index].weight = pointer[i][j];
 				index++;
 			}
-			if (index == 2*edges) break;
+			if (index == edges) break;
 		}
-		if (index == 2*edges) break;
+		if (index == edges) break;
 	}
 	sort(line);
-	for (int i = 0; i < 2*edges; i++)
+	result = new Kruskal[(nodes - 1)];
+	ind = -1;
+	while (cnt != (nodes - 1))
 	{
-		connected = false;
+		ind++;
+		index = line[ind].source;
+		index2 = line[ind].target;
 		found = false;
-		for (int j = 0; j < t_size; j++)
+		for (int i = 0; i < t_size; i++)   
 		{
-			for (int m = 0; m < sizes[j]; m++)
+			for (int j = 0; j < sizes[j]; j++)
 			{
-				if (tree[j][m].index == line[i].source)
-				{
-					found = true;
-					tab = j;
-					break;
-				}
-			}
-			if (found) break;
-		}
-		found = false;
-		for (int j = 0; j < sizes[tab]; j++)
-		{
-			if (tree[tab][j].index == line[i].target) 
-			{
-				found = true; break;
+				if (tree[i][j] == line[ind].source) tab = i;
+				if (tree[i][j] == line[ind].target) tab2 = i;
 			}
 		}
-		if (found) continue;
-		found = false;
-		for (int j = 0; j < t_size; j++)
-		{
-			for (int m = 0; m < sizes[j]; m++)
-			{
-				if (tree[j][m].index == line[i].target)
-				{
-					if (tree[j][m].distance != 0)
-					{
-						index2 = tree[j][m].prev;
-						connected = true;
-						charge = tree[j][m].distance;
-						from = tree[j][m].index;
-					}
-					tree[j][m].distance = line[i].weight;
-					tree[j][m].prev = line[i].source;
-					found = true;
-					tab2 = j;
-					break;
-				}
-			}
-			if (found) break;
-		}
-		if (connected) reverse(tab2, index2, charge, from);
+		if (tab == tab2) continue;
+		result[cnt] = line[ind];
+		cnt++;
 		if (tab > tab2) connect(tab2, tab);
 		else connect(tab, tab2);
-		if (sizes[0] == nodes) break;
 	}
-	/*if (t_size > 1)
-	{
-		for (int i = 1; i < t_size; i++) connect(i - 1, i);
-	}*/
-	for (int i = 0; i < sizes[0]; i++) mst_size = mst_size + tree[0][i].distance;
-	display_Prim(tree[0], sizes[0]);
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*system("cls");
-	cout << "Solution:" << endl;
-	cout << "Total mst size: " << mst_size << endl;
-	cout << "\nWeig:  ";
-	for (int i = 0; i < 2*edges; i++)
-	{
-		cout << line[i].weight;
-		if (line[i].weight > 9) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nSour:  ";
-	for (int i = 0; i < 2*edges; i++)
-	{
-		cout << line[i].source;
-		if (line[i].source > 9) cout << " ";
-		else cout << "  ";
-	}
-	cout << "\nTarg: ";
-	for (int i = 0; i < 2*edges; i++)
-	{
-		cout << line[i].target;
-		if (line[i].target > 9) cout << " ";
-		else cout << "  ";
-	}
-	_getche();*/
+	for (int i = 0; i < (nodes - 1); i++) mst_size = mst_size + result[i].weight;
+	display_Kruskal(result, nodes - 1);
+	delete[] result;
+	delete[] line;
+	delete[] tree;
 }

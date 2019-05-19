@@ -46,8 +46,9 @@ protected:
 	int mst_size;
 	//Zmienne powi¹zane z algorytmem Kruskala
 	Kruskal *line;
-	Prim **tree;
-	int t_size;
+	Kruskal *result;
+	int **tree;
+	int t_size, cnt;
 	int *sizes;
 public:
 	//Funkcja losowo tworz¹ca graf
@@ -59,8 +60,6 @@ public:
 	//Funkcja obs³uguj¹ca algorytm Kruskala
 	virtual void mst_Kruskal() = 0;
 protected:
-	//Funkcja odwracaj¹ca po³¹czenie
-	void reverse(int tab, int index, int weight, int from);
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);
 	//£¹czenie dwóch zbiorów 
@@ -69,6 +68,8 @@ protected:
 	void display_Dijkstra(Dijkstra *list, int size);
 	//Funckja drukuj¹ca wynik dzia³ania algorytmu Prima
 	void display_Prim(Prim *list, int size);
+	//Funckja drukuj¹ca wynik dzia³ania algorytmu Kruskala
+	void display_Kruskal(Kruskal *list, int size);
 };
 
 #endif

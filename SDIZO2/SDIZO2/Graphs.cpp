@@ -53,9 +53,9 @@ void Graphs::display_Prim(Prim *list, int size)
 void Graphs::sort(Kruskal *target)
 {
 	Kruskal temp;
-	for (int j = 1; j < 2*edges; j++)
+	for (int j = 1; j < edges; j++)
 	{
-		for (int i = j; i < 2*edges; i++)
+		for (int i = j; i < edges; i++)
 		{
 			if (target[i].weight < target[j - 1].weight)
 			{
@@ -71,13 +71,13 @@ void Graphs::sort(Kruskal *target)
 void Graphs::connect(int tab, int tab2)
 {
 	int loop = 0;
-	Prim *temp;
-	Prim **temp2;
+	int *temp;
+	int **temp2;
 	int *temp3;
 	int start = sizes[tab];
 	int ind = 0;
 	sizes[tab] = sizes[tab] + sizes[tab2];
-	temp = new Prim[sizes[tab]];
+	temp = new int[sizes[tab]];
 	for (int i = 0; i < sizes[tab]; i++)
 	{
 		if (i < start)
@@ -93,7 +93,7 @@ void Graphs::connect(int tab, int tab2)
 	delete[] tree[tab];
 	tree[tab] = temp;
 	t_size--;
-	temp2 = new Prim*[t_size];
+	temp2 = new int*[t_size];
 	temp3 = new int[t_size];
 	for (int i = 0; i < t_size; i++)
 	{
@@ -117,26 +117,16 @@ void Graphs::connect(int tab, int tab2)
 	tree = temp2;
 }
 
-//Funkcja odwracaj¹ca po³¹czenie
-void Graphs::reverse(int tab, int index, int weight, int from)
+//Funckja drukuj¹ca wynik dzia³ania algorytmu Kruskala
+void Graphs::display_Kruskal(Kruskal *list, int size)
 {
-	/*int con = 0;
-	int temp;
-	do
+	system("cls");
+	cout << "Solution:" << endl;
+	cout << "Total mst size: " << mst_size << endl;
+	cout << "\nLista u¿ytych krawêdzi: " << endl;
+	for (int i = 0; i < size; i++)
 	{
-		for (int i = 0; i < sizes[tab]; i++)
-		{
-			if (tree[tab][i].index == index) 
-			{
-				con = i;
-				break;
-			}
-		}
-		index = tree[tab][con].prev;
-		tree[tab][con].prev = from;
-		from = tree[tab][con].index;
-		temp = tree[tab][con].distance;
-		tree[tab][con].distance = weight;
-		weight = temp;
-	} while (index != -1);*/
+		cout << "\nPo³¹czenie " << list[i].source << " z " << list[i].target << ", o wadze " << list[i].weight;
+	}
+	_getche();
 }
