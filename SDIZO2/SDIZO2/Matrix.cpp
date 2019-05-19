@@ -320,9 +320,10 @@ void Matrix::mst_Prim(int start)
 //Funkcja obs³uguj¹ca algorytm Kruskala
 void Matrix::mst_Kruskal()
 {
-	bool found;
+	bool found, connected;
 	int tab = 0;
 	int tab2 = 0;
+	mst_size = 0;
 	t_size = nodes;
 	Prim *temp;
 	tree = new Prim *[t_size];
@@ -335,10 +336,10 @@ void Matrix::mst_Kruskal()
 		temp[0].index = i;
 		tree[i] = temp;
 	}
-	line = new Kruskal[edges];
+	line = new Kruskal[2*edges];
 	for (int i = 0; i < nodes; i++)
 	{
-		for (int j = i; j < nodes; j++)
+		for (int j = 0; j < nodes; j++)
 		{
 			if (pointer[i][j] != 0)
 			{
@@ -347,13 +348,14 @@ void Matrix::mst_Kruskal()
 				line[index].weight = pointer[i][j];
 				index++;
 			}
-			if (index == edges) break;
+			if (index == 2*edges) break;
 		}
-		if (index == edges) break;
+		if (index == 2*edges) break;
 	}
 	sort(line);
-	for (int i = 1; i < edges; i++)
+	for (int i = 0; i < 2*edges; i++)
 	{
+		connected = false;
 		found = false;
 		for (int j = 0; j < t_size; j++)
 		{
@@ -384,6 +386,12 @@ void Matrix::mst_Kruskal()
 			{
 				if (tree[j][m].index == line[i].target)
 				{
+					if (tree[j][m].distance != 0)
+					{
+						connected = true;
+						found = true;
+						break;
+					}
 					tree[j][m].distance = line[i].weight;
 					tree[j][m].prev = line[i].source;
 					found = true;
@@ -393,37 +401,39 @@ void Matrix::mst_Kruskal()
 			}
 			if (found) break;
 		}
+		if (connected) continue;
 		if (tab > tab2) connect(tab2, tab);
 		else connect(tab, tab2);
-		//display_Prim(tree[tab], sizes[tab]);
+		if (sizes[0] == nodes) break;
 	}
+	for (int i = 0; i < nodes; i++) mst_size = mst_size + tree[0][i].distance;
 	display_Prim(tree[0], nodes);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	system("cls");
+	/*system("cls");
 	cout << "Solution:" << endl;
 	cout << "Total mst size: " << mst_size << endl;
 	cout << "\nWeig:  ";
-	for (int i = 0; i < edges; i++)
+	for (int i = 0; i < 2*edges; i++)
 	{
 		cout << line[i].weight;
 		if (line[i].weight > 9) cout << " ";
 		else cout << "  ";
 	}
 	cout << "\nSour:  ";
-	for (int i = 0; i < edges; i++)
+	for (int i = 0; i < 2*edges; i++)
 	{
 		cout << line[i].source;
 		if (line[i].source > 9) cout << " ";
 		else cout << "  ";
 	}
 	cout << "\nTarg: ";
-	for (int i = 0; i < edges; i++)
+	for (int i = 0; i < 2*edges; i++)
 	{
 		cout << line[i].target;
 		if (line[i].target > 9) cout << " ";
 		else cout << "  ";
 	}
-	_getche();
+	_getche();*/
 }

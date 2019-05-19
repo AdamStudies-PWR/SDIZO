@@ -38,12 +38,13 @@ void Graphs::display_Prim(Prim *list, int size)
 		if (list[i].distance > 9) cout << " ";
 		else cout << "  ";
 	}
-	cout << "\nPrev: ";
+	cout << "\nPrev:";
 	for (int i = 0; i < size; i++)
 	{
+		if (list[i].prev == -1) cout << " ";
+		else if (list[i].prev < 9) cout << "  ";
+		else cout << " ";
 		cout << list[i].prev;
-		if (list[i].prev > 9) cout << " ";
-		else cout << "  ";
 	}
 	_getche();
 }
@@ -52,9 +53,9 @@ void Graphs::display_Prim(Prim *list, int size)
 void Graphs::sort(Kruskal *target)
 {
 	Kruskal temp;
-	for (int j = 1; j < edges; j++)
+	for (int j = 1; j < 2*edges; j++)
 	{
-		for (int i = j; i < edges; i++)
+		for (int i = j; i < 2*edges; i++)
 		{
 			if (target[i].weight < target[j - 1].weight)
 			{
@@ -111,7 +112,7 @@ void Graphs::connect(int tab, int tab2)
 	}
 	delete[] sizes;
 	//for (int i = 0; i < (t_size + 1); i++) delete[] tree[i];
-	//delete[] tree;
+	delete tree;
 	sizes = temp3;
 	tree = temp2;
 }
