@@ -193,6 +193,7 @@ void List::spanningtree()
 	} while (created != nodes);
 }
 
+//Funkcja obs³uguj¹ca algorytm Dijsktry
 void List::dijkstra(int start)
 {
 	dnch = nodes;
@@ -212,6 +213,7 @@ void List::dijkstra(int start)
 	display_Dijkstra(checked, dch);
 }
 
+//Funkcja relaksuj¹ca s¹siadów
 int List::relax(int index)
 {
 	Dijkstra *temp;
@@ -384,5 +386,67 @@ void List::mst_Prim(int start)
 //Funkcja obs³uguj¹ca algorytm Kruskala
 void List::mst_Kruskal()
 {
-
+	Node *iter = head;
+	Edge *els;
+	bool found;
+	int *temp;
+	int index2, ind, tab, tab2;
+	mst_size = 0;
+	cnt = 0;
+	t_size = nodes;
+	sizes = new int[t_size];
+	tree = new int*[t_size];
+	int index = 0;
+	for (int i = 0; i < t_size; i++)
+	{
+		temp = new int[1];
+		temp[0] = i;
+		tree[i] = temp;
+		sizes[i] = 1;
+	}
+	line = new Kruskal[edges];
+	for (int i = 0; i < nodes; i++)
+	{
+		els = iter->head;
+		while (els != nullptr)
+		{
+			if (els->target->index < i)
+			{
+				line[index].source = i;
+				line[index].target = els->target->index;
+				line[index].weight = els->weight;
+				index++;
+			}
+			els = els->next;
+		}
+		iter = iter->next;
+	}
+	sort(line);
+	result = new Kruskal[(nodes - 1)];
+	ind = -1;
+	while (cnt != (nodes - 1))
+	{
+		ind++;
+		index = line[ind].source;
+		index2 = line[ind].target;
+		found = false;
+		for (int i = 0; i < t_size; i++)
+		{
+			for (int j = 0; j < sizes[i]; j++)
+			{
+				if (tree[i][j] == line[ind].source) tab = i;
+				if (tree[i][j] == line[ind].target) tab2 = i;
+			}
+		}
+		if (tab == tab2) continue;
+		result[cnt] = line[ind];
+		cnt++;
+		if (tab > tab2) connect(tab2, tab);
+		else connect(tab, tab2);
+	}
+	for (int i = 0; i < (nodes - 1); i++) mst_size = mst_size + result[i].weight;
+	display_Kruskal(result, nodes - 1);
+	delete[] result;
+	delete[] line;
+	delete[] tree;
 }
