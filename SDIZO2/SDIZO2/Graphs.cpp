@@ -111,7 +111,6 @@ void Graphs::connect(int tab, int tab2)
 		loop++;
 	}
 	delete[] sizes;
-	//for (int i = 0; i < (t_size + 1); i++) delete tree[i];
 	delete tree;
 	sizes = temp3;
 	tree = temp2;

@@ -363,7 +363,7 @@ void Matrix::mst_Kruskal()
 		found = false;
 		for (int i = 0; i < t_size; i++)   
 		{
-			for (int j = 0; j < sizes[j]; j++)
+			for (int j = 0; j < sizes[i]; j++)
 			{
 				if (tree[i][j] == line[ind].source) tab = i;
 				if (tree[i][j] == line[ind].target) tab2 = i;
