@@ -59,6 +59,8 @@ public:
 	//Funkcja obs³uguj¹ca algorytm Kruskala
 	virtual void mst_Kruskal() = 0;
 protected:
+	//Funkcja odwracaj¹ca po³¹czenie
+	void reverse(int tab, int index, int weight, int from);
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);
 	//£¹czenie dwóch zbiorów 

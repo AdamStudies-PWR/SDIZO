@@ -323,6 +323,9 @@ void Matrix::mst_Kruskal()
 	bool found, connected;
 	int tab = 0;
 	int tab2 = 0;
+	int index2 = 0;
+	int charge = 0;
+	int from = 0;
 	mst_size = 0;
 	t_size = nodes;
 	Prim *temp;
@@ -388,9 +391,10 @@ void Matrix::mst_Kruskal()
 				{
 					if (tree[j][m].distance != 0)
 					{
+						index2 = tree[j][m].prev;
 						connected = true;
-						found = true;
-						break;
+						charge = tree[j][m].distance;
+						from = tree[j][m].index;
 					}
 					tree[j][m].distance = line[i].weight;
 					tree[j][m].prev = line[i].source;
@@ -401,13 +405,17 @@ void Matrix::mst_Kruskal()
 			}
 			if (found) break;
 		}
-		if (connected) continue;
+		if (connected) reverse(tab2, index2, charge, from);
 		if (tab > tab2) connect(tab2, tab);
 		else connect(tab, tab2);
 		if (sizes[0] == nodes) break;
 	}
-	for (int i = 0; i < nodes; i++) mst_size = mst_size + tree[0][i].distance;
-	display_Prim(tree[0], nodes);
+	/*if (t_size > 1)
+	{
+		for (int i = 1; i < t_size; i++) connect(i - 1, i);
+	}*/
+	for (int i = 0; i < sizes[0]; i++) mst_size = mst_size + tree[0][i].distance;
+	display_Prim(tree[0], sizes[0]);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

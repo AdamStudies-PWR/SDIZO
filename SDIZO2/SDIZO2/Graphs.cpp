@@ -111,8 +111,32 @@ void Graphs::connect(int tab, int tab2)
 		loop++;
 	}
 	delete[] sizes;
-	//for (int i = 0; i < (t_size + 1); i++) delete[] tree[i];
+	//for (int i = 0; i < (t_size + 1); i++) delete tree[i];
 	delete tree;
 	sizes = temp3;
 	tree = temp2;
+}
+
+//Funkcja odwracaj¹ca po³¹czenie
+void Graphs::reverse(int tab, int index, int weight, int from)
+{
+	/*int con = 0;
+	int temp;
+	do
+	{
+		for (int i = 0; i < sizes[tab]; i++)
+		{
+			if (tree[tab][i].index == index) 
+			{
+				con = i;
+				break;
+			}
+		}
+		index = tree[tab][con].prev;
+		tree[tab][con].prev = from;
+		from = tree[tab][con].index;
+		temp = tree[tab][con].distance;
+		tree[tab][con].distance = weight;
+		weight = temp;
+	} while (index != -1);*/
 }
