@@ -152,6 +152,8 @@ void Matrix::dijkstra(int start)
 		dch++;
 	} while (dnch != 0);
 	display_Dijkstra(checked, dch);
+	delete notchecked;
+	delete checked;
 }
 
 //Funkcja relaksuj¹ca s¹siadów
@@ -383,7 +385,31 @@ void Matrix::mst_Kruskal()
 }
 
 //Funkcja obs³uguj¹ca algorytm Forda-Bellmana
-void Matrix::ford_bellman(int node)
+void Matrix::ford_bellman(int start)
 {
-
+	dnch = nodes;
+	dch = 0;
+	notchecked = new Dijkstra[dnch];
+	for (int i = 0; i < dnch; i++)
+	{
+		notchecked[i].index = i;
+	}
+	notchecked[start].distance = 0;
+	for (int i = 0; i < nodes; i++)
+	{
+		for (int j = 0; j < nodes; j++)
+		{
+			if (pointer[i][j] != 0)
+			{
+				if ((notchecked[i].distance + pointer[i][j]) < notchecked[j].distance || notchecked[j].distance == -1)
+				{
+					notchecked[j].distance = notchecked[i].distance + pointer[i][j];
+					if (notchecked[i].distance == -1) notchecked[j].distance++;
+					notchecked[j].prev = notchecked[i].prev + to_string(i) + ", ";
+				}
+			}
+		}
+	}
+	display_Dijkstra(notchecked, dnch);
+	delete notchecked;
 }
