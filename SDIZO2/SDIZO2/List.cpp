@@ -452,7 +452,53 @@ void List::mst_Kruskal()
 }
 
 //Funkcja obs³uguj¹ca algorytm Forda-Bellmana
-void List::ford_bellman(int node)
+void List::ford_bellman(int start)
 {
-
+	Node *temp = head;
+	Edge *els;
+	dnch = nodes;
+	notchecked = new Dijkstra[dnch];
+	for (int i = 0; i < dnch; i++)
+	{
+		notchecked[i].index = i;
+	}
+	notchecked[start].distance = 0;
+	for (int i = 0; i < start; i++) temp = temp->next;
+	els = temp->head;
+	for (int i = 0; i < nodes; i++)
+	{
+		if (els->target->index == i)
+		{
+			notchecked[i].distance = notchecked[start].distance + els->weight;
+			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
+		}
+		else if (start != i)
+		{
+			notchecked[i].distance = 0;
+			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
+		}
+	}
+	for (int i = 1; i < (nodes - 1); i++)
+	{
+		temp = head;
+		for (int j = 0; j < nodes; j++)
+		{
+			els = temp->head;
+			while(els != nullptr)
+			{
+				if (els->target->index != start)
+				{
+					if ((notchecked[els->source->index].distance + els->weight) < notchecked[els->target->index].distance || notchecked[els->target->index].distance == 0)
+					{
+						notchecked[els->target->index].distance = notchecked[els->source->index].distance + els->weight;
+						notchecked[els->target->index].prev = notchecked[els->source->index].prev + to_string(els->source->index) + ", ";
+					}
+				}
+				els = els->next;
+			}
+			temp = temp->next;
+		}
+	}
+	display_Dijkstra(notchecked, dnch);
+	delete[] notchecked;
 }

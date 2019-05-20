@@ -388,22 +388,29 @@ void Matrix::mst_Kruskal()
 void Matrix::ford_bellman(int start)
 {
 	dnch = nodes;
-	dch = 0;
 	notchecked = new Dijkstra[dnch];
 	for (int i = 0; i < dnch; i++)
 	{
 		notchecked[i].index = i;
 	}
 	notchecked[start].distance = 0;
+	for (int i = 0; i < nodes; i++)
+	{
+		if (start != i)
+		{
+			notchecked[i].distance = notchecked[start].distance + pointer[start][i];
+			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
+		}
+	}
 	for (int i = 1; i < (nodes - 1); i++)
 	{
 		for (int j = 0; j < nodes; j++)
 		{
 			for (int m = 0; m < nodes; m++)
 			{
-				if (pointer[j][m] != 0)
+				if (pointer[j][m] != 0 && m != start)
 				{
-					if ((notchecked[j].distance + pointer[j][m]) < notchecked[m].distance || notchecked[m].distance == -1)
+					if ((notchecked[j].distance + pointer[j][m]) < notchecked[m].distance || notchecked[m].distance == 0)
 					{
 						notchecked[m].distance = notchecked[j].distance + pointer[j][m];
 						notchecked[m].prev = notchecked[j].prev + to_string(j) + ", ";
