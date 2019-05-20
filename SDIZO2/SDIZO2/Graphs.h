@@ -59,6 +59,8 @@ public:
 	virtual void mst_Prim(int start) = 0;
 	//Funkcja obs³uguj¹ca algorytm Kruskala
 	virtual void mst_Kruskal() = 0;
+	//Funkcja obs³uguj¹ca algorytm Forda-Bellmana
+	virtual void ford_bellman(int start) = 0;
 protected:
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);

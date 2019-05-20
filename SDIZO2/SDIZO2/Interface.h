@@ -35,6 +35,8 @@ private:
 	void prim_ui(Graphs * g);
 	//Obs³uga algorytmu Kruskala
 	void kruskal_ui(Graphs *g);
+	//Obs³uga algorytmu Forda-Bellmana
+	void ford_ui(Graphs *g);
 };
 
 #endif

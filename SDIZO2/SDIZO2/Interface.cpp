@@ -33,13 +33,12 @@ char Interface::structure_menu(string name)
 	char choice;
 	system("cls");
 	cout << "\t---" << name << "---" << endl;
-	cout << " [1] Wczytaj z pliku" << endl;
-	cout << " [2] Wygeneruj graf losowo" << endl;
-	cout << " [3] Wyświetl graf" << endl;
-	cout << " [4] Algorytm Prima" << endl;
-	cout << " [5] Algorytm Kruskala" << endl;
-	cout << " [6] Algorytm Dijkstry" << endl;
-	cout << " [7] Algorytm Forda-Bellmana" << endl;
+	cout << " [1] Wygeneruj graf losowo" << endl;
+	cout << " [2] Wyświetl graf" << endl;
+	cout << " [3] Algorytm Prima" << endl;
+	cout << " [4] Algorytm Kruskala" << endl;
+	cout << " [5] Algorytm Dijkstry" << endl;
+	cout << " [6] Algorytm Forda-Bellmana" << endl;
 	cout << " [0] Powrót" << endl;
 	cout << "Wybór: ";
  choice = _getche();
@@ -130,6 +129,7 @@ void Interface::prim_ui(Graphs *gg)
 	}
 }
 
+//Obsługa algorytmu Kruskala
 void Interface::kruskal_ui(Graphs *gg)
 {
 	int node;
@@ -138,6 +138,27 @@ void Interface::kruskal_ui(Graphs *gg)
 	{
 		if (!exists) cout << "\n Graf nie istnieje" << endl, _getche();
 		else gg->mst_Kruskal();
+	}
+}
+
+//Obsługa algorytmu Forda-Bellmana
+void Interface::ford_ui(Graphs *gg)
+{
+	int node;
+	if (!directed) cout << "\n Graf musi być skierowany" << endl, _getche();
+	else
+	{
+		if (!exists) cout << "\n Graf nie istnieje" << endl, _getche();
+		else
+		{
+			do
+			{
+				system("cls");
+				cout << "Podaj węzeł początkowy [0 - " << size_n - 1 << "]:" << endl;
+				cin >> node;
+			} while (node < 0 || node >(size_n - 1));
+			gg->ford_bellman(node);
+		}
 	}
 }
 
@@ -151,11 +172,12 @@ void Interface::matrix()
 		switch (choice)
 		{
 		case '0': break;
-		case '2': create_ui(&mat); break;
-		case '3': mat.display(); break;
-		case '4': prim_ui(&mat); break;
-		case '5': kruskal_ui(&mat); break;
-		case '6': dijkstra_ui(&mat); break;
+		case '1': create_ui(&mat); break;
+		case '2': mat.display(); break;
+		case '3': prim_ui(&mat); break;
+		case '4': kruskal_ui(&mat); break;
+		case '5': dijkstra_ui(&mat); break;
+		case '6': ford_ui(&mat); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');
@@ -171,11 +193,12 @@ void Interface::glist()
 		switch (choice)
 		{
 		case '0': break;
-		case '2': create_ui(&list); break;
-		case '3': list.display(); break;
-		case '4': prim_ui(&list); break;
-		case '5': kruskal_ui(&list); break;
-		case '6': dijkstra_ui(&list); break;
+		case '1': create_ui(&list); break;
+		case '2': list.display(); break;
+		case '3': prim_ui(&list); break;
+		case '4': kruskal_ui(&list); break;
+		case '5': dijkstra_ui(&list); break;
+		case '6': ford_ui(&list); break;
 		default: cout << "\n Błąd wprowadzenia, spróbuj ponownie." << endl, _getche();
 		}
 	} while (choice != '0');

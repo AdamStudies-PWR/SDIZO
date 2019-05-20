@@ -21,6 +21,8 @@ public:
 	void mst_Prim(int start);
 	//Funkcja obs³uguj¹ca algorytm Kruskala
 	void mst_Kruskal();
+	//Funkcja obs³uguj¹ca algorytm Forda-Bellmana
+	void ford_bellman(int node);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);

@@ -381,3 +381,9 @@ void Matrix::mst_Kruskal()
 	delete[] line;
 	delete[] tree;
 }
+
+//Funkcja obs³uguj¹ca algorytm Forda-Bellmana
+void Matrix::ford_bellman(int node)
+{
+
+}
