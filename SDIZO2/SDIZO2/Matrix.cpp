@@ -152,8 +152,8 @@ void Matrix::dijkstra(int start)
 		dch++;
 	} while (dnch != 0);
 	display_Dijkstra(checked, dch);
-	delete notchecked;
-	delete checked;
+	delete[] notchecked;
+	delete[] checked;
 }
 
 //Funkcja relaksuj¹ca s¹siadów
@@ -395,21 +395,23 @@ void Matrix::ford_bellman(int start)
 		notchecked[i].index = i;
 	}
 	notchecked[start].distance = 0;
-	for (int i = 0; i < nodes; i++)
+	for (int i = 1; i < (nodes - 1); i++)
 	{
 		for (int j = 0; j < nodes; j++)
 		{
-			if (pointer[i][j] != 0)
+			for (int m = 0; m < nodes; m++)
 			{
-				if ((notchecked[i].distance + pointer[i][j]) < notchecked[j].distance || notchecked[j].distance == -1)
+				if (pointer[j][m] != 0)
 				{
-					notchecked[j].distance = notchecked[i].distance + pointer[i][j];
-					if (notchecked[i].distance == -1) notchecked[j].distance++;
-					notchecked[j].prev = notchecked[i].prev + to_string(i) + ", ";
+					if ((notchecked[j].distance + pointer[j][m]) < notchecked[m].distance || notchecked[m].distance == -1)
+					{
+						notchecked[m].distance = notchecked[j].distance + pointer[j][m];
+						notchecked[m].prev = notchecked[j].prev + to_string(j) + ", ";
+					}
 				}
 			}
 		}
 	}
 	display_Dijkstra(notchecked, dnch);
-	delete notchecked;
+	delete[] notchecked;
 }
