@@ -1,6 +1,7 @@
 ﻿//Implementacja metod klasy Interface
 #include "pch.h"
 #include "Interface.h"
+#include "Automatic.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ void Interface::main_menu()
 		cout << "\t---Główne Menu---" << endl;
 		cout << " [1] Graf - reprezentacja macierzowa" << endl;
 		cout << " [2] Graf - reprezentacja listowa" << endl;
+		cout << " [4] Automatyczne testy" << endl;
 		cout << " [0] Zakończ program" << endl;
 		cout << "Wybór: ";
 		choice = _getche();
@@ -22,9 +24,29 @@ void Interface::main_menu()
 		case '0': break;
 		case '1': matrix(); break;
 		case '2': glist(); break;
+		case '4': auto_test(); break;
 		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne." << endl; _getch();
 		}
 	} while (choice != '0');
+}
+
+//Obsługa testów
+void Interface::auto_test()
+{
+	mat.switch_test();
+	list.switch_test();
+	int ii;
+	system("cls");
+	cout << "[MAX 2000] Wielkość grafu: ";
+	cin >> ii;
+	if (ii > 2000 || ii < 1)
+	{
+		cout << "\nBłędna wartość!" << endl;
+		_getche();
+	}
+	else loop_tests(mat, list, ii);
+	mat.switch_test();
+	list.switch_test();
 }
 
 //Menu struktury

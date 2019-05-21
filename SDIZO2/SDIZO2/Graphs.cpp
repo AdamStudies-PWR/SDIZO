@@ -4,6 +4,12 @@
 
 using namespace std;
 
+//W³¹nczanie/Wy³¹nczanie testowania
+void Graphs::switch_test()
+{
+	testing = !testing;
+}
+
 //Funckja drukuj¹ca wynik dzia³ania algorytmu Disjkstry
 void Graphs::display_Dijkstra(Dijkstra *list, int size)
 {

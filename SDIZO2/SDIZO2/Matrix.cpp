@@ -52,7 +52,7 @@ void Matrix::create(int NN, double EE, double ME, bool directed)
 		counter++;
 	}
 	delete visited;
-	display();
+	if (!testing) display();
 }
 
 //Funkcja wyœwietlaj¹ca graf
@@ -151,7 +151,7 @@ void Matrix::dijkstra(int start)
 		dnch--;
 		dch++;
 	} while (dnch != 0);
-	display_Dijkstra(checked, dch);
+	if (!testing) display_Dijkstra(checked, dch);
 	delete[] notchecked;
 	delete[] checked;
 }
@@ -163,7 +163,7 @@ int Matrix::relax(int index)
 	int loop;
 	int fall = 0;
 	int result;
-	int small;
+	int mini;
 	for (int i = 0; i < dnch; i++)
 	{
 		if (index == notchecked[i].index)
@@ -222,15 +222,15 @@ int Matrix::relax(int index)
 	delete[] notchecked;
 	notchecked = temp;
 	result = notchecked[0].index;
-	small = 10000000;
+	mini = 10000000;
 	for (int i = 0; i < (dnch - 1); i++)
 	{
 		if (notchecked[i].distance != -1)
 		{
-			if (notchecked[i].distance < small)
+			if (notchecked[i].distance < mini)
 			{
 				result = notchecked[i].index;
-				small = notchecked[i].distance;
+				mini = notchecked[i].distance;
 			}
 		}
 	}
@@ -315,7 +315,7 @@ void Matrix::mst_Prim(int start)
 			}
 		}
 	}
-	display_Prim(solved, sol);
+	if (!testing) display_Prim(solved, sol);
 	delete[] solved;
 }
 
@@ -378,7 +378,7 @@ void Matrix::mst_Kruskal()
 		else connect(tab, tab2);
 	}
 	for (int i = 0; i < (nodes - 1); i++) mst_size = mst_size + result[i].weight;
-	display_Kruskal(result, nodes - 1);
+	if (!testing) display_Kruskal(result, nodes - 1);
 	delete[] result;
 	delete[] line;
 	delete[] tree;
@@ -419,6 +419,6 @@ void Matrix::ford_bellman(int start)
 			}
 		}
 	}
-	display_Dijkstra(notchecked, dnch);
+	if (!testing) display_Dijkstra(notchecked, dnch);
 	delete[] notchecked;
 }

@@ -37,6 +37,8 @@ private:
 	void kruskal_ui(Graphs *g);
 	//Obs³uga algorytmu Forda-Bellmana
 	void ford_ui(Graphs *g);
+	//Obs³uga testów
+	void auto_test();
 };
 
 #endif

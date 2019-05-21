@@ -3,6 +3,7 @@
 #define List_hpp
 //Klasa obs³uguj¹ca listow¹ reprezentacje grafów
 #include "Graphs.h"
+#include "Tests.h"
 
 struct Node;
 struct Edge;
@@ -25,7 +26,7 @@ struct Edge
 	Node *source = nullptr;
 };
 
-class List : public Graphs
+class List : public Graphs, public Tests
 {
 private:
 	//Zmienne

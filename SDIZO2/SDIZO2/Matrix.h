@@ -3,8 +3,9 @@
 #define Matrix_hpp
 //Klasa obs³uguj¹ca maciorzow¹ reprezantacj¹ grafów
 #include "Graphs.h"
+#include "Tests.h"
 
-class Matrix: public Graphs
+class Matrix: public Graphs, public Tests
 { 
 private:
 	//Zmienne

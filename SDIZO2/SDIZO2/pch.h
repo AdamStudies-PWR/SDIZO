@@ -14,5 +14,7 @@
 #include <string>
 #include <cstdlib>
 #include <time.h>
+#include <Windows.h>
+#include <stdio.h>
 
 #endif //PCH_H
