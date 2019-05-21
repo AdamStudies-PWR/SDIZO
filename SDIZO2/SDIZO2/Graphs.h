@@ -64,6 +64,8 @@ public:
 	virtual void mst_Kruskal() = 0;
 	//Funkcja obs³uguj¹ca algorytm Forda-Bellmana
 	virtual void ford_bellman(int start) = 0;
+	//Czyszczenie pamiêci
+	virtual void free_memory() = 0;
 protected:
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);

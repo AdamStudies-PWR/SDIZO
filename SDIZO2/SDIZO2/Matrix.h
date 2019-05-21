@@ -24,6 +24,8 @@ public:
 	void mst_Kruskal();
 	//Funkcja obs³uguj¹ca algorytm Forda-Bellmana
 	void ford_bellman(int node);
+	//Czyszczeni pamiêci
+	void free_memory();
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);

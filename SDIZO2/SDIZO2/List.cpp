@@ -448,6 +448,7 @@ void List::mst_Kruskal()
 	if (!testing) display_Kruskal(result, nodes - 1);
 	delete[] result;
 	delete[] line;
+	//for (int i = 0; i < t_size; i++) delete[] tree[i];
 	delete[] tree;
 }
 
@@ -501,4 +502,23 @@ void List::ford_bellman(int start)
 	}
 	if (!testing) display_Dijkstra(notchecked, dnch);
 	delete[] notchecked;
+}
+
+//Czyszczeni pamiêci
+void List::free_memory()
+{
+	rekdel(head);
+}
+
+void List::rekdel(Node *nod)
+{
+	if (nod->next != nullptr) rekdel(nod->next);
+	if (nod->head != nullptr) edgedel(nod->head);
+	delete nod;
+}
+
+void List::edgedel(Edge *edg)
+{
+	if (edg->next != nullptr) edgedel(edg->next);
+	delete edg;
 }

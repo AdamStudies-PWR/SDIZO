@@ -117,7 +117,7 @@ void Graphs::connect(int tab, int tab2)
 		loop++;
 	}
 	delete[] sizes;
-	delete tree;
+	delete[] tree;
 	sizes = temp3;
 	tree = temp2;
 }

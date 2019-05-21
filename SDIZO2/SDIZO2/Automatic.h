@@ -40,6 +40,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.ford_bellman(0);
 		testing.addford_bellman(testing.GetCounter(), sizes, 17);
 		//25% nieskierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 25, notdirected, false);
 		list.create(size, 25, notdirected, false);
 		testing.StartCounter();
@@ -55,6 +57,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.mst_Kruskal();
 		testing.addkruskal(testing.GetCounter(), sizes, 19);
 		//50% skierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 50, directed, true);
 		list.create(size, 50, directed, true);
 		testing.StartCounter();
@@ -70,6 +74,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.ford_bellman(0);
 		testing.addford_bellman(testing.GetCounter(), sizes, 21);
 		//50% nieskierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 50, notdirected, false);
 		list.create(size, 50, notdirected, false);
 		testing.StartCounter();
@@ -85,6 +91,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.mst_Kruskal();
 		testing.addkruskal(testing.GetCounter(), sizes, 23);
 		//75% skierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 75, directed, true);
 		list.create(size, 75, directed, true);
 		testing.StartCounter();
@@ -100,6 +108,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.ford_bellman(0);
 		testing.addford_bellman(testing.GetCounter(), sizes, 25);
 		//75% nieskierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 75, notdirected, false);
 		list.create(size, 75, notdirected, false);
 		testing.StartCounter();
@@ -115,6 +125,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.mst_Kruskal();
 		testing.addkruskal(testing.GetCounter(), sizes, 27);
 		//99% skierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 99, directed, true);
 		list.create(size, 99, directed, true);
 		testing.StartCounter();
@@ -130,6 +142,8 @@ void loop_tests(Matrix mat, List list, int size)
 		list.ford_bellman(0);
 		testing.addford_bellman(testing.GetCounter(), sizes, 29);
 		//75% nieskierowany
+		mat.free_memory();
+		list.free_memory();
 		mat.create(size, 75, notdirected, false);
 		list.create(size, 75, notdirected, false);
 		testing.StartCounter();

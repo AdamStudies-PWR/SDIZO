@@ -381,6 +381,7 @@ void Matrix::mst_Kruskal()
 	if (!testing) display_Kruskal(result, nodes - 1);
 	delete[] result;
 	delete[] line;
+	//for (int i = 0; i < t_size; i++) delete[] tree[i];
 	delete[] tree;
 }
 
@@ -421,4 +422,11 @@ void Matrix::ford_bellman(int start)
 	}
 	if (!testing) display_Dijkstra(notchecked, dnch);
 	delete[] notchecked;
+}
+
+//Czyszczeni pamiêci
+void Matrix::free_memory() 
+{
+	for (int i = 0; i < nodes; i++) delete[] pointer[i];
+	delete[] pointer;
 }
