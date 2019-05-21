@@ -15,6 +15,6 @@
 #include <cstdlib>
 #include <time.h>
 #include <Windows.h>
-#include <stdio.h>
+#include <fstream>
 
 #endif //PCH_H

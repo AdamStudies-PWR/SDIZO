@@ -19,17 +19,16 @@ protected:
 public:
 	//Metody
 	//Funkcja zapisuj¹ca wyniki do pliku
-	void save_data(string filename, int index);
+	void save_data(std::string filename, int index);
 	//Funkcje mierz¹ce czas
 	//Uruchumienie pomiaru
 	void StartCounter();
 	//Pobranie wyniku pomiaru
 	double GetCounter();
 	//funkcje dodaj¹ce wynik pomiaru do odpowiedniej tablicy
-	void adddijkstra(double numb, int index);
-	void addfor_bellman(double numb, int index);
-	void addprim(double numb, int index);
-	void addkruskal(double numb, int index);
-
+	void adddijkstra(double numb, int *index, int where);
+	void addford_bellman(double numb, int *index, int where);
+	void addprim(double numb, int *index, int where);
+	void addkruskal(double numb, int *index, int where);
 };
 #endif
