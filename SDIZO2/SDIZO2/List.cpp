@@ -522,3 +522,52 @@ void List::edgedel(Edge *edg)
 	if (edg->next != nullptr) edgedel(edg->next);
 	delete edg;
 }
+
+void List::load_graph(string filename)
+{
+	Node *temp, *prev;
+	Edge *els, *iter;
+	int a, b, c;
+	string line;
+	ifstream plik(filename + ".txt");
+	if (plik.good() == true)
+	{
+		plik >> a >> b;
+		edges = a;
+		nodes = b;
+		prev = new Node();
+		prev->index = 0;
+		head = prev;
+		temp = tail;
+		for (int i = 1; i < nodes; i++)
+		{
+			temp = new Node();
+			temp->prev = prev;
+			prev->next = temp;
+			temp->index = i;
+			prev = temp;
+		}
+		tail = temp;
+		for (int i = 0; i < edges; i++)
+		{
+			temp = head;
+			plik >> a >> b >> c;
+			for (int j = 0; j < a; j++) temp = temp->next;
+			els = new Edge();
+			els->weight = c;
+			els->source = temp;
+			if (temp->connections == 0) temp->head = els;
+			else
+			{
+				iter = temp->head;
+				for (int j = 0; j < (temp->connections - 1); j++) iter = iter->next;
+				iter->next = els;
+			}
+			temp->connections++;
+			temp = head;
+			for (int j = 0; j < b; j++) temp = temp->next;
+			els->target = temp;
+		}
+	}
+	else cout << "B³¹d odczytu" << endl;
+}

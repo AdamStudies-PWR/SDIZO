@@ -39,6 +39,8 @@ private:
 	void ford_ui(Graphs *g);
 	//Obs³uga testów
 	void auto_test();
+	//Obs³uga wczytywania 
+	void load_menu();
 };
 
 #endif

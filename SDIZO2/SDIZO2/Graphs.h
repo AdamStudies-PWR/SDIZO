@@ -66,6 +66,8 @@ public:
 	virtual void ford_bellman(int start) = 0;
 	//Czyszczenie pamiêci
 	virtual void free_memory() = 0;
+	//Wczytanie grafu
+	virtual void load_graph(std::string filename) = 0;
 protected:
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);

@@ -430,3 +430,34 @@ void Matrix::free_memory()
 	for (int i = 0; i < nodes; i++) delete[] pointer[i];
 	delete[] pointer;
 }
+
+//Wczytanie grafu
+void Matrix::load_graph(string filename)
+{
+	int *temp;
+	int a, b, c;
+	string line;
+	ifstream plik(filename + ".txt");
+	if (plik.good() == true)
+	{
+		plik >> a >> b;
+		edges = a;
+		nodes = b;
+		pointer = new int*[nodes];
+		for (int i = 0; i < nodes; i++)
+		{
+			temp = new int[nodes];
+			for (int j = 0; j < nodes; j++)
+			{
+				temp[j] = 0;
+			}
+			pointer[i] = temp;
+		}
+		for (int i = 0; i < edges; i++)
+		{
+			plik >> a >> b >> c;
+			pointer[a][b] = c;
+		}
+	}
+	else cout << "B³¹d odczytu" << endl;
+}

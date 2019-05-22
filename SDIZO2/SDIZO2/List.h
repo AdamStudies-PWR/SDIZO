@@ -50,6 +50,8 @@ public:
 	void free_memory();
 	void rekdel(Node *nod);
 	void edgedel(Edge *edg);
+	//Wczytanie grafu
+	void load_graph(std::string filename);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree();

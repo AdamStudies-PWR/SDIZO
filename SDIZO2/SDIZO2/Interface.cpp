@@ -15,6 +15,7 @@ void Interface::main_menu()
 		cout << "\t---Główne Menu---" << endl;
 		cout << " [1] Graf - reprezentacja macierzowa" << endl;
 		cout << " [2] Graf - reprezentacja listowa" << endl;
+		cout << " [3] Wczytywanie" << endl;
 		cout << " [4] Automatyczne testy" << endl;
 		cout << " [0] Zakończ program" << endl;
 		cout << "Wybór: ";
@@ -24,7 +25,68 @@ void Interface::main_menu()
 		case '0': break;
 		case '1': matrix(); break;
 		case '2': glist(); break;
+		case '3': load_menu(); break;
 		case '4': auto_test(); break;
+		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne." << endl; _getch();
+		}
+	} while (choice != '0');
+}
+
+void Interface::load_menu()
+{
+	string filename;
+	char choice;
+	do
+	{
+		system("cls");
+		cout << "\t---Menu wczytywania---" << endl;
+		cout << " [1] Wczytaj i wyświetl graf" << endl;
+		cout << " [2] Wczytaj Dikistra" << endl;
+		cout << " [3] Wczytaj Kruskal" << endl;
+		cout << " [4] Wczytaj Prim" << endl;
+		cout << " [5] Wczytaj Ford-Bellman" << endl;
+		cout << " [0] Cofnij" << endl;
+		cout << "Wybór: ";
+		choice = _getche();
+		switch (choice)
+		{
+		case '0': break;
+		case '1':
+		{
+			system("cls");
+			cout << "Wprowadź nazwe pliku: ";
+			cin >> filename;
+			mat.load_graph(filename);
+			mat.display();
+			mat.free_memory();
+			list.load_graph(filename);
+			list.display();
+			list.free_memory();
+		}break;
+		case '3':
+		{
+			system("cls");
+			cout << "Wprowadź nazwe pliku: ";
+			cin >> filename;
+			mat.load_graph(filename);
+			mat.mst_Prim(0);
+			mat.free_memory();
+			list.load_graph(filename);
+			list.mst_Prim(0);
+			list.free_memory();
+		}break;
+		case '4':
+		{
+			system("cls");
+			cout << "Wprowadź nazwe pliku: ";
+			cin >> filename;
+			mat.load_graph(filename);
+			mat.mst_Kruskal();
+			mat.free_memory();
+			list.load_graph(filename);
+			list.mst_Kruskal();
+			list.free_memory();
+		}break;
 		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne." << endl; _getch();
 		}
 	} while (choice != '0');

@@ -26,6 +26,8 @@ public:
 	void ford_bellman(int node);
 	//Czyszczeni pamiêci
 	void free_memory();
+	//Wczytanie grafu
+	void load_graph(std::string filename);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);
