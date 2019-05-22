@@ -35,6 +35,7 @@ void Interface::main_menu()
 void Interface::load_menu()
 {
 	string filename;
+	bool directed;
 	char choice;
 	do
 	{
@@ -56,10 +57,18 @@ void Interface::load_menu()
 			system("cls");
 			cout << "Wprowadź nazwe pliku: ";
 			cin >> filename;
-			mat.load_graph(filename);
+			do
+			{
+				system("cls");
+				cout << "Czy graf Skierowany? [T/N]" << endl;
+				choice = _getche();
+			} while (choice != 't' && choice != 'T' && choice != 'n' && choice != 'N');
+			if (choice == 't' || choice == 'T') directed = true;
+			else directed = false;
+			mat.load_graph(filename, directed);
 			mat.display();
 			mat.free_memory();
-			list.load_graph(filename);
+			list.load_graph(filename, directed);
 			list.display();
 			list.free_memory();
 		}break;
@@ -68,10 +77,10 @@ void Interface::load_menu()
 			system("cls");
 			cout << "Wprowadź nazwe pliku: ";
 			cin >> filename;
-			mat.load_graph(filename);
+			mat.load_graph(filename, false);
 			mat.mst_Prim(0);
 			mat.free_memory();
-			list.load_graph(filename);
+			list.load_graph(filename, false);
 			list.mst_Prim(0);
 			list.free_memory();
 		}break;
@@ -80,10 +89,10 @@ void Interface::load_menu()
 			system("cls");
 			cout << "Wprowadź nazwe pliku: ";
 			cin >> filename;
-			mat.load_graph(filename);
+			mat.load_graph(filename, false);
 			mat.mst_Kruskal();
 			mat.free_memory();
-			list.load_graph(filename);
+			list.load_graph(filename, false);
 			list.mst_Kruskal();
 			list.free_memory();
 		}break;

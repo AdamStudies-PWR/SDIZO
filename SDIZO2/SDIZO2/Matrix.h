@@ -27,7 +27,7 @@ public:
 	//Czyszczeni pamiêci
 	void free_memory();
 	//Wczytanie grafu
-	void load_graph(std::string filename);
+	void load_graph(std::string filename, bool directed);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree(int *visited);

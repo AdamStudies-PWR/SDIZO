@@ -432,7 +432,7 @@ void Matrix::free_memory()
 }
 
 //Wczytanie grafu
-void Matrix::load_graph(string filename)
+void Matrix::load_graph(string filename, bool directed)
 {
 	int *temp;
 	int a, b, c;
@@ -458,6 +458,17 @@ void Matrix::load_graph(string filename)
 			plik >> a >> b >> c;
 			pointer[a][b] = c;
 		}
+		if (!directed)
+		{
+			for (int i = 0; i < nodes; i++)
+			{
+				for (int j = 0; j < nodes; j++)
+				{
+					if (pointer[i][j] != 0) pointer[j][i] = pointer[i][j];
+				}
+			}
+		}
+		plik.close();
 	}
 	else cout << "B³¹d odczytu" << endl;
 }

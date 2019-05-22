@@ -507,7 +507,7 @@ void List::ford_bellman(int start)
 //Czyszczeni pamiêci
 void List::free_memory()
 {
-	rekdel(head);
+	if(head != nullptr) rekdel(head);
 }
 
 void List::rekdel(Node *nod)
@@ -523,10 +523,10 @@ void List::edgedel(Edge *edg)
 	delete edg;
 }
 
-void List::load_graph(string filename)
+void List::load_graph(string filename, bool directed)
 {
 	Node *temp, *prev;
-	Edge *els, *iter;
+	Edge *els, *iter, *newEdge, *revEdge;
 	int a, b, c;
 	string line;
 	ifstream plik(filename + ".txt");
@@ -556,18 +556,59 @@ void List::load_graph(string filename)
 			els = new Edge();
 			els->weight = c;
 			els->source = temp;
-			if (temp->connections == 0) temp->head = els;
+			if (temp->connections == 0)
+			{
+				temp->head = els;
+				temp->tail = els;
+			}
 			else
 			{
-				iter = temp->head;
-				for (int j = 0; j < (temp->connections - 1); j++) iter = iter->next;
+				iter = temp->tail;
 				iter->next = els;
+				temp->tail = els;
 			}
 			temp->connections++;
 			temp = head;
 			for (int j = 0; j < b; j++) temp = temp->next;
 			els->target = temp;
 		}
+		if (!directed)
+		{
+			temp = head;
+			while (temp != nullptr)
+			{
+				els = temp->head;
+				while (els != nullptr)
+				{
+					if (els->target->index > temp->index)
+					{
+						newEdge = new Edge();
+						newEdge->target = els->source;
+						newEdge->source = els->target;
+						newEdge->weight = els->weight;
+						if (els->target->head == nullptr)
+						{
+							els->target->head = newEdge;
+							els->target->tail = newEdge;
+						}
+						else
+						{
+							els->target->tail->next = newEdge;
+							els->target->tail = newEdge;
+						}
+						if (!directed)
+						{
+							revEdge = new Edge();
+							revEdge->target = newEdge->source;
+						}
+						els->target->connections++;
+					}
+					els = els->next;
+				}
+				temp = temp->next;
+			}
+		}
+		plik.close();
 	}
 	else cout << "B³¹d odczytu" << endl;
 }
