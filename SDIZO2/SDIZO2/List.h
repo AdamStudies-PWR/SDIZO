@@ -52,6 +52,8 @@ public:
 	void edgedel(Edge *edg);
 	//Wczytanie grafu
 	void load_graph(std::string filename, bool directed);
+	// Wczytywanie dla algorytmu najkrótszej drogi
+	int load_sw(std::string filename);
 private:
 	//Funkcja towrz¹ca drzewo rozpinaj¹ce dla nieskierowanego
 	void spanningtree();

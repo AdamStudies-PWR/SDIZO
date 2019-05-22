@@ -612,3 +612,58 @@ void List::load_graph(string filename, bool directed)
 	}
 	else cout << "B³¹d odczytu" << endl;
 }
+
+// Wczytywanie dla algorytmu najkrótszej drogi
+int List::load_sw(string filename)
+{
+	Node *temp, *prev;
+	Edge *els, *iter;
+	int a, b, c, index = 0;
+	string line;
+	ifstream plik(filename + ".txt");
+	if (plik.good() == true)
+	{
+		plik >> a >> b >> index;
+		edges = a;
+		nodes = b;
+		prev = new Node();
+		prev->index = 0;
+		head = prev;
+		temp = tail;
+		for (int i = 1; i < nodes; i++)
+		{
+			temp = new Node();
+			temp->prev = prev;
+			prev->next = temp;
+			temp->index = i;
+			prev = temp;
+		}
+		tail = temp;
+		for (int i = 0; i < edges; i++)
+		{
+			temp = head;
+			plik >> a >> b >> c;
+			for (int j = 0; j < a; j++) temp = temp->next;
+			els = new Edge();
+			els->weight = c;
+			els->source = temp;
+			if (temp->connections == 0)
+			{
+				temp->head = els;
+				temp->tail = els;
+			}
+			else
+			{
+				iter = temp->tail;
+				iter->next = els;
+				temp->tail = els;
+			}
+			temp->connections++;
+			temp = head;
+			for (int j = 0; j < b; j++) temp = temp->next;
+			els->target = temp;
+		}
+	}
+	else cout << "B³¹d odczytu" << endl;
+	return index;
+}

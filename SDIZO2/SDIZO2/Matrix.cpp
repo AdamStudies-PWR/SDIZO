@@ -472,3 +472,35 @@ void Matrix::load_graph(string filename, bool directed)
 	}
 	else cout << "B³¹d odczytu" << endl;
 }
+
+// Wczytywanie dla algorytmu najkrótszej drogi
+int Matrix::load_sw(string filename)
+{
+	int *temp;
+	int a, b, c, index = 0;
+	string line;
+	ifstream plik(filename + ".txt");
+	if (plik.good() == true)
+	{
+		plik >> a >> b >> index;
+		edges = a;
+		nodes = b;
+		pointer = new int*[nodes];
+		for (int i = 0; i < nodes; i++)
+		{
+			temp = new int[nodes];
+			for (int j = 0; j < nodes; j++)
+			{
+				temp[j] = 0;
+			}
+			pointer[i] = temp;
+		}
+		for (int i = 0; i < edges; i++)
+		{
+			plik >> a >> b >> c;
+			pointer[a][b] = c;
+		}
+	}
+	else cout << "B³¹d odczytu" << endl;
+	return index;
+}

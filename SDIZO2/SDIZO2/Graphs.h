@@ -68,6 +68,8 @@ public:
 	virtual void free_memory() = 0;
 	//Wczytanie grafu
 	virtual void load_graph(std::string filename, bool directed) = 0;
+	// Wczytywanie dla algorytmu najkrótszej drogi
+	virtual int load_sw(std::string filename) = 0;
 protected:
 	//Funkcja sortuj¹ca krawêdzie
 	void sort(Kruskal *target);

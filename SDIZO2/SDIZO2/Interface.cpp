@@ -37,6 +37,7 @@ void Interface::load_menu()
 	string filename;
 	bool directed;
 	char choice;
+	int index;
 	do
 	{
 		system("cls");
@@ -72,6 +73,18 @@ void Interface::load_menu()
 			list.display();
 			list.free_memory();
 		}break;
+		case '2':
+		{
+			system("cls");
+			cout << "Wprowadź nazwe pliku: ";
+			cin >> filename;
+			index = mat.load_sw(filename);
+			mat.dijkstra(index);
+			mat.free_memory();
+			index = list.load_sw(filename);
+			list.dijkstra(index);
+			list.free_memory();
+		}break;
 		case '3':
 		{
 			system("cls");
@@ -94,6 +107,18 @@ void Interface::load_menu()
 			mat.free_memory();
 			list.load_graph(filename, false);
 			list.mst_Kruskal();
+			list.free_memory();
+		}break;
+		case '5':
+		{
+			system("cls");
+			cout << "Wprowadź nazwe pliku: ";
+			cin >> filename;
+			index = mat.load_sw(filename);
+			mat.ford_bellman(index);
+			mat.free_memory();
+			index = list.load_sw(filename);
+			list.ford_bellman(index);
 			list.free_memory();
 		}break;
 		default: cout << "\nBłąd wprowadzenia, spróbuj ponowne." << endl; _getch();
