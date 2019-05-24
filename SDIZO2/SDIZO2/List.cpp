@@ -458,27 +458,16 @@ void List::ford_bellman(int start)
 	Node *temp = head;
 	Edge *els;
 	dnch = nodes;
+	int MAX_INT = 64000;
 	notchecked = new Dijkstra[dnch];
 	for (int i = 0; i < dnch; i++)
 	{
 		notchecked[i].index = i;
+		notchecked[i].distance = MAX_INT;
 	}
 	notchecked[start].distance = 0;
 	for (int i = 0; i < start; i++) temp = temp->next;
 	els = temp->head;
-	for (int i = 0; i < nodes; i++)
-	{
-		if (els->target->index == i)
-		{
-			notchecked[i].distance = notchecked[start].distance + els->weight;
-			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
-		}
-		else if (start != i)
-		{
-			notchecked[i].distance = 0;
-			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
-		}
-	}
 	for (int i = 1; i < (nodes - 1); i++)
 	{
 		temp = head;
@@ -489,7 +478,7 @@ void List::ford_bellman(int start)
 			{
 				if (els->target->index != start)
 				{
-					if ((notchecked[els->source->index].distance + els->weight) < notchecked[els->target->index].distance || notchecked[els->target->index].distance == 0)
+					if ((notchecked[els->source->index].distance + els->weight) < notchecked[els->target->index].distance)
 					{
 						notchecked[els->target->index].distance = notchecked[els->source->index].distance + els->weight;
 						notchecked[els->target->index].prev = notchecked[els->source->index].prev + to_string(els->source->index) + ", ";

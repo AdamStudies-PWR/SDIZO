@@ -388,21 +388,15 @@ void Matrix::mst_Kruskal()
 //Funkcja obs³uguj¹ca algorytm Forda-Bellmana
 void Matrix::ford_bellman(int start)
 {
+	int MAX_INT = 64000;
 	dnch = nodes;
 	notchecked = new Dijkstra[dnch];
 	for (int i = 0; i < dnch; i++)
 	{
 		notchecked[i].index = i;
+		notchecked[i].distance = MAX_INT;
 	}
 	notchecked[start].distance = 0;
-	for (int i = 0; i < nodes; i++)
-	{
-		if (start != i)
-		{
-			notchecked[i].distance = notchecked[start].distance + pointer[start][i];
-			notchecked[i].prev = notchecked[start].prev + to_string(start) + ", ";
-		}
-	}
 	for (int i = 1; i < (nodes - 1); i++)
 	{
 		for (int j = 0; j < nodes; j++)
@@ -411,7 +405,7 @@ void Matrix::ford_bellman(int start)
 			{
 				if (pointer[j][m] != 0 && m != start)
 				{
-					if ((notchecked[j].distance + pointer[j][m]) < notchecked[m].distance || notchecked[m].distance == 0)
+					if ((notchecked[j].distance + pointer[j][m]) < notchecked[m].distance)
 					{
 						notchecked[m].distance = notchecked[j].distance + pointer[j][m];
 						notchecked[m].prev = notchecked[j].prev + to_string(j) + ", ";

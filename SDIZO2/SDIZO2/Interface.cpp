@@ -44,8 +44,8 @@ void Interface::load_menu()
 		cout << "\t---Menu wczytywania---" << endl;
 		cout << " [1] Wczytaj i wyświetl graf" << endl;
 		cout << " [2] Wczytaj Dikistra" << endl;
-		cout << " [3] Wczytaj Kruskal" << endl;
-		cout << " [4] Wczytaj Prim" << endl;
+		cout << " [3] Wczytaj Prim" << endl;
+		cout << " [4] Wczytaj Kruskal" << endl;
 		cout << " [5] Wczytaj Ford-Bellman" << endl;
 		cout << " [0] Cofnij" << endl;
 		cout << "Wybór: ";
