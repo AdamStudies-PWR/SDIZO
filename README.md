@@ -6,6 +6,7 @@ Zrealizowane zostały:
 * Lista dwukierunkowa
 * Kopiec Binarny
 * Drzewo BST
+
 Projekt działa stabilnie i został wykonany na ocene 4.5.
 
 ### Projekt 2
@@ -15,6 +16,7 @@ Zrealizowane zostały
 * Najkrótsza ścieżka w grafie (Dijkstra i Ford-Bellman)
 * Implementacja grafu macierzą sąsiedztwa
 * Implementacja grafu poprzez liste
+
 Projekt wykonany na ocene 4.5 ale ze względu na naiwną implememntacje listy oraz sortowań ocena obnizona do 4.
 
 **UWAGA Projekt może służyć jako przykład jak zaimplementować pewne algorytmy lub czego uniknąć przy ich implementacji jednak jeżeli piszesz projekt na studia nie zalecam kopiować kodu 1:1**
