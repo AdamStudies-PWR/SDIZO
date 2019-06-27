@@ -18,4 +18,5 @@ Zrealizowane zostały
 Projekt wykonany na ocene 4.5 ale ze względu na naiwną implememntacje listy oraz sortowań ocena obnizona do 4.
 
 **UWAGA Projekt może służyć jako przykład jak zaimplementować pewne algorytmy lub czego uniknąć przy ich implementacji jednak jeżeli piszesz projekt na studia nie zalecam kopiować kodu 1:1**
+
 W innych przypadkach nie ma problemu jeżeli ktoś chciałby wykorzystać bądź zmodyfikować kod programu
