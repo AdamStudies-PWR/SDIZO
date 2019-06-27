@@ -1,4 +1,4 @@
-# Projekt PWR SDZIO do dr. Mierzwy
+# Projekt PWR SDIZO do dr. Mierzwy
 ### Projekt 1
 Projekt znajduje sie w branchu SDIZO1
 Zrealizowane zostały:
